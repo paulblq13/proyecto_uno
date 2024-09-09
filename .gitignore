@@ -1,0 +1,29 @@
+# Carpeta de entorno virtual de Python
+venv/
+
+# Archivos de configuración locales
+*.sqlite3
+*.pyc
+
+# Archivos de configuración de PyCharm
+.idea/
+
+# Carpeta de archivos estáticos compilados
+static-files/
+static/
+
+# Carpeta de caché de Python
+__pycache__/
+
+# Carpeta de archivos de migraciones de Django
+*/migrations/
+
+# Archivo de registro
+*.log
+
+# Archivos de respaldos
+*.bak
+*.swp
+
+# Carpeta de dependencias de Node.js
+node_modules/
