@@ -10,7 +10,6 @@ venv/
 
 # Carpeta de archivos estáticos compilados
 static-files/
-static/
 
 # Carpeta de caché de Python
 __pycache__/
