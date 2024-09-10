@@ -77,13 +77,24 @@ WSGI_APPLICATION = 'proyecto_uno.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'd8ki4aakoabm2b',
+#        'USER': 'u5sh07aht3evpl',
+#        'PASSWORD': 'p73141efe44b16e19ffadef62f5103a4ff9b4c1d87395b4ab43210ef22ac61efb',
+#        'HOST': 'c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+#        'PORT': '5432',       
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8ki4aakoabm2b',
-        'USER': 'u5sh07aht3evpl',
-        'PASSWORD': 'p73141efe44b16e19ffadef62f5103a4ff9b4c1d87395b4ab43210ef22ac61efb',
-        'HOST': 'c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+        'NAME': 'db_proyecto_uno',
+        'USER': 'postgres',
+        'PASSWORD': '14789632',
+        'HOST': 'localhost',
         'PORT': '5432',       
     }
 }
