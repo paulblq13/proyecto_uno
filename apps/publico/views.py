@@ -11,6 +11,10 @@ class IndexView(TemplateView):
 
 class LoginView(TemplateView):
     template_name = 'publico/login.html'
+
+class EscritorioView(TemplateView):
+    template_name = 'publico/escritorio.html'
+
     
 def login_user(request):
     if request.method == "POST":
