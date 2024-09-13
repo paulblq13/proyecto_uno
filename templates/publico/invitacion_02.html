@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+<style>
+    .video-background {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Asegura que ocupe el 100% de la altura de la ventana */
+        overflow: hidden;
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+    }
+
+    .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1);
+    }
+
+    .image-background {
+        position: relative;
+        width: 100%;
+        height: 740px; /* Ajusta este valor al alto deseado */
+        overflow: hidden;
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+    }
+    
+    .image-background img {
+        width: 100%;
+        height: 100%; /* Mantiene el alto fijo de la imagen */
+        object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }  
+
+    .text-overlay {
+        position: absolute;
+        bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
+        left: 50%;
+        transform: translateX(-50%); /* Centra el contenido horizontalmente */
+        color: #ffffff;
+        text-align: center;
+        width: 100%;
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 10px; /* Ajusta la distancia desde la parte superior según sea necesario */
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+        z-index: 1; /* Asegura que la imagen esté por encima del video */
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+    }
+    
+    .image-overlay img {
+        width: auto; /* Ajusta el ancho según sea necesario */
+        height: 50px; /* Ajusta la altura según sea necesario */
+    }    
+
+    .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+        width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+
+    }
+
+    .fontcarta{
+        font-family: 'Dancing Script', cursive;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .second-video-background {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Tamaño completo para el segundo video */
+        overflow: hidden;
+    }
+
+    .second-video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .aro-overlay {
+        position: absolute;
+        top: 100px; /* Ajusta la distancia desde la parte superior según sea necesario */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1; /* Asegura que la imagen esté por encima del video */
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+        width: 440px; /* Ajusta el ancho del contenedor */
+        height: 440px; /* Ajusta la altura del contenedor para mantener la proporción deseada */
+        overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
+    }
+    
+    .aro-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajusta la imagen para cubrir el contenedor sin distorsionarse */
+    }
+    .text-reloj {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+        width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+
+    }
+</style>   
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid" style="background-color: black;">
+    <div class="image-background">
+        <img src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Fondo adaptable">
+        <div class="text-overlay">
+            <h5>
+                <span id="t5q1tr8OemPRTugq" style="color:#ffffff;">
+                    <svg width="80" height="3">
+                        <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                    </svg>
+                    14-12-2024
+                    <svg width="80" height="3">
+                        <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                    </svg>
+                </span>
+            </h5>
+            <h1 class="fontcarta">
+                <span id="t5q1tr8OemPRTugq" style="color:#ffffff;">Juliana</span>
+            </h1>
+            <p>
+                <span id="t5q1tr8OemPRTugq" style="color:#ffffff;">Mis 15 años</span>
+            </p>
+            <h5>
+                <svg width="400" height="3">
+                    <path d="M0,1.5 L400.58799494,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                </svg>
+            </h5>
+        </div>
+    </div>
+    <!-- Primer video -->        
+    <div class="video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+        </div>
+            <!-- Aro -->
+        <div class="aro-overlay">
+            <img src="{% static 'img/aro-hojas.webp' %}" alt="Imagen de fondo">    
+            <div class="text-reloj" style="font-size: 40px;">
+                <p class='fontcarta'>Faltan</p>
+                <script>
+                    (function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));
+                </script>
+                <a data-type="countdown" data-id="5797229" class="tickcounter" style="display:block; left:0; width:25%; height:0; position:relative; padding-bottom:6%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/"></a>
+            </div>              
+        </div>   
+        
+    </div>
+    <script>
+        (function(d, s, id) {
+            var js, pjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//www.tickcounter.com/static/js/loader.js";
+            pjs.parentNode.insertBefore(js, pjs);
+        }(document, "script", "tickcounter-sdk"));
+    </script>
+
+    <!-- Segundo video -->
+    <div class="second-video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+</div>    
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

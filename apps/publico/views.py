@@ -15,6 +15,9 @@ class LoginView(TemplateView):
 class Invitacion01View(TemplateView):
     template_name = 'publico/invitacion_01.html'    
 
+class Invitacion02View(TemplateView):
+    template_name = 'publico/invitacion_02.html'       
+
 class EscritorioView(TemplateView):
     template_name = 'publico/escritorio.html'
 

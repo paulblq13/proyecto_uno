@@ -8,5 +8,5 @@ urlpatterns = [
     #VIEW
     path('login', publicoViews.LoginView.as_view(), name='login'), 
     path('invitacion01', publicoViews.Invitacion01View.as_view(), name='invitacion01'),        
-
+    path('invitacion02', publicoViews.Invitacion02View.as_view(), name='invitacion02'),  
 ]
