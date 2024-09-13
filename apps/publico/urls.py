@@ -6,6 +6,7 @@ urlpatterns = [
     #DEF
     path('login_user/', views.login_user, name='login_user'),
     #VIEW
-    path('login', publicoViews.LoginView.as_view(), name='login'),    
+    path('login', publicoViews.LoginView.as_view(), name='login'), 
+    path('invitacion01', publicoViews.Invitacion01View.as_view(), name='invitacion01'),        
 
 ]
