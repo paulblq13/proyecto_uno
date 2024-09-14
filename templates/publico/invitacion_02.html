@@ -128,6 +128,23 @@
         width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
 
     }
+    .text-reloj-pie {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        border: 1px solid red; /* Cambia el color del borde si lo prefieres */
+        width: 50%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+        overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
+    }    
+    .text-reloj-pie img {
+        width: 100%; /* Ajusta la imagen al ancho del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+        display: block; /* Elimina el espacio blanco debajo de la imagen */
+    }    
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
@@ -186,7 +203,10 @@
                     (function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));
                 </script>
                 <a data-type="countdown" data-id="5797229" class="tickcounter" style="display:block; left:0; width:25%; height:0; position:relative; padding-bottom:6%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/"></a>
-            </div>              
+            </div>
+            <div class="text-reloj-pie" >
+                <img src="{% static 'img/reloj-arreglo01.svg' %}" alt="arreglo">   
+            </div>             
         </div>   
         
     </div>
@@ -213,6 +233,15 @@
         >
             Tu navegador no soporta el elemento de video.
         </video>
+            <!-- Flecha -->
+            <div class="image-overlay">
+                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            </div> 
+            <!-- Text -->
+            <div class="text-overlay">
+                   <h1><p>Te espero para compartir<p/>
+                    <p>esta noche mágica</p></h1>
+            </div>      
     </div>
 </div>    
 
