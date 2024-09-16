@@ -1,4 +1,4 @@
-#sb admin2
+﻿#sb admin2
 node_modules
 # Carpeta de entorno virtual de Python
 venv/
@@ -11,7 +11,7 @@ venv/
 .idea/
 
 # Carpeta de archivos estáticos compilados
-static-files/
+staticfiles/
 
 # Carpeta de caché de Python
 __pycache__/
