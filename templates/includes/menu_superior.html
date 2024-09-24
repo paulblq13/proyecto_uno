@@ -1,33 +1,73 @@
 {% load static %}
 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    {% if user.is_authenticated %} 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    {% endif%}
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Ingrese su búsqueda"
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    {% if user.is_authenticated %}
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+    {% endif %}
 
-                    <!-- Topbar Navbar -->
-                    {% if user.is_authenticated %}                      
-                        {% include 'includes/menu_usuario.html' %}
-                    {% else %}
-                    <a class="btn btn-primary" type="button" href="{% url 'login' %}">
-                        Ingresar
-                    </a>                    
-                    {% endif%}
-                </nav>
-                <!-- End of Topbar -->
+    <!-- Topbar Search -->
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Ingrese su búsqueda"
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+            <!-- Menú de usuario -->
+            {% include 'includes/menu_usuario.html' %}
+        {% else %}
+            <!-- Dropdown - Cursos -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-gray-700" href="#" id="cursosDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-book fa-fw"></i>
+                    <span>Cursos</span>
+                </a>
+                <!-- Dropdown - Submenú de Cursos -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="cursosDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Prueba 1
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Prueba 2
+                    </a>
+                </div>
+            </li>
+
+            <!-- Link - Contacto -->
+            <li class="nav-item">
+                <a class="nav-link text-gray-700" href="#">
+                    <i class="fas fa-phone fa-fw"></i>
+                    <span>Contacto</span>
+                </a>
+            </li>
+
+            <!-- Link - Quienes somos -->
+            <li class="nav-item">
+                <a class="nav-link text-gray-700" href="#" >
+                    <i class="fas fa-users fa-fw"></i>
+                    <span>Quienes somos</span>
+                </a>
+            </li>        
+            <!-- Botón de Ingresar -->
+            <li class="nav-item">
+                <a class="nav-link btn btn-primary btn-sm ml-2 text-white" href="{% url 'login' %}">
+                    <span>INGRESAR</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
