@@ -22,9 +22,12 @@ from apps.publico import views as publicoViews
 urlpatterns = [
     path('admin/', admin.site.urls),
     #--------VIEW
-    path('', publicoViews.IndexView.as_view(), name='index'),
-    path('publico', publicoViews.IndexView.as_view(), name='publico'),
+    path('', publicoViews.IndexView.as_view(), name=''),
+    path('index/', publicoViews.IndexView.as_view(), name='index'),
+    path('publico/', publicoViews.IndexView.as_view(), name='publico'),
     #INCLUDES URL   
-    path('', include('apps.publico.urls')),  # Cambia esto si es necesario
+    path('', include('apps.publico.urls')),
+    path('', include('apps.usuario.urls')),
+    path('', include('apps.noticias.urls')),
 ]
 

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.publico.apps.GeneralConfig',
     'apps.prueba.apps.GeneralConfig',
+    'apps.usuario.apps.GeneralConfig',
+    'apps.noticias.apps.GeneralConfig',
 ]
 
 MIDDLEWARE = [

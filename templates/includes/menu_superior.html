@@ -27,41 +27,25 @@
             <!-- Menú de usuario -->
             {% include 'includes/menu_usuario.html' %}
         {% else %}
-            <!-- Dropdown - Cursos -->
+            <!-- Dropdown - MENSAJEA -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-gray-700" href="#" id="cursosDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-book fa-fw"></i>
-                    <span>Cursos</span>
+                    <span>Mensajeanos</span>
                 </a>
                 <!-- Dropdown - Submenú de Cursos -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="cursosDropdown">
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Prueba 1
+                        WhatsApp
                     </a>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Prueba 2
+                        Mail
                     </a>
                 </div>
-            </li>
-
-            <!-- Link - Contacto -->
-            <li class="nav-item">
-                <a class="nav-link text-gray-700" href="#">
-                    <i class="fas fa-phone fa-fw"></i>
-                    <span>Contacto</span>
-                </a>
-            </li>
-
-            <!-- Link - Quienes somos -->
-            <li class="nav-item">
-                <a class="nav-link text-gray-700" href="#" >
-                    <i class="fas fa-users fa-fw"></i>
-                    <span>Quienes somos</span>
-                </a>
-            </li>        
+            </li>     
             <!-- Botón de Ingresar -->
             <li class="nav-item">
                 <a class="nav-link btn btn-primary btn-sm ml-2 text-white" href="{% url 'login' %}">
