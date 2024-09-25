@@ -2,38 +2,32 @@
 {% block main %}
 <div id="main-content" xmlns="http://www.w3.org/1999/html">
     <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a class="home" href="/"><i class="icon-home"></i> {{INICIO}}</a></li>
-                        <li class="breadcrumb-item"><i></i><a class="home" href="">{{PANEL}}</a></li>
-                        <li class="breadcrumb-item"><i></i><b>{{lista}}</b></li>
-
-                    </ul>
-                </div>
-            </div>    
-            <div class="row clearfix">
-                <div class="col-lg-9 col-md-12" style="display: flex">
-                    <div class="card">
-                        <div class="header">
-                            <h2>{{ titulo }}<small style="font-size: 15px;">{{ titulosmall }}</small></h2>
+            <ul class="breadcrumb .border-left-secondary">
+                <li class="breadcrumb-item"><a class="home" href="/"><i class="icon-home"></i> {{INICIO}}</a></li>
+                <li class="breadcrumb-item"><i></i><a class="home" href="">{{PANEL}}</a></li>
+                <li class="breadcrumb-item"><i></i><b>{{lista}}</b></li>
+            </ul>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                           <h6 class="m-0 font-weight-bold text-secondary"> {{ titulo }}: Muestra un listado de todas las entradas, puede filtrar ingresando cualquier dato que contenga la tabla.
+                           </h6>
                         </div>
-                    </div>
+                    </div> 
                 </div>
-                <div class="col-lg-3 col-md-12">
-                    <div class="card">
-                        <div class="header">
-                            <div class="btn-group" style="display: flex; justify-content: center;">
-                            <a type="button" class="btn btn-primary" aria-expanded="false" href="">
+                <div class="col-lg-3">
+                    <div class="card mb-12 py-12">
+                        <div class="card-body">
+                            <a type="button" class="btn btn-primary btn-user btn-block" aria-expanded="true" href="">
                                 NUEVO
                             </a>
-                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div> 
+                </div>                
             </div>
-
-            <div class="row clearfix">
+                  
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="body">
@@ -43,8 +37,8 @@
                               <thead class="sorting">
                               <tr>
                                   <th>ACCIONES</th>
-                                  <th>NOMBRE</th>
-                                  <th>DESCRIPCIÓN</th>
+                                  <th>TITULO</th>
+                                  <th>CUERPO</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -64,8 +58,8 @@
     </ul>
   </div>
                                 </td>
-                                <td>{{ objeto.nombre }}</td>
-                                <td>{{ objeto.descripcion }}</td>
+                                <td>{{ objeto.titulo }}</td>
+                                <td>{{ objeto.cuerpo }}</td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
