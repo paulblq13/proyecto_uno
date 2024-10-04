@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div id="main-content" xmlns="http://www.w3.org/1999/html">
+    <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i> {{INICIO}}</a></li>
+                        <li class="breadcrumb-item"><i></i><a href="">{{PANEL}}</a></li>
+                        <li class="breadcrumb-item"><i></i><a href="">{{LISTA_VENDEDORES}}</a></li>
+                        <li class="breadcrumb-item"><i></i><b>{{titulo}}</b></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12" style="display: flex">
+                    <div class="card">
+                        <div class="header">
+                            <h2>{{ tituloh2 }}<small>{{ titulosmall }}</small></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row clearfix">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-8 col-md-12">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        DNI:
+                                                    </span>
+                                                </div>
+                                                {{ form2.dni }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12"> 
+                                                <a href="#" id="btn_verificar" class="btn btn-primary">Verificar</a> 
+                                        </div>
+                                        <div class="col-md-12 col-12" id="resultado-busqueda-persona">
+                                        </div>                                                                               
+                                    </div>
+                                    {% include 'includes/_buscarpersona.html' %}                                       
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    APELLIDO/S:
+                                                </span>
+                                            </div>
+                                             {{ form2.apellido }}
+                                        </div>           
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    NOMBRE/S:
+                                                </span>
+                                            </div>
+                                             {{ form2.nombre }}
+                                        </div>                                                                       
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    FECHA DE NACIMIENTO:
+                                                </span>
+                                            </div>
+                                             {{ form2.fecha_nacimiento}}
+                                        </div>
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    TELÉFONO 1:
+                                                </span>
+                                            </div>
+                                             {{ form2.telefono1}}
+                                        </div>  
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    TELÉFONO 2:
+                                                </span>
+                                            </div>
+                                             {{ form2.telefono2}}
+                                        </div>              
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    EMAIL:
+                                                </span>
+                                            </div>
+                                             {{ form2.email|default:''}}
+                                        </div>  
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                NACIONALIDAD:
+                                            </span>
+                                        </div>
+                                         {{ form2.id_nacionalidad }}
+                                    </div>        
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                PROVINCIA:
+                                            </span>
+                                        </div>
+                                         {{ form2.id_provincia }}
+                                    </div>   
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                LOCALIDAD:
+                                            </span>
+                                        </div>
+                                         {{ form2.id_localidad }}
+                                    </div>      
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                BARRIO:
+                                            </span>
+                                        </div>
+                                         {{ form2.dom_barrio }}
+                                    </div>      
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                CALLE:
+                                            </span>
+                                        </div>
+                                         {{ form2.dom_calle }}
+                                    </div>      
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                NÚMERO:
+                                            </span>
+                                        </div>
+                                         {{ form2.dom_numero }}
+                                    </div>    
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                PISO:
+                                            </span>
+                                        </div>
+                                         {{ form2.dpto_piso }}
+                                    </div>   
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                DEPTO.:
+                                            </span>
+                                        </div>
+                                         {{ form2.dpto_numero }}
+                                    </div>                                                                                                                                                                                                                                                                                 
+                                </div>
+		                        <div class="col-lg-12 col-md-12" style="display: flex; flex-direction: column; align-items: end;">
+		                            <button id="btnGuardar" type="submit" class="btn btn-primary btn-block" style="width: auto;">GUARDAR</button>
+		                        </div>
+                            </div>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+{% endblock main %}
+{% block java %}
+{% include 'includes/_mayusculas.html' %}
+{% endblock java %}

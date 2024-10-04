@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
+
 <div id="main-content" xmlns="http://www.w3.org/1999/html">
     <div class="container-fluid">
             <ul class="breadcrumb .border-left-secondary">
@@ -19,7 +20,7 @@
                 <div class="col-lg-3">
                     <div class="card mb-12 py-12">
                         <div class="card-body">
-                            <a type="button" class="btn btn-primary btn-user btn-block" aria-expanded="true" href="">
+                            <a type="button" class="btn btn-primary btn-user btn-block" aria-expanded="true" href="{{ url_nuevo }}">
                                 NUEVO
                             </a>
                         </div>
@@ -33,8 +34,8 @@
                         <div class="body">
 
                           <div class="table-responsive">
-                            <table id="data_table" class="table table-bordered table-striped table-hover dataTable">
-                              <thead class="sorting">
+                            <table id="data_table" class="display" style="width:100%">
+                              <thead>
                               <tr>
                                   <th>ACCIONES</th>
                                   <th>TITULO</th>
@@ -75,5 +76,4 @@
 {% endblock main %}
 {% block java %}
 {% include "includes/_datatable.html" %}
-{% include 'includes/_libreriasdatatable.html' %}
 {% endblock java %}

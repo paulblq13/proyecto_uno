@@ -1,4 +1,4 @@
-﻿#sb admin2
+#sb admin2
 node_modules
 # Carpeta de entorno virtual de Python
 venv/
@@ -28,3 +28,7 @@ __pycache__/
 
 # Carpeta de dependencias de Node.js
 node_modules/
+apps/usuario/migrations/__init__.py
+apps/usuario/__init__.py
+migrations/
+__init__.py

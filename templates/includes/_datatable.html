@@ -1,52 +1,40 @@
+<link href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css" rel="stylesheet">     
+<link href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css" rel="stylesheet"> 
+
+<link href="https://cdn.datatables.net/select/2.1.0/css/select.dataTables.css" rel="stylesheet">   
+<link href="https://cdn.datatables.net/datetime/1.5.4/css/dataTables.dateTime.min.css" rel="stylesheet">   
+<link href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.css" rel="stylesheet">   
+
+<script src="https://cdn.datatables.net/v/dt/dt-2.1.7/datatables.min.js"></script>
 
 
+
+<link href="https://cdn.datatables.net/v/dt/dt-2.1.7/af-2.7.0/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.css" rel="stylesheet">
+ 
+<script src="https://cdn.datatables.net/v/dt/dt-2.1.7/af-2.7.0/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
   <script>
     $(document).ready(function(){
   //-------------------------------------DATA TABLE------------------
-        var data_table = $('#data_table').DataTable( {
+  new DataTable('#data_table', {
             autoWidth: true,
             dom: 'Bfrtip',
             buttons: [
-            'copy', 'excel', 'pdf', 'print', 'csv', 'colvis', 'selectAll', 'selectNone', 'pageLength', 'search', 'reload'
+            'copy',
+            'excel',
+            //'pdf',
+            'print',
+            'csv',
+            'colvis',
+            //'selectAll',
+            //'selectNone',
+            //'pageLength',
+            'search',
+            'reload'
             ],
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
             },
-            pageLength: 50,
-        });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function(){
-  //-------------------------------------DATA TABLE------------------
-        var data_table = $('#data_table2').DataTable( {
-            autoWidth: true,
-            dom: 'Bfrtip',
-            buttons: [
-                'csv', 'print', 'copy'
-            ],
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
-            },
-            pageLength: 50,
-        });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function(){
-  //-------------------------------------DATA TABLE------------------
-        var data_table = $('#data_table3').DataTable( {
-            autoWidth: true,
-            dom: 'Bfrtip',
-            buttons: [
-                'csv', 'print', 'copy'
-            ],
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
-            },
-            pageLength: 50,
+            pageLength: 50,         
         });
     });
   </script>

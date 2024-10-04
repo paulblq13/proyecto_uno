@@ -1,0 +1,26 @@
+
+<script>
+    $(document).ready(function() {
+        $('#btn_verificar').on('click', function() {
+            var dni = $('#id_dni').val();
+            if (dni.length >= 8) {
+                $.ajax({
+                    url: '{% url '' %}',
+                    type: 'POST',
+                    data: {
+                        'dni': dni,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    },
+                    success: function(response) {
+                        $('#resultado-busqueda-persona').html(response);
+                    },
+                    error: function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    },
+                });
+            } else {
+                alert("El DNI ingresado debe tener 8 caracteres");
+            }
+        });
+    });
+</script>

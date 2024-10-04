@@ -1,0 +1,9 @@
+<script>
+    $(document).ready(function() {
+        $('.form-control').on('input', function() {
+            var textoMinusculas = $(this).val();
+            var textoMayusculas = textoMinusculas.toUpperCase();
+            $(this).val(textoMayusculas);
+        });
+    });
+    </script>

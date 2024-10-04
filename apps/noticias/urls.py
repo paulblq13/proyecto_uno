@@ -9,5 +9,7 @@ urlpatterns = [
 
     #VIEW
     #path('login/', usuarioViews.LoginView.as_view(), name='login'),
-    path('lista-noticias/', login_required(noticiasViews.listNoticiasView.as_view()), name="lista-noticias"),      
+    path('lista-noticias/', login_required(noticiasViews.listNoticiasView.as_view()), name="lista-noticias"),  
+#------------ADD VIEW
+    path('nueva-noticia/', login_required(noticiasViews.addNoticiaView.as_view()), name="nueva-noticia"),         
 ]

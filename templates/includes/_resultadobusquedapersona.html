@@ -1,0 +1,55 @@
+{% for resultado_persona in resultados_persona %}
+    <div class="alert alert-danger">
+    <p>El DNI de la persona ya existe en nuestra base de datos:</p>
+        <p><small>{{ resultado_persona.apellido }}, {{ resultado_persona.nombre }}</small></p>
+    </div>
+ <script>
+    $(document).ready(function() {
+         $('#id_tipo_identificacion').on('mousedown', function(event) {
+          event.preventDefault();
+          this.blur();
+          window.focus();
+        });
+            $('#id_dni').prop('readonly', false);
+            $('#id_apellido').val('{{ resultado_persona.apellido }}').prop('readonly', false);
+            $('#id_nombre').val('{{ resultado_persona.nombre }}').prop('readonly', false);
+            $('#id_fecha_nacimiento').val('{{ resultado_persona.fecha_nacimiento|date:"Y-m-d" }}').prop('readonly', false);
+            $('#id_telefono1').val('{{ resultado_persona.telefono1 }}').prop('readonly', false);
+            $('#id_telefono2').val('{{ resultado_persona.telefono2 }}').prop('readonly', false);            
+            $('#id_email').val('{{ resultado_persona.email|default:"" }}').prop('readonly', false);
+            $('#id_id_nacionalidad').val('{{ resultado_persona.id_nacionalidad.id }}').prop('readonly', false);
+            $('#id_id_provincia').val('{{ resultado_persona.id_provincia.id }}').prop('readonly', false);
+            $('#id_id_localidad').val('{{ resultado_persona.id_localidad.id }}').prop('readonly', false);
+            $('#id_dom_barrio').val('{{ resultado_persona.dom_barrio|default:"0" }}').prop('readonly', false);
+            $('#id_dom_calle').val('{{ resultado_persona.dom_calle|default:"" }}').prop('readonly', false);
+            $('#id_dom_numero').val('{{ resultado_persona.dom_numero|default:"" }}').prop('readonly', false);
+            $('#id_dpto_piso').val('{{ resultado_persona.dpto_piso|default:"" }}').prop('readonly', false);
+            $('#id_dpto_numero').val('{{ resultado_persona.dpto_numero|default:"" }}').prop('readonly', false);
+            $('#formok').show();
+            $('#resultado-busqueda-persona').show();
+    });
+</script>
+{% empty %}
+    <div class="alert alert-info">El DNI ingresado no se encuentra en nuestra base de datos, porfavor continue
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAACI0lEQVR4nGNgGAWjYBSQAJIf+FqnPPCpj3nuys1AL5B819ss9b7vl9QHvv9T7vueyrgTKEZzS9Mf+Gml3vd9C7IUCd9MeugnRTNLE277y6be932MZul/ML7vk0UTS7OfBAinPvC9hs3SlPu+Z3NvefBR3dK0pz5cKfd9jmK31OdO1n0vCbwGRN/y4Eu649mScttdm2hLzxizJt712J501/M/Br7j8TzxprcSXgPq/9czxd902Rx/y+V//C2Xzwk3XbwI2vqfgTHulvN8qB5UfNP5Y+wtZ0OCZkRft++Mue7wHwn/jr1un4FPT8x1+140PVBs/zPmmp0rQUujLlroRly2/hdxxfo/Og6/YtUM8hm6nvAr1hXY1EdcsfoTftk6iIEYEHpFiyfkgsmVkAum/7Hh4AsmSzxuqbDD1AdfMEkKOW/6D5va0PMmaQykAL8j6rz+Z/S3BZzR/48d6x31OWMs4n9WzzfgjN5vrGpO69cwkAOMzxizep/UmONzUvM/Nux9UuO290nNb9jlNKcwUArcjyrlux9R/utxVPk/Mdj9iNL60FUMzAzUAM4H5YJdDsh9czko9x8/lt3nsQ0R/1QB9vvFLOz3ir102Cv+Hxu23yN+wWW3ID8DLYDtTn5F6+3816x3CPxHw3fM93CLM9ASWOzgEzLfzLnXfAvXfzDezHXTbCO7IgNdwH8GRuP1zA7G65m9jDcxcNHH0lEwChhIAwDJfapHvq7fzAAAAABJRU5ErkJggg==">
+    </div>    
+<script>
+    $('#id_dni').prop('readonly', false);
+    $('#id_apellido').val('').prop('readonly', false);
+    $('#id_nombre').val('').prop('readonly', false);
+    $('#id_fecha_nacimiento').val('').prop('readonly', false);
+    $('#id_telefono1').val('').prop('readonly', false);
+    $('#id_telefono2').val('').prop('readonly', false);            
+    $('#id_email').val('').prop('readonly', false);
+    $('#id_id_nacionalidad').val('').prop('readonly', false);
+    $('#id_id_provincia').val('').prop('readonly', false);
+    $('#id_id_localidad').val('').prop('readonly', false);
+    $('#id_dom_barrio').val('').prop('readonly', false);
+    $('#id_dom_calle').val('').prop('readonly', false);
+    $('#id_dom_numero').val('').prop('readonly', false);
+    $('#id_dpto_piso').val('').prop('readonly', false);
+    $('#id_dpto_numero').val('').prop('readonly', false);
+    $('#formok').show();
+    $('#resultado-busqueda-persona').show();    
+</script>    
+{% endfor %}
