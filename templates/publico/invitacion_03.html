@@ -1,0 +1,573 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+<style>
+    .video-background {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Asegura que ocupe el 100% de la altura de la ventana */
+        overflow: hidden;
+    }
+
+    .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1);
+    }
+
+    .image-background {
+        position: relative;
+        width: 100%;
+        height: 740px; /* Ajusta este valor al alto deseado */
+        overflow: hidden;
+    }
+    
+    .image-background img {
+        width: 100%;
+        height: 100%; /* Mantiene el alto fijo de la imagen */
+        object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }  
+
+    .text-overlay {
+        position: absolute;
+        bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
+        left: 50%;
+        transform: translateX(-50%); /* Centra el contenido horizontalmente */
+        color: #ffffff;
+        text-align: center;
+        width: 100%;
+
+    }
+
+    .text-overlay h1 {
+        font-size: 4vw; /* El tamaño de fuente se ajusta en función del ancho de la pantalla */
+        color: white; /* Puedes cambiar el color según tu diseño */
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        }    
+
+    .image-overlay {
+        position: absolute;
+        top: 10px; /* Ajusta la distancia desde la parte superior según sea necesario */
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+        z-index: 1; /* Asegura que la imagen esté por encima del video */
+
+    }
+    
+    .image-overlay img {
+        width: auto; /* Ajusta el ancho según sea necesario */
+        height: 50px; /* Ajusta la altura según sea necesario */
+    }    
+
+    .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+
+    }
+
+    .fontcarta{
+        font-family: 'Dancing Script', cursive;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .second-video-background {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Tamaño completo para el segundo video */
+        overflow: hidden;
+    }
+
+    .second-video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .aro-overlay {
+        position: absolute;
+        top: 100px; /* Ajusta la distancia desde la parte superior según sea necesario */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1; /* Asegura que la imagen esté por encima del video */
+        width: 440px; /* Ajusta el ancho del contenedor */
+        height: 440px; /* Ajusta la altura del contenedor para mantener la proporción deseada */
+        overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
+    }
+    
+    .aro-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ajusta la imagen para cubrir el contenedor sin distorsionarse */
+    }
+    .text-reloj {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+
+    }
+    .text-reloj-pie {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        z-index: 2; /* Asegura que el texto esté encima del video */
+        width: 50%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+        overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
+    }    
+    .text-reloj-pie img {
+        width: 100%; /* Ajusta la imagen al ancho del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+        display: block; /* Elimina el espacio blanco debajo de la imagen */
+    }    
+
+    .container {
+  position: relative; /* Contenedor para posicionar los divs superpuestos */
+  width: 400px; /* Ajusta el tamaño del contenedor */
+  height: 300px;
+}
+
+.image-layer {
+  position: absolute; /* Para que todos los divs se superpongan */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-layer img {
+  width: 100%; /* Hace que las imágenes ocupen todo el div */
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el div sin deformarse */
+  opacity: 1; /* Puedes ajustar la opacidad para la superposición */
+}
+
+
+.layer1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.layer1 img {
+  opacity: 1; /* Transparencia de la imagen */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+  width: 60%; /* Redimensiona la imagen al 80% del contenedor */
+  height: auto;
+}
+
+.layer2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.layer2 img {
+  opacity: 1; /* Transparencia de la imagen */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+  width: 40%; /* Redimensiona la imagen al 80% del contenedor */
+  height: auto;
+}
+
+.layer3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.layer3 img {
+  opacity: 1; /* Transparencia de la imagen */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+  width: 32%; /* Redimensiona la imagen al 80% del contenedor */
+  height: auto;
+} 
+
+.layer4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.layer4 img {
+  opacity: 1; /* Transparencia de la imagen */
+  object-fit: contain; /* Asegura que la imagen no se recorte */
+  width: 20%; /* Redimensiona la imagen al 80% del contenedor */
+  height: auto;
+} 
+
+.custom-button {
+  background-color: black; /* Fondo negro */
+  color: white; /* Color del texto blanco */
+  border: 3px solid white; /* Contorno blanco de 3px */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno para mayor tamaño */
+  font-size: 4vw; /* Tamaño del texto */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s ease; /* Animación de cambio de fondo */
+}
+
+.custom-button:hover {
+  background-color: #333; /* Fondo ligeramente más claro al pasar el mouse */
+}
+
+
+/* Estilos generales para la galería de imágenes */
+.image-gallery {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las imágenes */
+  gap: 20px; /* Espaciado entre los contenedores */
+  flex-wrap: wrap; /* Permite que las imágenes se muevan a una nueva línea si es necesario */
+}
+
+/* Estilos para las imágenes */
+.image-container {
+  flex: 1; /* Cada imagen ocupará la misma cantidad de espacio */
+  min-width: 30%; /* Ancho mínimo del 30% para las imágenes en pantallas grandes */
+}
+
+.image-container img {
+  width: 100%; /* La imagen ocupará el 100% del ancho del contenedor */
+  height: auto; /* Mantener la relación de aspecto correcta */
+  object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+}
+/* Media Query para pantallas pequeñas (como móviles) */
+@media (max-width: 768px) {
+  .image-container {
+    min-width: 100%; /* Las imágenes ocuparán el 100% del ancho en pantallas pequeñas */
+  }
+}
+</style>   
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid" style="background-color: black;">
+    <div class="image-background">
+        <img src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Fondo adaptable">
+        <div class="text-overlay">
+            <h5>
+                <span id="t5q1tr8OemPRTugq" style="color:#ffffff; font-size: 30px">
+                    <svg width="80" height="3">
+                        <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                    </svg>
+                    14-12-2024
+                    <svg width="80" height="3">
+                        <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                    </svg>
+                </span>
+            </h5>
+            <h1 class="fontcarta">
+                <span style="color:#ffffff; font-size: 99px;">Serena</span>
+            </h1>
+            <p>
+                <span id="t5q1tr8OemPRTugq" style="color:#ffffff; font-size: 30px;">Mis 15 años</span>
+            </p>
+            <h5>
+                <svg width="400" height="3">
+                    <path d="M0,1.5 L400.58799494,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
+                </svg>
+            </h5>
+        </div>
+    </div>
+    <!-- Primer video -->        
+    <div class="video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+        </div>
+            <!-- Aro -->
+        <div class="aro-overlay">
+            <img src="{% static 'img/aro-hojas.webp' %}" alt="Imagen de fondo">    
+            <div class="text-reloj" style="font-size: 40px;">
+                <p class='fontcarta'>Faltan</p>
+                <script>
+                    (function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));
+                </script>
+                <a data-type="countdown" data-id="5797229" class="tickcounter" style="display:block; left:0; width:25%; height:0; position:relative; padding-bottom:6%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/"></a>
+            </div>
+            <div class="text-reloj-pie" >
+                <img src="{% static 'img/reloj-arreglo01.svg' %}" alt="arreglo">   
+            </div>             
+        </div>   
+        
+    </div>
+    <script>
+        (function(d, s, id) {
+            var js, pjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//www.tickcounter.com/static/js/loader.js";
+            pjs.parentNode.insertBefore(js, pjs);
+        }(document, "script", "tickcounter-sdk"));
+    </script>
+
+    <!-- Segundo video -->
+    <div class="second-video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <!-- Flecha -->
+            <div class="image-overlay">
+                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            </div> 
+            <!-- Text -->
+            <div class="text-overlay" style="top: 30%;">
+                <p><img src="{% static 'img/mariposa.svg' %}" alt="Flecha" style="width: 110px;"></p>
+                   <h1><p>Te espero para compartir</p>
+                    <p>esta noche mágica</p></h1>
+                <p><img src="{% static 'img/corazon.svg' %}" alt="Flecha" style="width: 30px;"></p>
+            </div>      
+    </div>
+
+   <!-- Tercer video -->        
+   <div class="video-background">
+    <video 
+        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        playsinline 
+        preload="none" 
+        muted 
+        loop 
+        autoplay
+    >
+        Tu navegador no soporta el elemento de video.
+    </video>
+            <!-- Icono -->
+    <div class="text-overlay" style="top: 20%;">
+        <div class="container">
+            <div class="image-layer layer1">
+                <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
+            </div>
+            <div class="image-layer layer2">
+                <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
+            </div>
+            <div class="image-layer layer3">
+                <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
+            </div>
+            <div class="image-layer layer4">
+                <img src="{% static 'img/03-icono_fiesta.svg' %}" alt="img04">
+            </div>        
+        </div>   
+    </div>  
+        <!-- Fiesta -->
+        <div class="text-overlay" style="top: 60%;">
+            <h1><p>FIESTA: Viernes 16 de Julio - 21 Hs.</p></h1><br>
+            <p><button type="button" class="custom-button">AGENDAR</button></p>
+        </div>  
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+        </div>
+    </div>   
+    
+    <!-- Cuarto video -->
+    <div class="second-video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <!-- Flecha -->
+            <div class="image-overlay">
+                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            </div> 
+            <!-- Icono -->
+            <div class="text-overlay" style="top: 10%;">
+                <div class="container">
+                    <div class="image-layer layer1">
+                        <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
+                    </div>
+                    <div class="image-layer layer2">
+                        <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
+                    </div>
+                    <div class="image-layer layer3">
+                        <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
+                    </div>
+                    <div class="image-layer layer4">
+                        <img src="{% static 'img/ubicacion_01.gif' %}" style="width: 15%;" alt="img04">
+                    </div>        
+                </div>   
+            </div>             
+        <!-- Fiesta -->
+        <div class="text-overlay" style="top: 50%;">
+            <h1><p>Sociedad Española</p>
+            <h1>Belgrano N° 00</h1><br>
+            <p><button type="button" class="custom-button">COMO LLEGAR</button></p>
+        </div>    
+    </div>   
+    
+   <!-- Quinto video -->        
+   <div class="video-background">
+    <video 
+        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        playsinline 
+        preload="none" 
+        muted 
+        loop 
+        autoplay
+    >
+        Tu navegador no soporta el elemento de video.
+    </video>
+            <!-- Icono -->
+    <div class="text-overlay" style="top: 20%;">
+        <div class="container">
+            <div class="image-layer layer1">
+                <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
+            </div>
+            <div class="image-layer layer2">
+                <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
+            </div>
+            <div class="image-layer layer3">
+                <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
+            </div>
+            <div class="image-layer layer4">
+                <img src="{% static 'img/confirmar_01.svg' %}" alt="img04">
+            </div>        
+        </div>   
+    </div>  
+        <!-- Fiesta -->
+        <div class="text-overlay" style="top: 60%;">
+            <h1><p>Confirmar asistencia</p></h1><br>
+            <p><button type="button" class="custom-button">CONFIRMAR</button></p>
+        </div>  
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+        </div>
+    </div>       
+
+    <!-- Sexto video -->
+    <div class="second-video-background" style="height: 300px;">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <!-- Flecha -->
+            <div class="image-overlay">
+                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            </div> 
+            <!-- Icono -->
+            <div class="text-overlay" style="top: 10%;">
+                <div class="container">
+                    <div class="image-layer layer1">
+                        <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
+                    </div>
+                    <div class="image-layer layer2">
+                        <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
+                    </div>
+                    <div class="image-layer layer3">
+                        <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
+                    </div>
+                    <div class="image-layer layer4">
+                        <img src="{% static 'img/camara_01.gif' %}" style="width: 15%;" alt="img04">
+                    </div>        
+                </div>   
+            </div> 
+    </div>    
+    <div class="image-gallery">
+        <div class="image-container">
+          <img src="static/img/imagen1.jpg" alt="Imagen 1">
+        </div>
+        <div class="image-container">
+          <img src="static/img/imagen2.jpg" alt="Imagen 2">
+        </div>
+        <div class="image-container">
+          <img src="static/img/imagen3.jpg" alt="Imagen 3">
+        </div>
+      </div>
+   <!-- Septimo video -->        
+   <div class="video-background">
+    <video 
+        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        playsinline 
+        preload="none" 
+        muted 
+        loop 
+        autoplay
+    >
+        Tu navegador no soporta el elemento de video.
+    </video>
+        <!-- Texto -->
+        <div class="text-overlay" style="top: 60%;">
+            <h1><p>Dress code</p></h1><br>
+        </div> 
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+        </div>
+    </div>       
+
+
+
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
