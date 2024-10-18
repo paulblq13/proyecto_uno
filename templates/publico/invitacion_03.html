@@ -49,14 +49,33 @@
 
     }
 
+    .text-overlay2 {
+        position: absolute;
+        bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
+        left: 50%;
+        transform: translateX(-50%); /* Centra el contenido horizontalmente */
+        color: #ffffff;
+        text-align: center;
+        width: 100%;
+
+    }    
+
     .text-overlay h1 {
-        font-size: 4vw; /* El tamaño de fuente se ajusta en función del ancho de la pantalla */
+        font-size: min(7vw, 30px); /* El tamaño de fuente se ajusta en función del ancho de la pantalla */
         color: white; /* Puedes cambiar el color según tu diseño */
         margin: 0;
         padding: 0;
         line-height: 1.2;
-        }    
-
+        }   
+      
+    .text-overlay2 h1 {
+        font-size: min(7vw, 30px); /* El tamaño de fuente se ajusta en función del ancho de la pantalla */
+        color: white; /* Puedes cambiar el color según tu diseño */
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        }   
+        /* =======================FLECHA HACIA ABAJO ============================== */
     .image-overlay {
         position: absolute;
         top: 10px; /* Ajusta la distancia desde la parte superior según sea necesario */
@@ -68,9 +87,27 @@
     
     .image-overlay img {
         width: auto; /* Ajusta el ancho según sea necesario */
-        height: 50px; /* Ajusta la altura según sea necesario */
+        height: 50px; /* Ajusta la altura según sea necesario */        
     }    
-
+    
+    /* Animación de las flechas */
+    .animated-arrow {
+        animation: sway 1s ease-in-out forwards; /* Cambia a "forwards" para mantener la posición final */
+    }
+    
+    /* Definición de la animación horizontal */
+    @keyframes sway {
+        0% {
+            transform: translateX(0); /* Comienza en la posición original */
+        }
+        50% {
+            transform: translateX(-10px); /* Desplaza a la izquierda 10 píxeles */
+        }
+        100% {
+            transform: translateX(0); /* Vuelve a la posición original */
+        }
+    }
+    /* =======================FIN FLECHA HACIA ABAJO ============================== */
     .text-overlay {
         position: absolute;
         top: 50%;
@@ -100,7 +137,7 @@
 
     .second-video-background video {
         width: 100%;
-        height: 100%;
+        height: 100vh;
         object-fit: cover;
     }
 
@@ -110,11 +147,13 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 1; /* Asegura que la imagen esté por encima del video */
-        width: 440px; /* Ajusta el ancho del contenedor */
-        height: 440px; /* Ajusta la altura del contenedor para mantener la proporción deseada */
+        width: 80vw; /* Ajusta el ancho del contenedor al 50% del ancho de la ventana */
+        max-width: 450px; /* Ancho máximo para pantallas grandes */
+        height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
         overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
     }
-    
+
+
     .aro-overlay img {
         width: 100%;
         height: 100%;
@@ -230,20 +269,24 @@
   height: auto;
 } 
 
+
+
 .custom-button {
-  background-color: black; /* Fondo negro */
-  color: white; /* Color del texto blanco */
-  border: 3px solid white; /* Contorno blanco de 3px */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 10px 20px; /* Espaciado interno para mayor tamaño */
-  font-size: 4vw; /* Tamaño del texto */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  transition: background-color 0.3s ease; /* Animación de cambio de fondo */
+    font-size: 1.5rem; /* Tamaño de fuente adaptable */
+    padding: 10px 20px; /* Espaciado dentro del botón */
+    background-color: #ff0000; /* Ajusta el color de fondo según tu diseño */
+    color: white;
+    border: 3px solid white; /* Contorno blanco de 3px */
+    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer;
+    min-width: 150px; /* Ancho mínimo del botón */
+    min-height: 50px; /* Alto mínimo del botón */
+    transition: background-color 0.3s ease; /* Animación suave al hacer hover */
+    background-color: black; /* Fondo negro */
+    color: white; /* Color del texto blanco */    
 }
 
-.custom-button:hover {
-  background-color: #333; /* Fondo ligeramente más claro al pasar el mouse */
-}
+
 
 
 /* Estilos generales para la galería de imágenes */
@@ -271,12 +314,39 @@
     min-width: 100%; /* Las imágenes ocuparán el 100% del ancho en pantallas pequeñas */
   }
 }
+
+/* =======================CARRUSEL DE IMAGENES ============================== */
+/* Estilos para mantener la proporción de las imágenes */
+.carousel-item img {
+  width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+  height: 600px; /* Ajusta la altura máxima deseada */
+  object-fit: cover; /* Asegura que las imágenes no se deformen */
+}
+
+/* Opcional: estilos específicos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 600px; /* Menor altura en pantallas pequeñas */
+  }
+}
+/* =======================CARRUSEL DE IMAGENES FIN ============================== */
+
+.rectangulo {
+    display: inline-block; /* Permite que el contenedor ajuste su tamaño al contenido */
+    padding: 20px; /* Espaciado interno */
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco sólido */
+    border-radius: 15px; /* Bordes redondeados */
+    color: black; /* Color del texto */
+    font-size: 24px; /* Tamaño de la fuente */
+    max-width: 300px; /* Ajusta el ancho máximo del rectángulo */
+    width: 600px;
+}
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-<div class="container-fluid" style="background-color: black;">
+<div class="" style="background-color: black;">
     <div class="image-background">
         <img src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Fondo adaptable">
         <div class="text-overlay">
@@ -318,7 +388,7 @@
         </video>
             <!-- Flecha -->
         <div class="image-overlay">
-            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha1">
         </div>
             <!-- Aro -->
         <div class="aro-overlay">
@@ -361,7 +431,7 @@
         </video>
             <!-- Flecha -->
             <div class="image-overlay">
-                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+                <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha2">
             </div> 
             <!-- Text -->
             <div class="text-overlay" style="top: 30%;">
@@ -402,13 +472,13 @@
         </div>   
     </div>  
         <!-- Fiesta -->
-        <div class="text-overlay" style="top: 60%;">
-            <h1><p>FIESTA: Viernes 16 de Julio - 21 Hs.</p></h1><br>
+        <div class="text-overlay2" style="top: 60%;">
+            <h1><p>FIESTA</p><p>Viernes 16 de Julio - 21 Hs.</p></h1><br>
             <p><button type="button" class="custom-button">AGENDAR</button></p>
         </div>  
             <!-- Flecha -->
         <div class="image-overlay">
-            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha3">
         </div>
     </div>   
     
@@ -426,7 +496,7 @@
         </video>
             <!-- Flecha -->
             <div class="image-overlay">
-                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+                <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha4">
             </div> 
             <!-- Icono -->
             <div class="text-overlay" style="top: 10%;">
@@ -489,7 +559,7 @@
         </div>  
             <!-- Flecha -->
         <div class="image-overlay">
-            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha5">
         </div>
     </div>       
 
@@ -507,7 +577,7 @@
         </video>
             <!-- Flecha -->
             <div class="image-overlay">
-                <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+                <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha6">
             </div> 
             <!-- Icono -->
             <div class="text-overlay" style="top: 10%;">
@@ -527,19 +597,35 @@
                 </div>   
             </div> 
     </div>    
-    <div class="image-gallery">
-        <div class="image-container">
-          <img src="static/img/imagen1.jpg" alt="Imagen 1">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="static/img/imagen1.jpg" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="static/img/imagen2.jpg" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="static/img/imagen3.jpg" alt="Third slide">
+          </div>
         </div>
-        <div class="image-container">
-          <img src="static/img/imagen2.jpg" alt="Imagen 2">
-        </div>
-        <div class="image-container">
-          <img src="static/img/imagen3.jpg" alt="Imagen 3">
-        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
    <!-- Septimo video -->        
-   <div class="video-background">
+   <div class="video-background"  style="height: 500px;">
     <video 
         src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
         playsinline 
@@ -551,21 +637,74 @@
         Tu navegador no soporta el elemento de video.
     </video>
         <!-- Texto -->
-        <div class="text-overlay" style="top: 60%;">
-            <h1><p>Dress code</p></h1><br>
-        </div> 
+        <div class="text-overlay" style="top: 30%;">
+            <div class="rectangulo">
+                <div class="section">Dress Code</div>
+                <div class="section"><img src="{% static 'img/dress-elegante.png' %}" alt="música" style="width:80px;">   </div>
+                <div class="section">Elegante</div>
+                <div class="section"><br></div>
+                <div class="section"><br></div>
+            </div>
+        </div>        
             <!-- Flecha -->
         <div class="image-overlay">
-            <img src="{% static 'img/flecha.svg' %}" alt="Flecha">
+            <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha7">
         </div>
     </div>       
 
-
-
-
-
+    <!-- Octavo video -->
+    <div class="second-video-background">
+        <video 
+            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <!-- Texto -->
+        <div class="text-overlay" style="top: 30%;">
+            <h1><p>Hagamos que sea</p><p> una noche epíca</p></h1><br>
+            <div class="rectangulo">
+                <div class="section">Música</div>
+                <div class="section"><img src="{% static 'img/musica.gif' %}" alt="música" style="width:80px;">   </div>
+                <div class="section">¿Que canción no debe faltar?</div>
+                <div class="section"><br></div>
+                <div class="section"><button class="custom-button">Sugerir canción</button></div>
+            </div>
+        </div>    
+            <!-- Flecha -->
+            <div class="image-overlay">
+                <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha8">
+            </div>                 
+    </div>          
 </div>
+<script>
+    // Selecciona todas las flechas
+    const arrows = document.querySelectorAll('.animated-arrow');
 
+    // Función para manejar la intersección
+    const handleIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Cuando la flecha entra en la vista, se hace visible y se anima
+                entry.target.style.opacity = 1; // Hace la flecha visible
+                entry.target.classList.add('animated-arrow'); // Agrega la clase de animación
+                observer.unobserve(entry.target); // Deja de observar la flecha después de animarla
+            }
+        });
+    };
+
+    // Crear un nuevo observador
+    const observer = new IntersectionObserver(handleIntersection);
+
+    // Observar cada flecha
+    arrows.forEach(arrow => {
+        observer.observe(arrow);
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
