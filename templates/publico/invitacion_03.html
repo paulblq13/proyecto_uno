@@ -8,6 +8,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 <style>
+    .textoneon {
+        font-size: 40px; /* Puedes ajustar el tamaño de la letra */
+        color: #e3e4e5; /* Rosa neón */
+        text-shadow: 0 0 5px #e3e4e5, 
+                    0 0 10px #e3e4e5, 
+                    0 0 20px #e3e4e5, 
+                    0 0 40px #e3e4e5, 
+                    0 0 80px #e3e4e5, 
+                    0 0 90px #e3e4e5, 
+                    0 0 100px #e3e4e5;
+        font-family: Arial, sans-serif;
+        text-align: center; /* Centra el texto */
+    }
+
+    .textobrillo {
+        font-size: 40px; /* Tamaño de la letra */
+        color: #C0C0C0; /* Plata */
+        text-shadow: 1px 1px 5px rgba(192, 192, 192, 0.8), 
+                     2px 2px 10px rgba(255, 255, 255, 0.5); /* Efecto de brillo */
+        font-family: Arial, sans-serif;
+        text-align: center; /* Centra el texto */
+    }
+
     .video-background {
         position: relative;
         width: 100%;
@@ -341,15 +364,33 @@
     max-width: 300px; /* Ajusta el ancho máximo del rectángulo */
     width: 600px;
 }
+
+
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #007BFF; /* Color del botón */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+}   
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-<div class="" style="background-color: black;">
+    <button onclick="reproducirMusica()" style="font-size: 16px; color: white; background-color: #007BFF; border: none; border-radius: 5px; cursor: pointer;">
+        Reproducir Música
+    </button>  
+<div style="background-color: black; position: relative; overflow: hidden;">    
     <div class="image-background">
         <img src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Fondo adaptable">
-        <div class="text-overlay">
+        <div class="text-overlay">           
             <h5>
                 <span id="t5q1tr8OemPRTugq" style="color:#ffffff; font-size: 30px">
                     <svg width="80" height="3">
@@ -361,7 +402,8 @@
                     </svg>
                 </span>
             </h5>
-            <h1 class="fontcarta">
+             
+            <h1 class="fontcarta textobrillo">
                 <span style="color:#ffffff; font-size: 99px;">Serena</span>
             </h1>
             <p>
@@ -373,11 +415,19 @@
                 </svg>
             </h5>
         </div>
+        <audio id="musica" src="{% static 'aud/fiesta.mp3' %}" preload="auto"></audio>
+
+        <script>
+            function reproducirMusica() {
+                var audio = document.getElementById("musica");
+                audio.play();
+            }
+        </script>        
     </div>
     <!-- Primer video -->        
     <div class="video-background">
         <video 
-            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            src="{% static 'vid/brillos.mp4' %}" 
             playsinline 
             preload="none" 
             muted 
@@ -420,7 +470,7 @@
     <!-- Segundo video -->
     <div class="second-video-background">
         <video 
-            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            src="{% static 'vid/brillos.mp4' %}" 
             playsinline 
             preload="none" 
             muted 
@@ -434,7 +484,7 @@
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha2">
             </div> 
             <!-- Text -->
-            <div class="text-overlay" style="top: 30%;">
+            <div class="text-overlay textobrillo" style="top: 30%;">
                 <p><img src="{% static 'img/mariposa.svg' %}" alt="Flecha" style="width: 110px;"></p>
                    <h1><p>Te espero para compartir</p>
                     <p>esta noche mágica</p></h1>
@@ -445,7 +495,7 @@
    <!-- Tercer video -->        
    <div class="video-background">
     <video 
-        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        src="{% static 'vid/brillos.mp4' %}" 
         playsinline 
         preload="none" 
         muted 
@@ -485,7 +535,7 @@
     <!-- Cuarto video -->
     <div class="second-video-background">
         <video 
-            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            src="{% static 'vid/brillos.mp4' %}" 
             playsinline 
             preload="none" 
             muted 
@@ -526,7 +576,7 @@
    <!-- Quinto video -->        
    <div class="video-background">
     <video 
-        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        src="{% static 'vid/brillos.mp4' %}" 
         playsinline 
         preload="none" 
         muted 
@@ -566,7 +616,7 @@
     <!-- Sexto video -->
     <div class="second-video-background" style="height: 300px;">
         <video 
-            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            src="{% static 'vid/brillos.mp4' %}" 
             playsinline 
             preload="none" 
             muted 
@@ -627,7 +677,7 @@
    <!-- Septimo video -->        
    <div class="video-background"  style="height: 500px;">
     <video 
-        src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+        src="{% static 'vid/brillos.mp4' %}" 
         playsinline 
         preload="none" 
         muted 
@@ -655,7 +705,7 @@
     <!-- Octavo video -->
     <div class="second-video-background">
         <video 
-            src="{% static 'vid/b44b51b84e8b8e5e7c1a4f5e19ee2751.mp4' %}" 
+            src="{% static 'vid/brillos.mp4' %}" 
             playsinline 
             preload="none" 
             muted 
