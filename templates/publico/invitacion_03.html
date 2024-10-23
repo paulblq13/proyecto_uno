@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 <style>
+    /* =======================TEXTOS EFECTOS============================== */    
     .textoneon {
         font-size: 40px; /* Puedes ajustar el tamaño de la letra */
         color: #e3e4e5; /* Rosa neón */
@@ -30,7 +31,7 @@
         font-family: Arial, sans-serif;
         text-align: center; /* Centra el texto */
     }
-
+    /* =======================FIN TEXTOS EFECTOS============================== */    
     .video-background {
         position: relative;
         width: 100%;
@@ -69,7 +70,6 @@
         color: #ffffff;
         text-align: center;
         width: 100%;
-
     }
 
     .text-overlay2 {
@@ -309,7 +309,9 @@
     color: white; /* Color del texto blanco */    
 }
 
-
+button:hover {
+    background-color: #848482; /* Color al pasar el mouse */
+}  
 
 
 /* Estilos generales para la galería de imágenes */
@@ -354,6 +356,7 @@
 }
 /* =======================CARRUSEL DE IMAGENES FIN ============================== */
 
+/* =======================RECTANGULO SEMITRANSPARENTE ============================== */
 .rectangulo {
     display: inline-block; /* Permite que el contenedor ajuste su tamaño al contenido */
     padding: 20px; /* Espaciado interno */
@@ -364,33 +367,56 @@
     max-width: 300px; /* Ajusta el ancho máximo del rectángulo */
     width: 600px;
 }
+/* =======================FIN RECTANGULO SEMITRANSPARENTE ============================== */
 
-
-
-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    color: white;
-    background-color: #007BFF; /* Color del botón */
-    border: none;
-    border-radius: 5px;
+/* =======================IMAGENES ALADO DE LA OTRA ============================== */
+/* Para pantallas grandes (como en tu PC) */
+@media (min-width: 768px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 5%;
+    display: block;    
+    height: 50px;
+    width: auto;
     cursor: pointer;
+  }
+
+  img[src*="flechas.gif"] {
+    top: 2%;
+    left: 1%;
+    height: 30px;
+    width: auto;    
+  }
 }
-button:hover {
-    background-color: #0056b3; /* Color al pasar el mouse */
-}   
+
+/* Para pantallas pequeñas (como en tu celular) */
+@media (max-width: 767px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 15%;
+    display: block;    
+    height: 50px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  img[src*="flechas.gif"] {
+    top: 2%;
+    left: 1%;
+    height: 30px;
+    width: auto;   
+  }
+}
+/* =======================FIN IMAGENES ALADO DE LA OTRA ============================== */
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <button onclick="reproducirMusica()" style="font-size: 16px; color: white; background-color: #007BFF; border: none; border-radius: 5px; cursor: pointer;">
-        Reproducir Música
-    </button>  
 <div style="background-color: black; position: relative; overflow: hidden;">    
     <div class="image-background">
         <img src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Fondo adaptable">
-        <div class="text-overlay">           
+        <div class="text-overlay">
             <h5>
                 <span id="t5q1tr8OemPRTugq" style="color:#ffffff; font-size: 30px">
                     <svg width="80" height="3">
@@ -402,7 +428,6 @@ button:hover {
                     </svg>
                 </span>
             </h5>
-             
             <h1 class="fontcarta textobrillo">
                 <span style="color:#ffffff; font-size: 99px;">Serena</span>
             </h1>
@@ -415,14 +440,37 @@ button:hover {
                 </svg>
             </h5>
         </div>
+            <div class="image-layer layer4">
+    <img id="soundOnImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido activado" width="24" height="24" >
+    <img id="soundOffImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido desactivado" width="24" height="24" >                
+    <img src="{% static 'img/flechas.gif' %}">
+</div>  
         <audio id="musica" src="{% static 'aud/fiesta.mp3' %}" preload="auto"></audio>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            function reproducirMusica() {
-                var audio = document.getElementById("musica");
-                audio.play();
-            }
-        </script>        
+            $(document).ready(function (){
+                $('#soundOnImage, #soundOffImage').on('click', function(){
+                    var soundOn = $('#soundOnImage');
+                    var soundOff = $('#soundOffImage');
+                    
+                    if (soundOn.is(':visible')) {
+                        soundOn.hide();
+                        soundOff.show();
+                    } else {
+                        soundOn.show();
+                        soundOff.hide();
+                    }
+        
+                    // Aquí puedes agregar la lógica para reproducir o pausar la música
+                    var musica = $('#musica').get(0);
+                    if (musica.paused) {
+                        musica.play();
+                    } else {
+                        musica.pause();
+                    }
+                });
+            });
+        </script>  
     </div>
     <!-- Primer video -->        
     <div class="video-background">
@@ -730,7 +778,34 @@ button:hover {
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha8">
             </div>                 
     </div>          
+
+   <!-- Noveno video -->        
+   <div class="video-background" >
+    <video 
+        src="{% static 'vid/brillos.mp4' %}" 
+        playsinline 
+        preload="none" 
+        muted 
+        loop 
+        autoplay
+    >
+        Tu navegador no soporta el elemento de video.
+    </video>
+        <!-- Texto -->
+        <div class="text-overlay" style="top: 30%;">
+<p><h1>Una gran noche junto a vos</h1></p>
+<p><h1 class="textoneon" style="font-size: 55px;">#LosXVdeSere</h1></p>
+        </div>        
+            <!-- Flecha -->
+        <div class="image-overlay">
+            <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha7">
+        </div>
+    </div>   
+
+
 </div>
+
+
 <script>
     // Selecciona todas las flechas
     const arrows = document.querySelectorAll('.animated-arrow');
