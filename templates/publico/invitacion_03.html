@@ -113,21 +113,26 @@
         height: 50px; /* Ajusta la altura según sea necesario */        
     }    
     
-    /* Animación de las flechas */
     .animated-arrow {
-        animation: sway 1s ease-in-out forwards; /* Cambia a "forwards" para mantener la posición final */
+        position: relative;
+        opacity: 0; /* Inicialmente invisible */
+        transition: opacity 0.5s ease-in-out; /* Suaviza la transición de opacidad */
     }
     
-    /* Definición de la animación horizontal */
-    @keyframes sway {
+    .animate {
+        opacity: 1; /* Se vuelve visible cuando se añade la clase 'animate' */
+        animation: arrow-move 2s ease-in-out 1;
+    }
+    
+    @keyframes arrow-move {
         0% {
-            transform: translateX(0); /* Comienza en la posición original */
+            left: 0;
         }
         50% {
-            transform: translateX(-10px); /* Desplaza a la izquierda 10 píxeles */
+            left: 10px; /* Ajusta según cuánto quieres que se mueva */
         }
         100% {
-            transform: translateX(0); /* Vuelve a la posición original */
+            left: 0;
         }
     }
     /* =======================FIN FLECHA HACIA ABAJO ============================== */
@@ -313,6 +318,7 @@ button:hover {
     background-color: #848482; /* Color al pasar el mouse */
 }  
 
+/* =======================CARRUSEL DE IMAGENES ============================== */
 
 /* Estilos generales para la galería de imágenes */
 .image-gallery {
@@ -340,7 +346,6 @@ button:hover {
   }
 }
 
-/* =======================CARRUSEL DE IMAGENES ============================== */
 /* Estilos para mantener la proporción de las imágenes */
 .carousel-item img {
   width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
@@ -794,7 +799,10 @@ button:hover {
         <!-- Texto -->
         <div class="text-overlay" style="top: 30%;">
 <p><h1>Una gran noche junto a vos</h1></p>
-<p><h1 class="textoneon" style="font-size: 55px;">#LosXVdeSere</h1></p>
+<a href="https://www.instagram.com/explore/tags/LosXVdeSerena/" target="_blank">
+    <h1 class="textoneon" style="font-size: 55px;">#LosXVdeSerena</h1>
+    <img src="{% static 'img/logo_insta.png' %}" style="height: 120px;">
+</a>
         </div>        
             <!-- Flecha -->
         <div class="image-overlay">
@@ -807,27 +815,27 @@ button:hover {
 
 
 <script>
-    // Selecciona todas las flechas
-    const arrows = document.querySelectorAll('.animated-arrow');
-
-    // Función para manejar la intersección
-    const handleIntersection = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Cuando la flecha entra en la vista, se hace visible y se anima
-                entry.target.style.opacity = 1; // Hace la flecha visible
-                entry.target.classList.add('animated-arrow'); // Agrega la clase de animación
-                observer.unobserve(entry.target); // Deja de observar la flecha después de animarla
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        const arrows = document.querySelectorAll('.animated-arrow');
+    
+        // Configuración del Intersection Observer
+        const observerOptions = {
+            threshold: 0.5 // Se activará cuando el 50% del elemento esté visible
+        };
+    
+        const observer = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate'); // Añade la clase que activa la animación
+                    observer.unobserve(entry.target); // Deja de observar el elemento una vez que se ha activado la animación
+                }
+            });
+        }, observerOptions);
+    
+        // Observa cada flecha
+        arrows.forEach(arrow => {
+            observer.observe(arrow);
         });
-    };
-
-    // Crear un nuevo observador
-    const observer = new IntersectionObserver(handleIntersection);
-
-    // Observar cada flecha
-    arrows.forEach(arrow => {
-        observer.observe(arrow);
     });
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

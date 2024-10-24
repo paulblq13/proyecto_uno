@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Fotos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Fotos</h1>
+
+    <!-- Galería de fotos -->
+    <div class="gallery">
+        {% for photo in photos %}
+            <img src="{{ MEDIA_URL }}{{ photo }}" alt="Foto subida">
+        {% endfor %}
+    </div>
+
+    <!-- Actualización automática cada 5 segundos -->
+    <script>
+        setInterval(function() {
+            location.reload();  // Recarga la página cada 5 segundos para mostrar nuevas fotos
+        }, 5000);
+    </script>
+</body>
+</html>
