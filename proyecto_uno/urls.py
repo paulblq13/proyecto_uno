@@ -16,6 +16,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
+
+#=========================PARA IMAGENES
+from django.conf import settings
+from django.conf.urls.static import static
+#FIN PARA IMAGENES======================
 from django.urls import path, include
 from apps.publico import views as publicoViews
 
@@ -31,3 +36,5 @@ urlpatterns = [
     path('', include('apps.noticias.urls')),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

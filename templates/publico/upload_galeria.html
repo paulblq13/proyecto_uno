@@ -42,9 +42,21 @@
 
     <!-- Actualización automática cada 5 segundos -->
     <script>
-        setInterval(function() {
-            location.reload();  // Recarga la página cada 5 segundos para mostrar nuevas fotos
-        }, 5000);
+        const gallerySocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/galeria/'
+        );
+    
+        gallerySocket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            // Si hay una nueva imagen, recarga la galería
+            if (data.new_image) {
+                location.reload();
+            }
+        };
+    
+        gallerySocket.onclose = function(e) {
+            console.error('WebSocket cerrado inesperadamente');
+        };
     </script>
 </body>
 </html>

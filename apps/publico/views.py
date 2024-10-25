@@ -2,10 +2,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-#==FOTOS TIEMPO REAL==
+#==FOTOS==
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-#==FIN FOTOS TIEMPO REAL==
+#==FIN FOTOS==
+#TIEMPO REAL=========
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+from django.conf import settings
+#======FIN TIEMPO REAL
 
 #-----------------------VIEWS-------------------------
 from django.views.generic import TemplateView
@@ -27,12 +32,20 @@ class EscritorioView(TemplateView):
 
 def upload_photo(request):
     if request.method == 'POST' and request.FILES['photo']:
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            'gallery_group',  # Nombre del grupo de la galería
+            {
+                'type': 'new_image',
+                'message': 'Nueva imagen subida'
+            }
+        )        
         photo = request.FILES['photo']
         fs = FileSystemStorage()
         filename = fs.save(photo.name, photo)
-        return render(request, 'upload_success.html', {'filename': filename})
-    return render(request, 'upload_photo.html')
+        return redirect(f'{settings.MEDIA_URL}')
+    return render(request, 'publico/upload_fotos.html')
 
-def gallery(request):
+def photo_gallery(request):
     photos = FileSystemStorage().listdir('')[1]  # Listar todas las fotos
-    return render(request, 'gallery.html', {'photos': photos})
+    return render(request, 'publico/upload_galeria.html', {'photos': photos})
