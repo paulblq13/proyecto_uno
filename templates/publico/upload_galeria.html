@@ -40,10 +40,9 @@
         {% endfor %}
     </div>
 
-    <!-- Actualización automática cada 5 segundos -->
     <script>
         const gallerySocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/galeria/'
+            'ws://' + window.location.host + '/ws/fotos/'
         );
     
         gallerySocket.onmessage = function(event) {
@@ -56,6 +55,10 @@
     
         gallerySocket.onclose = function(e) {
             console.error('WebSocket cerrado inesperadamente');
+        };
+    
+        gallerySocket.onerror = function(error) {
+            console.error('Error en el WebSocket:', error);
         };
     </script>
 </body>

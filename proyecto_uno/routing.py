@@ -1,6 +1,13 @@
-from django.urls import re_path
-from ..apps.publico import consumers
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+import apps.publico.routing  # Importa las rutas de WebSocket de la app publico
+from django.core.asgi import get_asgi_application
 
-websocket_urlpatterns = [
-    re_path(r'ws/media/$', consumers.GalleryConsumer.as_asgi()),
-]
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            apps.publico.routing.websocket_urlpatterns  # Usa las rutas de WebSocket de publico
+        )
+    ),
+})
