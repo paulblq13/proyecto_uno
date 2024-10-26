@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Fotos</title>
+    <style>
+        /* Estilos para mostrar la imagen en pantalla completa */
+        #galeria-aprobada {
+            position: relative; /* Posicionamiento relativo para el contenedor */
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden; /* Ocultar cualquier desbordamiento */
+        }
+        
+        img {
+            width: 100%; /* Ajustar al ancho completo del contenedor */
+            height: 100%; /* Ajustar a la altura completa del contenedor */
+            object-fit: cover; /* Mantener la proporción de la imagen */
+        }
+
+        /* Estilo para el mensaje */
+        .mensaje {
+            position: absolute; /* Posicionamiento absoluto para superponer */
+            top: 20px; /* Ajustar según sea necesario */
+            left: 20px; /* Ajustar según sea necesario */
+            color: white; /* Color del texto */
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+            padding: 10px; /* Espaciado interno */
+            border-radius: 5px; /* Bordes redondeados */
+            font-size: 20px; /* Tamaño de fuente */
+            z-index: 10; /* Asegurarse de que el mensaje esté por encima de la imagen */
+        }
+    </style>
+</head>
+<body>
+    <div id="galeria-aprobada"></div>
+
+<script>
+    // Obtener el ID de la foto actual desde el template
+    const fotoActualId = "{% if foto %}{{ foto.id }}{% else %}''{% endif %}";
+    const fotoActualMensaje = "{% if foto %}{{ foto.mensaje }}{% else %}''{% endif %}";
+    const fotoActualUrl = "{% if foto %}{{ foto.imagen.url }}{% else %}''{% endif %}";
+    
+    // Obtener el ID de la última foto almacenada en localStorage
+    const ultimaFotoId = localStorage.getItem('ultimaFotoId');
+
+    // Comprobar si la foto actual es la misma que la última
+    if (fotoActualId === ultimaFotoId) {
+        // Si es la misma, mostrar una foto predeterminada
+        document.getElementById('galeria-aprobada').innerHTML = `<img src="/static/img/imagen3.jpg" alt="Foto Predeterminada">`;
+    } else {
+        // Si no es la misma, mostrar la foto actual
+        document.getElementById('galeria-aprobada').innerHTML = `<img src="${fotoActualUrl}" alt="Foto aprobada">`;
+        // Guardar el ID de la foto actual en localStorage
+        localStorage.setItem('ultimaFotoId', fotoActualId);
+    }
+
+    // Función para recargar la página
+    function recargarPagina() {
+        window.location.reload(); // Recarga la página
+    }
+
+    // Actualizar la página cada 30 segundos
+    setInterval(recargarPagina, 10000);
+</script>
+        
+</body>
+</html>

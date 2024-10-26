@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block css%}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .gallery img {
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: cover;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+    }
+</style>
+{% endblock css%}
+{% block main %}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="text-center">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Subir Foto</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+<!-- moderar_fotos.html -->
+<h1>Moderación de Fotos</h1>
+<div class="gallery">
+{% for foto in fotos_pendientes %}
+    <div>
+        <p>Mensaje: {{ foto.usuario }}</p>
+        <img src="{{ foto.imagen.url }}" alt="Foto subida">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="foto_id" value="{{ foto.id }}">
+            <button name="accion" value="aprobar" type="submit" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <span class="text">Aprobar</span>
+            </button>
+
+            <button name="accion" value="rechazar" type="submit" class="btn btn-danger btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <span class="text">Rechazar</span>
+            </button>
+        </form>
+    </div>
+{% endfor %}
+</div>
+
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script>
+    // Función para recargar la página
+    function recargarPagina() {
+        window.location.reload(); // Recarga la página
+    }
+
+    // Actualizar la página cada 30 segundos
+    setInterval(recargarPagina, 5000);
+</script>
+{% endblock main %}
