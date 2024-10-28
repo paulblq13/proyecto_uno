@@ -35,36 +35,41 @@
     </style>
 </head>
 <body>
-    <div id="galeria-aprobada"></div>
-
-<script>
-    // Obtener el ID de la foto actual desde el template
-    const fotoActualId = "{% if foto %}{{ foto.id }}{% else %}''{% endif %}";
-    const fotoActualMensaje = "{% if foto %}{{ foto.mensaje }}{% else %}''{% endif %}";
-    const fotoActualUrl = "{% if foto %}{{ foto.imagen.url }}{% else %}''{% endif %}";
-    
-    // Obtener el ID de la última foto almacenada en localStorage
-    const ultimaFotoId = localStorage.getItem('ultimaFotoId');
-
-    // Comprobar si la foto actual es la misma que la última
-    if (fotoActualId === ultimaFotoId) {
-        // Si es la misma, mostrar una foto predeterminada
-        document.getElementById('galeria-aprobada').innerHTML = `<img src="/static/img/imagen3.jpg" alt="Foto Predeterminada">`;
-    } else {
-        // Si no es la misma, mostrar la foto actual
-        document.getElementById('galeria-aprobada').innerHTML = `<img src="${fotoActualUrl}" alt="Foto aprobada">`;
-        // Guardar el ID de la foto actual en localStorage
-        localStorage.setItem('ultimaFotoId', fotoActualId);
-    }
-
-    // Función para recargar la página
-    function recargarPagina() {
-        window.location.reload(); // Recarga la página
-    }
-
-    // Actualizar la página cada 30 segundos
-    setInterval(recargarPagina, 10000);
-</script>
+    <div>
+        {% if mostrar_predeterminada %}
+            <p>No hay fotos aprobadas para mostrar. Mostrando imagen predeterminada.</p>
+            <img src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada"> 
+            <script>
+                setTimeout(function() {
+                    // Redirigir a la URL sin ID
+                    window.location.href = "{% url 'galeria_aprobada' %}";
+                }, 5000); // Espera de 10 segundos antes de cambiar
+            </script>            
+        {% else %}
+            {% if foto_actual %}
+                <img src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                <p>{{ foto_actual.mensaje }}</p>
         
+                {% if ultima_foto %}
+                    <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
+                    <script>
+                        setTimeout(function() {
+                            // Redirigir a la URL sin ID
+                            window.location.href = "{% url 'galeria_aprobada' %}";
+                        }, 5000); // Espera de 10 segundos antes de cambiar
+                    </script>
+                {% else %}
+                    <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "{% url 'galeria_aprobada' siguiente_index  %}";
+                        }, 5000); // 10 segundos para la siguiente foto
+                    </script>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+
+    
 </body>
 </html>

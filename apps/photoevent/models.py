@@ -10,6 +10,7 @@ class Fotos(models.Model):
     mensaje = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to='fotos/')
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
+    visto = models.BooleanField(default=False)
     fecha_subida = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
