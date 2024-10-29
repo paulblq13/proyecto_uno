@@ -6,70 +6,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Fotos</title>
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altura completa de la ventana */
+            background-color: #ffffff; /* Fondo suave */
+        }     
         /* Estilos para mostrar la imagen en pantalla completa */
-        #galeria-aprobada {
-            position: relative; /* Posicionamiento relativo para el contenedor */
-            width: 100vw;
-            height: 100vh;
+        .predeterminada {
+            display: flex; /* Usar flexbox para centrar el contenido */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            width: auto; /* Asegurar que el contenedor use todo el ancho */
+            height: 100%; /* Usar toda la altura de la ventana */
             overflow: hidden; /* Ocultar cualquier desbordamiento */
-        }
-        
-        img {
-            width: 100%; /* Ajustar al ancho completo del contenedor */
-            height: 100%; /* Ajustar a la altura completa del contenedor */
-            object-fit: cover; /* Mantener la proporción de la imagen */
+            background-color: #f7f7f7; /* Fondo suave para contraste */
+            position: relative; /* Necesario para el posicionamiento absoluto del mensaje */
         }
 
+        .galeria-aprobada {
+            display: flex; /* Usar flexbox para centrar el contenido */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            overflow: hidden; /* Ocultar cualquier desbordamiento */
+            background-color: #f7f7f7; /* Fondo suave para contraste */
+            position: relative; /* Necesario para el posicionamiento absoluto del mensaje */
+        }        
+    
+        .marco {
+            border: 10px solid #f7f7f7;
+            border-radius: 15px; /* Bordes redondeados para el marco */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra para el efecto de profundidad */
+            padding: 10px; /* Espacio entre la imagen y el marco */
+            transition: transform 0.5s; /* Transición suave al pasar el ratón */
+        }
+
+    
+        .foto {
+            border-radius: 10px; /* Bordes redondeados en la imagen */
+            height: 720px; /* Ajusta a la altura deseada */
+            object-fit: cover; /* O 'contain' si quieres mantener la proporción */
+        }
+    
         /* Estilo para el mensaje */
         .mensaje {
             position: absolute; /* Posicionamiento absoluto para superponer */
-            top: 20px; /* Ajustar según sea necesario */
-            left: 20px; /* Ajustar según sea necesario */
-            color: white; /* Color del texto */
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-            padding: 10px; /* Espaciado interno */
-            border-radius: 5px; /* Bordes redondeados */
-            font-size: 20px; /* Tamaño de fuente */
+            bottom: 50px; /* Espacio desde la parte inferior */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translateX(-50%); /* Mover a la izquierda para centrar */
+            color: #fff; /* Color blanco para el texto */
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+            padding: 15px 20px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            font-size: 24px; /* Tamaño de fuente mayor */
             z-index: 10; /* Asegurarse de que el mensaje esté por encima de la imagen */
+            text-align: center; /* Centrar el texto */
+            font-family: 'Dancing Script', cursive; /* Fuente elegante (ejemplo) */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div>
+
         {% if mostrar_predeterminada %}
-            <p>No hay fotos aprobadas para mostrar. Mostrando imagen predeterminada.</p>
-            <img src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada"> 
+        <div class="predeterminada">
+            <img src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada">
+        </div>     
             <script>
                 setTimeout(function() {
                     // Redirigir a la URL sin ID
-                    window.location.href = "{% url 'galeria_aprobada' %}";
+                    window.location.href = "{% url 'galeria' %}";
                 }, 5000); // Espera de 10 segundos antes de cambiar
-            </script>            
+            </script>
+            {% if mostrar_predeterminada_salir %}
+                    <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "{% url 'galeria' siguiente_index  %}";
+                        }, 5000); // 10 segundos para la siguiente foto
+                    </script>            
+            {% endif %}        
         {% else %}
             {% if foto_actual %}
-                <img src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
-                <p>{{ foto_actual.mensaje }}</p>
-        
+            <div class="galeria-aprobada">
+                <div class="marco">
+                    <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                    <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
+                </div>
+            </div>    
                 {% if ultima_foto %}
                     <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
                     <script>
                         setTimeout(function() {
                             // Redirigir a la URL sin ID
-                            window.location.href = "{% url 'galeria_aprobada' %}";
+                            window.location.href = "{% url 'galeria' %}";
                         }, 5000); // Espera de 10 segundos antes de cambiar
                     </script>
                 {% else %}
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
-                            window.location.href = "{% url 'galeria_aprobada' siguiente_index  %}";
+                            window.location.href = "{% url 'galeria' siguiente_index  %}";
                         }, 5000); // 10 segundos para la siguiente foto
                     </script>
-                {% endif %}
+                {% endif %}          
             {% endif %}
         {% endif %}
     </div>
-
-    
 </body>
 </html>

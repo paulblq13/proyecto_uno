@@ -12,6 +12,7 @@ class Fotos(models.Model):
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
     visto = models.BooleanField(default=False)
     fecha_subida = models.DateTimeField(auto_now_add=True)
+    fecha_aprobado = models.DateTimeField(null=True, blank=True)
     
     def __str__(self):
         return f"{self.mensaje} - {self.estado}"
