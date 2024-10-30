@@ -149,29 +149,31 @@ class UltimaFotoView(ListView):
         return Fotos.objects.filter(estado='aprobado').order_by('fecha_aprobado')
 
     def get_context_data(self, **kwargs):
+        #self.request.session['bandera'] = None
         context = super().get_context_data(**kwargs)
         fotos_aprobadas = self.get_queryset()
         foto_index = self.kwargs.get('index')  # Obtener el índice desde la URL
-        # Convierte queryset a una lista de fotos aprobadas
-        fotos_aprobadas_list = list(fotos_aprobadas)        
-        print("1)fotos_aprobadas_list " + str(len(fotos_aprobadas_list)))
-        # Inicializar la BANDERA en la sesión
-        fotos_cantidad = Fotos.objects.filter(estado='aprobado').count()
+        fotos_aprobadas_list = list(fotos_aprobadas)
+        print("CANTIDAD DE FOTOS APROBADAS: " + str(len(fotos_aprobadas_list)))
+        print("VALOR DEL INDEX EN URL: " + str(foto_index))
+        print("LISTA DE FOTOS APROBADAS: " + str(fotos_aprobadas_list))
+        fotos_cantidad = len(fotos_aprobadas_list)
+        print("FOTOS_CANTIDAD: " + str(fotos_cantidad))
         if fotos_cantidad == 0:
             self.request.session['bandera'] = 0
             bandera = self.request.session['bandera'] 
-            print(bandera)
+            print("INICIALIZAR BANDERA: " + str(bandera))
         else:
             if 'bandera' not in self.request.session:
-                self.request.session['bandera'] = fotos_aprobadas_list[0] if fotos_aprobadas_list else 0    
-                print("Inicializando bandera en la sesión:", self.request.session['bandera'])
+                ultimo_index = fotos_cantidad - 1
+                print ("ULTIMO INDEX:" + str(ultimo_index))
+                self.request.session['bandera'] = ultimo_index if fotos_aprobadas_list else 0
+                bandera = self.request.session['bandera']
+                print("RETOMANDO BANDERA EN LA SESION: ", self.request.session['bandera'])
             else:
                 # Obtener el valor actual de la bandera
                 bandera = self.request.session['bandera']
-                print("Valor actual de bandera en la sesión:", bandera)                     
-                                
-          
-            
+                print("SI YA ESTÁ LA BANDERA EN LA SESION: ", bandera)
 #==================================SI LA URL ESTÁ VACIA
         if foto_index is None: 
             # Si no hay id, muestra la imagen predeterminada
@@ -179,7 +181,7 @@ class UltimaFotoView(ListView):
             context['mostrar_predeterminada'] = True
             context['foto_actual'] = None
             # Buscar si existe una nueva foto aprobada con ID mayor que la bandera
-            nueva_foto = len(fotos_aprobadas_list) > bandera
+            nueva_foto = fotos_cantidad > bandera
             print("NUEVA_FOTO?" +str(nueva_foto))
             if nueva_foto:
                 siguiente_index = bandera
@@ -193,7 +195,6 @@ class UltimaFotoView(ListView):
                     context['ultima_foto'] = False       
                     context['siguiente_index'] = foto_index
                     print("siguiente index:", siguiente_index)    
-
                 else:
                     context['siguiente_index'] = None
             else:

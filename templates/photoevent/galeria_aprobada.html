@@ -80,14 +80,14 @@
                 setTimeout(function() {
                     // Redirigir a la URL sin ID
                     window.location.href = "{% url 'galeria' %}";
-                }, 5000); // Espera de 10 segundos antes de cambiar
+                }, 10000); // Espera de 10 segundos antes de cambiar
             </script>
-            {% if mostrar_predeterminada_salir %}
+            {% if mostrar_predeterminada_salir %} mostrar_predeterminada_salir
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
                             window.location.href = "{% url 'galeria' siguiente_index  %}";
-                        }, 10000); // 10 segundos para la siguiente foto
+                        }, 5000); // 10 segundos para la siguiente foto
                     </script>            
             {% endif %}        
         {% else %}
@@ -104,14 +104,14 @@
                         setTimeout(function() {
                             // Redirigir a la URL sin ID
                             window.location.href = "{% url 'galeria' %}";
-                        }, 10000); // Espera de 10 segundos antes de cambiar
+                        }, 5000); // Espera de 10 segundos antes de cambiar
                     </script>
                 {% else %}
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
                             window.location.href = "{% url 'galeria' siguiente_index  %}";
-                        }, 10000); // 10 segundos para la siguiente foto
+                        }, 5000); // 10 segundos para la siguiente foto
                     </script>
                 {% endif %}          
             {% endif %}
