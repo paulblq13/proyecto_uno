@@ -10,11 +10,13 @@ class FotoForm(forms.ModelForm):
         widgets = {
             'mensaje': forms.Textarea(attrs={
                 'placeholder': 'Escribe tu mensaje aquí...',
-                'rows': 4,  # Número de filas del textarea
-                'cols': 40,  # Número de columnas del textarea
-                'class': 'form-control'  # Puedes agregar clases CSS si lo necesitas
+                'rows': 4,
+                'cols': 40,
+                'class': 'form-control'
             }),
             'imagen': forms.FileInput(attrs={
-                'class': 'form-control'  # Puedes agregar clases CSS si lo necesitas
+                'class': 'form-control',
+                'accept': 'image/*',        # Acepta solo archivos de imagen
+                'capture': 'environment'     # Usa la cámara trasera si está disponible
             }),
         }

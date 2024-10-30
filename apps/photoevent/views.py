@@ -10,7 +10,7 @@ from .forms import FotoForm
 #==MODELOS
 from .models import Fotos
 #==PILLOW
-from PIL import Image
+from PIL import Image, ExifTags
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 #==TIEMPO
@@ -35,6 +35,24 @@ def subir_fotoV2(request):
         if form.is_valid():
             foto = form.save(commit=False)
             imagen = Image.open(foto.imagen)
+
+            # Corregir la orientación según los metadatos EXIF
+            try:
+                for orientation in ExifTags.TAGS.keys():
+                    if ExifTags.TAGS[orientation] == 'Orientation':
+                        break
+                exif = imagen._getexif()
+                if exif is not None:
+                    orientation_value = exif.get(orientation, None)
+                    if orientation_value == 3:
+                        imagen = imagen.rotate(180, expand=True)
+                    elif orientation_value == 6:
+                        imagen = imagen.rotate(270, expand=True)
+                    elif orientation_value == 8:
+                        imagen = imagen.rotate(90, expand=True)
+            except (AttributeError, KeyError, IndexError):
+                # La imagen no tiene datos EXIF o no se pudo procesar
+                pass            
 
             # Dimensiones para pantalla Full HD
             ancho_deseado = 1920
