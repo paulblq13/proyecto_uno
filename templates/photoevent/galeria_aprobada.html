@@ -6,47 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Fotos</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Altura completa de la ventana */
-            background-color: #ffffff; /* Fondo suave */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }     
+
         /* Estilos para mostrar la imagen en pantalla completa */
         .predeterminada {
-            display: flex; /* Usar flexbox para centrar el contenido */
-            justify-content: center; /* Centrar horizontalmente */
-            align-items: center; /* Centrar verticalmente */
-            width: auto; /* Asegurar que el contenedor use todo el ancho */
-            height: 100%; /* Usar toda la altura de la ventana */
-            overflow: hidden; /* Ocultar cualquier desbordamiento */
-            background-color: #f7f7f7; /* Fondo suave para contraste */
-            position: relative; /* Necesario para el posicionamiento absoluto del mensaje */
+            width: 100%;
+            height: 100%;
+            opacity: 0; /* Comienza invisible */
+            transition: opacity 0.5s ease-in; /* Transición suave de opacidad */              
         }
 
-        .galeria-aprobada {
-            display: flex; /* Usar flexbox para centrar el contenido */
-            justify-content: center; /* Centrar horizontalmente */
-            align-items: center; /* Centrar verticalmente */
-            overflow: hidden; /* Ocultar cualquier desbordamiento */
-            background-color: #f7f7f7; /* Fondo suave para contraste */
-            position: relative; /* Necesario para el posicionamiento absoluto del mensaje */
+
+        .second-video-background {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Tamaño completo para el segundo video */
+            overflow: hidden;
+        } 
+
+        .video-background video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }    
+
+        .objeto-overlay {
+            position: absolute;
+            bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
+            left: 50%;
+            transform: translateX(-50%); /* Centra el contenido horizontalmente */
+            text-align: center;
+            width: 100%;
         }        
-    
-        .marco {
-            border: 10px solid #f7f7f7;
-            border-radius: 15px; /* Bordes redondeados para el marco */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra para el efecto de profundidad */
-            padding: 10px; /* Espacio entre la imagen y el marco */
-            transition: transform 0.5s; /* Transición suave al pasar el ratón */
+              
+        .galeria-aprobada {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            position: absolute;
+        } 
+
+        .foto {
+            height: 100vh; /* Ocupa el alto de la pantalla */
+            width: auto; /* Ajusta el ancho de manera proporcional */
+            border-radius: 10px; /* Bordes redondeados */
+            border: 20px solid white; /* Marco blanco alrededor de la imagen */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombras opcionales para resaltar */
+
+            opacity: 0; /* Comienza invisible */
+            transition: opacity 1s ease-in; /* Transición suave de opacidad */      
         }
 
-    
-        .foto {
-            border-radius: 10px; /* Bordes redondeados en la imagen */
-            height: 720px; /* Ajusta a la altura deseada */
-            object-fit: cover; /* O 'contain' si quieres mantener la proporción */
+        .mostrar {
+            opacity: 1; /* Aparece cuando se le agrega la clase 'mostrar' */
         }
     
         /* Estilo para el mensaje */
@@ -65,6 +90,7 @@
             font-family: 'Dancing Script', cursive; /* Fuente elegante (ejemplo) */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
         }
+   
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
@@ -73,8 +99,8 @@
     <div>
 
         {% if mostrar_predeterminada %}
-        <div class="predeterminada">
-            <img src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada">
+        <div>
+            <img class="predeterminada" src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada">
         </div>     
             <script>
                 setTimeout(function() {
@@ -82,7 +108,15 @@
                     window.location.href = "{% url 'galeria' %}";
                 }, 10000); // Espera de 10 segundos antes de cambiar
             </script>
-            {% if mostrar_predeterminada_salir %} mostrar_predeterminada_salir
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+                    setTimeout(function() {
+                        document.querySelector(".predeterminada").classList.add("mostrar");
+                    }, 100); // 100 ms de retraso para que se vea el efecto
+                });
+            </script>            
+            {% if mostrar_predeterminada_salir %}
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
@@ -92,30 +126,54 @@
             {% endif %}        
         {% else %}
             {% if foto_actual %}
-            <div class="galeria-aprobada">
-                <div class="marco">
-                    <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
-                    <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
-                </div>
-            </div>    
+    <!-- Segundo video -->
+    <div class="video-background">
+        <video 
+            src="{% static 'vid/brillos.mp4' %}" 
+            playsinline 
+            preload="none" 
+            muted 
+            loop 
+            autoplay
+        >
+            Tu navegador no soporta el elemento de video.
+        </video>
+            <div class="objeto-overlay" style="top: 0%;">
+                <div class="galeria-aprobada">
+                        <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                        <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
+                </div> 
+            </div>      
+    </div>
                 {% if ultima_foto %}
                     <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
                     <script>
                         setTimeout(function() {
                             // Redirigir a la URL sin ID
                             window.location.href = "{% url 'galeria' %}";
-                        }, 5000); // Espera de 10 segundos antes de cambiar
+                        }, 10000); // Espera de 10 segundos antes de cambiar
                     </script>
                 {% else %}
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
                             window.location.href = "{% url 'galeria' siguiente_index  %}";
-                        }, 5000); // 10 segundos para la siguiente foto
+                        }, 10000); // 10 segundos para la siguiente foto
                     </script>
                 {% endif %}          
             {% endif %}
         {% endif %}
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+            setTimeout(function() {
+                document.querySelector(".foto").classList.add("mostrar");
+            }, 100); // 100 ms de retraso para que se vea el efecto
+        });
+    </script>
 </body>
 </html>
+
+
+
