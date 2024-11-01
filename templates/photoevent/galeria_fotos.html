@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+    .galeria-fotos {
+        display: flex;
+        flex-wrap: nowrap; /* Evita que las imágenes se muevan a otra línea */
+        overflow-x: auto; /* Permite desplazamiento horizontal si hay muchas fotos */
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .galeria-fotos img {
+        width: 150px; /* Ajusta el ancho según tus preferencias */
+        height: 150px; /* Ajusta la altura para mantener la uniformidad */
+        object-fit: cover;
+        border-radius: 5px; /* Opcional: redondea los bordes */
+    }  
+</style>
+{% endblock css %}
+{% block main %}
+<!-- subir_foto.html -->
+ <div class="row">
+    <div class="col-lg-12">
+        <div class="text-center">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-x font-weight-bold text-success text-uppercase mb-1">
+                                GALERIA DE FOTOS
+                            </div>
+                            <div class="galeria-fotos">
+                                {% for foto in object %}
+                                <a href="{{ foto.imagen.url }}" target="_blank">
+                                    <img src="{{ foto.imagen.url }}" alt="Foto subida">
+                                </a>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-camera fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+
+
