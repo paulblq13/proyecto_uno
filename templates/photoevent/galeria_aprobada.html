@@ -84,7 +84,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
             padding: 15px 20px; /* Espaciado interno */
             border-radius: 10px; /* Bordes redondeados */
-            font-size: 24px; /* Tamaño de fuente mayor */
+            font-size: 40px; /* Tamaño de fuente mayor */
             z-index: 10; /* Asegurarse de que el mensaje esté por encima de la imagen */
             text-align: center; /* Centrar el texto */
             font-family: 'Dancing Script', cursive; /* Fuente elegante (ejemplo) */
@@ -126,25 +126,25 @@
             {% endif %}        
         {% else %}
             {% if foto_actual %}
-    <!-- Segundo video -->
-    <div class="video-background">
-        <video 
-            src="{% static 'vid/brillos.mp4' %}" 
-            playsinline 
-            preload="none" 
-            muted 
-            loop 
-            autoplay
-        >
-            Tu navegador no soporta el elemento de video.
-        </video>
-            <div class="objeto-overlay" style="top: 0%;">
-                <div class="galeria-aprobada">
-                        <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
-                        <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
-                </div> 
-            </div>      
-    </div>
+                <!-- Segundo video -->
+                <div class="video-background">
+                    <video 
+                        src="{% static 'vid/magenta.mp4' %}" 
+                        playsinline 
+                        preload="none" 
+                        muted 
+                        loop 
+                        autoplay
+                    >
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                        <div class="objeto-overlay" style="top: 0%;">
+                            <div class="galeria-aprobada">
+                                    <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                                    <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
+                            </div> 
+                        </div>      
+                </div>
                 {% if ultima_foto %}
                     <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
                     <script>

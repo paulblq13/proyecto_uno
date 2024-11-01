@@ -36,7 +36,6 @@ def subir_fotoV2(request):
             foto = form.save(commit=False)
             imagen = Image.open(foto.imagen)
 
-            # Corregir la orientación según los metadatos EXIF
             try:
                 for orientation in ExifTags.TAGS.keys():
                     if ExifTags.TAGS[orientation] == 'Orientation':
@@ -233,3 +232,13 @@ def actualizar_ultima_foto(request):
         return JsonResponse({'status': 'success'})
     
     return JsonResponse({'status': 'failed'})   
+
+
+class GaleriaFotosView(ListView):
+    model = Fotos
+    template_name = 'photoevent/galeria_fotos.html'
+    context_object_name = 'object'
+    
+    def get_queryset(self):
+        # Obtenemos todas las fotos aprobadas en orden ascendente
+        return Fotos.objects.filter(estado='aprobado').order_by('fecha_subida')    

@@ -11,7 +11,8 @@ urlpatterns = [
     #DEF
     path('subir_foto/', photoeventViews.subir_fotoV2, name='subir_foto'),    
     path('moderar_fotos/', photoeventViews.moderar_fotos, name='moderar_fotos'),
-    path('lista_fotos_aprobadas/', photoeventViews.UltimaFotoView.as_view(), name="lista_fotos_aprobadas"),    
+    path('galeria_fotos/', photoeventViews.GaleriaFotosView.as_view(), name="galeria_fotos"), 
+    #FUNCIONES   
     path('actualizar_ultima_foto/', photoeventViews.actualizar_ultima_foto, name='actualizar_ultima_foto'),           
     #VIEW
     path('galeria/<int:index>/', photoeventViews.UltimaFotoView.as_view(), name='galeria'),
