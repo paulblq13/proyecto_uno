@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería de Fotos</title>
+    <title>PHOTO EVENT</title>
     <style>
+/* ===================CONFIGURACION PANTALLA GRAL */        
         * {
             margin: 0;
             padding: 0;
@@ -17,17 +18,19 @@
             height: 100%;
             overflow: hidden;
         }     
+/* ===================FIN CONFIGURACION PANTALLA GRAL */ 
 
-        /* Estilos para mostrar la imagen en pantalla completa */
+/* ===================IMAGEN PREDETERMINADA */
         .predeterminada {
             width: 100%;
             height: 100%;
             opacity: 0; /* Comienza invisible */
             transition: opacity 0.5s ease-in; /* Transición suave de opacidad */              
         }
+/* ===================FIN IMAGEN PREDETERMINADA */
 
-
-        .second-video-background {
+/* ===================FONDO VIDEO */
+        .video-background {
             position: relative;
             width: 100%;
             height: 100vh; /* Tamaño completo para el segundo video */
@@ -39,7 +42,9 @@
             height: 100vh;
             object-fit: cover;
         }    
+/* ===================FIN FONDO VIDEO */
 
+/* ===================OBJETO ENCIMA DEL VIDEO */
         .objeto-overlay {
             position: absolute;
             bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
@@ -47,8 +52,9 @@
             transform: translateX(-50%); /* Centra el contenido horizontalmente */
             text-align: center;
             width: 100%;
-        }        
-              
+        }                
+/* ===================FIN OBJETO ENCIMA DEL VIDEO */   
+/* ===================GELERIA APROBADA */
         .galeria-aprobada {
             width: 100%;
             height: 100vh;
@@ -60,21 +66,25 @@
         } 
 
         .foto {
-            height: 100vh; /* Ocupa el alto de la pantalla */
+            height: 95%; /* Ocupa el alto de la pantalla */
             width: auto; /* Ajusta el ancho de manera proporcional */
             border-radius: 10px; /* Bordes redondeados */
             border: 20px solid white; /* Marco blanco alrededor de la imagen */
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombras opcionales para resaltar */
 
             opacity: 0; /* Comienza invisible */
-            transition: opacity 1s ease-in; /* Transición suave de opacidad */      
+            transition: opacity 1.5s ease-in; /* Transición suave de opacidad */      
         }
 
+/* ===================FIN GELERIA APROBADA */     
+
+/* ===================EFECTO MOSTRAR FOTO */  
         .mostrar {
             opacity: 1; /* Aparece cuando se le agrega la clase 'mostrar' */
         }
-    
-        /* Estilo para el mensaje */
+/* ===================FIN EFECTO MOSTRAR FOTO */   
+
+/* ===================MENSAJE */
         .mensaje {
             position: absolute; /* Posicionamiento absoluto para superponer */
             bottom: 50px; /* Espacio desde la parte inferior */
@@ -90,7 +100,7 @@
             font-family: 'Dancing Script', cursive; /* Fuente elegante (ejemplo) */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
         }
-   
+/* ===================FIN MENSAJE */
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 
@@ -126,7 +136,7 @@
             {% endif %}        
         {% else %}
             {% if foto_actual %}
-                <!-- Segundo video -->
+                <!-- video -->
                 <div class="video-background">
                     <video 
                         src="{% static 'vid/magenta.mp4' %}" 
@@ -143,7 +153,15 @@
                                     <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
                                     <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
                             </div> 
-                        </div>      
+                            <button id="pause-button" onclick="redirectToGaleria()" style="position: relative; z-index: 1000;">Pausar</button>
+                            <script>
+                                function redirectToGaleria() {
+                                    alert("Redirigiendo a la galería...");
+                                    window.location.href = "{% url 'galeria' %}";
+                                }
+                            </script>                            
+                        </div>     
+                        
                 </div>
                 {% if ultima_foto %}
                     <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
@@ -164,6 +182,8 @@
             {% endif %}
         {% endif %}
     </div>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Agrega la clase 'mostrar' a la imagen después de un breve retraso

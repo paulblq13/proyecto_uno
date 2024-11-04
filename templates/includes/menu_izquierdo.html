@@ -1,5 +1,5 @@
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -22,10 +22,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Nuevas:</h6>
-                        <a class="collapse-item" href="{% url 'subir_foto' %}" target="_blank">PhotoEvent-SELFIE</a>
-                        <a class="collapse-item" href="{% url 'moderar_fotos' %}">PhotoEvent-ADMIN</a>
-                        <a class="collapse-item" href="{% url 'galeria' %}" target="_blank">PhotoEvent-LIVE</a>
-                        <a class="collapse-item" href="{% url 'galeria_fotos' %}" target="_blank">PhotoEvent-GALERIA</a>
+                        <a class="collapse-item" href="{% url 'photoevent-detalle' pk=1 %}">PhotoEvent</a>
                     </div>
                 </div>
             </li>             

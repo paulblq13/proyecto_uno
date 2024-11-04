@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div id="main-content" xmlns="http://www.w3.org/1999/html">
+    <div class="container-fluid">
+            <ul class="breadcrumb .border-left-secondary">
+                <li class="breadcrumb-item"><a class="home" href="/"><i class="icon-home"></i>INICIO</a></li>
+                <li class="breadcrumb-item"><i></i><a class="home" href="{% url 'photoevent-lista' %}">PHOTOVIEW</a></li>
+                <li class="breadcrumb-item"><i></i><b>{{lista}}</b></li>
+            </ul>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                           <h6 class="m-0 font-weight text-secondary"> {{ titulo }}: Muestra un listado de todas las entradas, puede filtrar ingresando cualquier dato que contenga la tabla.
+                           </h6>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-4 py-2">
+                        <div class="card-body">
+                            <a type="button" class="btn btn-primary btn-user btn-block" aria-expanded="true" href="{{ url_nuevo }}">
+                                NUEVO
+                            </a>
+                        </div>
+                    </div> 
+                </div>                
+            </div>
+                  
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table id="data_table" class="display" style="width:100%">
+                              <thead>
+                              <tr>
+                                  <th>ACCIONES</th>
+                                  <th>EVENTO</th>
+                                  <th>TIPO</th>
+                                  <th>FECHA</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                {% for objeto in object_list %}
+                                <tr>
+                                <td>
+                                    <!-- Botón de menú desplegable -->
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="">
+                                            <a class="dropdown-item" href="{% url 'photoevent-detalle' pk=objeto.id %}">Información</a>
+                                            <a class="dropdown-item" href="{% url 'photoevent-modificar' pk=objeto.id %}">Modificar</a>
+                                            <a class="dropdown-item" href="#">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ objeto.nombre_evento }}</td>
+                                <td>{{ objeto.cod_eventotipo }}</td>
+                                <td>{{ objeto.fecha_evento | date:'d/m/Y' }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                              </table>
+                        </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock main %}
+{% block java %}
+{% include "includes/_datatable.html" %}
+{% endblock java %}

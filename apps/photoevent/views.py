@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.conf import settings
 #==VIEWS
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 #==FORMS
-from .forms import FotoForm
+from .forms import EventoForm, FotoForm
 #==MODELOS
-from .models import Fotos
+from .models import Evento, Fotos
 #==PILLOW
 from PIL import Image, ExifTags
 from io import BytesIO
@@ -18,7 +18,10 @@ from django.utils import timezone
 from datetime import datetime
 #==OTROS
 from django.views.decorators.csrf import csrf_exempt
+#===URLS
+from django.urls import reverse_lazy
 
+#===SUBIR FOTO V1
 def subir_foto(request):
     if request.method == 'POST':
         form = FotoForm(request.POST, request.FILES)
@@ -29,6 +32,7 @@ def subir_foto(request):
         form = FotoForm()
     return render(request, 'photoevent/subirfoto.html', {'form': form})
 
+#===SUBIR FOTO V2
 def subir_fotoV2(request):
     if request.method == 'POST':
         form = FotoForm(request.POST, request.FILES)
@@ -101,7 +105,7 @@ def subir_fotoV2(request):
         form = FotoForm()
     return render(request, 'photoevent/subirfoto.html', {'form': form})
 
-
+#===MODERAR FOTOS   
 def moderar_fotos(request):
     fotos_pendientes = Fotos.objects.filter(estado='pendiente')
     if request.method == 'POST':
@@ -120,24 +124,9 @@ def moderar_fotos(request):
     
     return render(request, 'photoevent/moderador.html', {'fotos_pendientes': fotos_pendientes})
 
-def lista_fotos_aprobadas(request):
-    # Obtener fotos aprobadas, ordenadas por fecha descendente
-    fotos_aprobadas = Fotos.objects.filter(estado='aprobado').order_by('-fecha_subida')
-    lista_fotos = []
-    for foto in fotos_aprobadas:
-    # Preparar datos para enviar como JSON
-        print(str(settings.MEDIA_URL) + str(foto.imagen))
-        fotos_data = {
-            'id': foto.id,
-            'mensaje': foto.mensaje,
-            'imagen': f"{settings.MEDIA_URL}{foto.imagen}"  # Concatenar MEDIA_URL
-        }
-        lista_fotos.append(fotos_data)
-    
-    return JsonResponse(lista_fotos, safe=False)
 
-
-class UltimaFotoView(ListView):
+#===LIVE GALERIA DE EVENTOS   
+class LiveGaleriaView(ListView):
     model = Fotos
     template_name = 'photoevent/galeria_aprobada.html'
     context_object_name = 'foto'
@@ -158,6 +147,8 @@ class UltimaFotoView(ListView):
         print("LISTA DE FOTOS APROBADAS: " + str(fotos_aprobadas_list))
         fotos_cantidad = len(fotos_aprobadas_list)
         print("FOTOS_CANTIDAD: " + str(fotos_cantidad))
+        if 'siguiente' not in self.request.session:
+             self.request.session['siguiente'] = 0
         if fotos_cantidad == 0:
             self.request.session['bandera'] = 0
             bandera = self.request.session['bandera'] 
@@ -173,7 +164,7 @@ class UltimaFotoView(ListView):
                 # Obtener el valor actual de la bandera
                 bandera = self.request.session['bandera']
                 print("SI YA ESTÁ LA BANDERA EN LA SESION: ", bandera)
-#==================================SI LA URL ESTÁ VACIA
+        #==================================SI LA URL ESTÁ VACIA
         if foto_index is None: 
             # Si no hay id, muestra la imagen predeterminada
            
@@ -196,10 +187,14 @@ class UltimaFotoView(ListView):
                     print("siguiente index:", siguiente_index)    
                 else:
                     context['siguiente_index'] = None
+                    siguiente_index=self.request.session['siguiente'] 
+                    print("siguiente index: " + str(siguiente_index))
             else:
                 print("NO EXISTE NUEVA FOTO")                
                 context['siguiente_index'] = None
-#==================================SI LA URL TIENE UN ID              
+                siguiente_index=self.request.session['siguiente'] 
+                print("siguiente index: " + str(siguiente_index))
+        #==================================SI LA URL TIENE UN ID              
         else:
             # Cargar la foto actual y verificar si es la última
             #foto_actual = get_object_or_404(Fotos, id=foto_id, estado='aprobado')
@@ -219,11 +214,18 @@ class UltimaFotoView(ListView):
                 print("Actualizando bandera al último índice:", self.request.session['bandera'])
             # Determinar el índice siguiente y agregarlo al contexto
             if not ultima_foto:
+                self.request.session['siguiente'] = foto_index + 1
+                siguiente_index=foto_index + 1
+                print("siguiente index: " + str(siguiente_index))
                 context['siguiente_index'] = foto_index + 1
             else:
                 context['siguiente_index'] = None
+                self.request.session['siguiente'] = 0
+                siguiente_index= 0
+                print("siguiente index: " + str(siguiente_index))
         return context
         
+#===ACTUALIZAR FOTO (X)         
 @csrf_exempt
 def actualizar_ultima_foto(request):
     if request.method == 'POST':
@@ -233,7 +235,7 @@ def actualizar_ultima_foto(request):
     
     return JsonResponse({'status': 'failed'})   
 
-
+#===GALERIA DE FOTOS 
 class GaleriaFotosView(ListView):
     model = Fotos
     template_name = 'photoevent/galeria_fotos.html'
@@ -242,3 +244,90 @@ class GaleriaFotosView(ListView):
     def get_queryset(self):
         # Obtenemos todas las fotos aprobadas en orden ascendente
         return Fotos.objects.filter(estado='aprobado').order_by('fecha_subida')    
+
+#===LISTADO DE EVENTOS    
+class PhotoEventListaView(ListView):
+    template_name = 'photoevent/lista-evento.html'
+    model= Evento
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk=self.kwargs.get('pk', 0)
+        object_list = Evento.objects.all()
+        print(object_list)
+        context['lista'] = "LISTA"
+        context['titulo'] = "LISTADO DE EVENTOS"
+        context['titulosmall'] = "Lista de eventos"
+        context['url_nuevo'] = "/photoevent/agregar"
+        context['url_modificar'] = "modificar-evento"
+        context['url_detalle'] = "detalle-evento"
+        context['url_eliminar'] = "eliminar-evento"
+        return context       
+
+
+#---------------------------EVENTONUEVO---------------
+class addEventoView(CreateView):
+    model = Evento
+    template_name = 'photoevent/addedit-evento.html'
+    form_class = EventoForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
+        context['titulo']="NUEVO"
+        context['lista']="LISTA"
+        context['tituloh2'] = "Agregue o modifique datos de algun vendedor"
+        context['titulosmall']="Ingrese los datos requeridos y luego presione GUARDAR"
+        context['urllegajo'] = "verLegajoPersona"
+        context['id'] = pk
+        context['bandera_add_update'] = "add"
+        return context
+    #POST
+        #PERSONA EXISTE?
+            #SI
+            #PERSONA YA ES VENDEDOR?
+                #SI: ACTUALIZAR DATOS
+                #NO: ACTUALIZAR Y DAR DE ALTA EN VENDEDOR
+            #NO
+                #DAR DE ALTA PERSONA
+                #DAR DE ALTA VENDEDOR
+
+# ------------------------------------------------------------------------EVENTOUPDATE---------------
+class updateEventoView(UpdateView):
+    model = Evento
+    template_name = 'photoevent/addedit-evento.html'
+    form_class = EventoForm
+    success_url = reverse_lazy('photoevent-lista')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
+        context['titulo'] = 'MODIFICAR'
+        context['tituloh2'] = 'Modificar evento'
+        context['titulosmall'] = 'Complete los campos requeridos y luego presiones el botón GUARDAR'
+        return context                
+
+#------------------------------------------------------------------------EVENTOSDETALLES---------------
+class detallesEventoView(DetailView):
+
+    model=Evento
+    template_name='photoevent/detalle-evento.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk=self.kwargs.get('pk', 0)
+        solicitud = self.model.objects.get(id=pk)
+        print("SOLICITUD: "+str(solicitud.foto_transicion))
+        unidad=self.model.objects.get(id=pk)
+        #print("UNIDAD: "+str(unidad.unidades_detencion.id))
+
+        context['anio_actual'] = timezone.now().year
+        context['titulo']="INFORMACIÓN"
+        context['tituloh2'] = "Información del evento"
+        context['titulosmall']="Aquí se muestra toda la información correspondiente"
+        context['id_solicitud'] = solicitud.id
+        context['foto_transicion'] = solicitud.foto_transicion
+        context['efecto_transicion'] = solicitud.efecto_transicion
+        return context
+    
+
