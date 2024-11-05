@@ -110,6 +110,13 @@
 
         {% if mostrar_predeterminada %}
         <div>
+            <button id="play-button" onclick="redirectToGaleria()" style="position: relative; z-index: 1000;">Play</button>
+            <script>
+                function redirectToGaleria() {
+                    alert("Redirigiendo a la galería...");
+                    window.location.href = "{% url 'galeria' siguiente %}";
+                }
+            </script>              
             <img class="predeterminada" src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada">
         </div>     
             <script>

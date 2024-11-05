@@ -192,8 +192,9 @@ class LiveGaleriaView(ListView):
             else:
                 print("NO EXISTE NUEVA FOTO")                
                 context['siguiente_index'] = None
-                siguiente_index=self.request.session['siguiente'] 
-                print("siguiente index: " + str(siguiente_index))
+                play=self.request.session['siguiente'] 
+                print("siguiente index: " + str(play))
+                context['siguiente'] = play
         #==================================SI LA URL TIENE UN ID              
         else:
             # Cargar la foto actual y verificar si es la última
@@ -220,9 +221,9 @@ class LiveGaleriaView(ListView):
                 context['siguiente_index'] = foto_index + 1
             else:
                 context['siguiente_index'] = None
-                self.request.session['siguiente'] = 0
-                siguiente_index= 0
-                print("siguiente index: " + str(siguiente_index))
+                self.request.session['siguiente'] = foto_index
+                siguiente_index= foto_index
+                print("siguiente index: " + str(foto_index))
         return context
         
 #===ACTUALIZAR FOTO (X)         
