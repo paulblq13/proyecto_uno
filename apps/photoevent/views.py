@@ -185,6 +185,9 @@ class LiveGaleriaView(ListView):
                     context['ultima_foto'] = False       
                     context['siguiente_index'] = foto_index
                     print("siguiente index:", siguiente_index)    
+                    play=self.request.session['siguiente'] 
+                    print("siguiente index_play: " + str(play))
+                    context['siguiente'] = play
                 else:
                     context['siguiente_index'] = None
                     siguiente_index=self.request.session['siguiente'] 
@@ -194,7 +197,12 @@ class LiveGaleriaView(ListView):
                 context['siguiente_index'] = None
                 play=self.request.session['siguiente'] 
                 print("siguiente index: " + str(play))
-                context['siguiente'] = play
+                if play == 0:
+                    print("play == 0")
+                    context['siguiente'] = play
+                else:  
+                    print("play - 1") 
+                    context['siguiente'] = play
         #==================================SI LA URL TIENE UN ID              
         else:
             # Cargar la foto actual y verificar si es la última
@@ -244,7 +252,7 @@ class GaleriaFotosView(ListView):
     
     def get_queryset(self):
         # Obtenemos todas las fotos aprobadas en orden ascendente
-        return Fotos.objects.filter(estado='aprobado').order_by('fecha_subida')    
+        return Fotos.objects.filter(estado='aprobado').order_by('-fecha_subida')    
 
 #===LISTADO DE EVENTOS    
 class PhotoEventListaView(ListView):
