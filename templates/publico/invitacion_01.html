@@ -8,76 +8,64 @@
 <style>
 
 
-      /* style.css */
-      @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');      
+/* ================TIPOS DE LETRAS ===================================*/
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');      
 
+@font-face {
+  font-family: 'Adlery Swash';
+  src: url("{% static 'fonts/Adlery_TRIAL.ttf' %}") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-      @font-face {
-        font-family: 'Adlery Swash';
-        src: url("{% static 'fonts/Adlery_TRIAL.ttf' %}") format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
-    
-    @font-face {
-      font-family: 'Codec Pro';
-      src: url("{% static 'fonts/CodecPro-Regular.ttf' %}") format('truetype');
-      font-weight: normal;
-      font-style: normal;
-  }
+@font-face {
+font-family: 'Codec Pro';
+src: url("{% static 'fonts/CodecPro-Regular.ttf' %}") format('truetype');
+font-weight: normal;
+font-style: normal;
+}
 
-    .adlery {
-      font-family: 'Adlery Swash';
-      font-size: 40px;
-      color: white;
-      margin-top: -500px;
-  }    
+.adlery {
+  font-family: 'Adlery Swash';
+  font-size: 40px;
+  color: white;
+}    
 
-  .codecpro {
-    font-family: 'Codec Pro';
+.codecpro {
+font-family: 'Codec Pro';
 }      
-    
-      body, html {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          font-family: Arial, sans-serif;
-      }
-      
-      .fondo01 {
-          background-image: url('{% static 'img/fondo01_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
+/* ================fin TIPOS DE LETRAS ====================*/    
 
-      .fondo02 {
-        background-image: url('{% static 'img/fondo02_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }   
-    
-    .fondo03 {
-      background-color: #cc7d7c;
+/* ================FORMATO GENERAL ===================================*/
 
-  }  
-    .fondo04 {
-      background-color: #f9afa6;
-}     
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-.fondo05 {
-  background-image: url('{% static 'img/fondo03_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+/* ================FORMATO GENERAL ===================================*/
+
+.fondo01 {
+    background-image: url('{% static 'img/fondo01_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fondo02 {
+  background-image: url('{% static 'img/fondo02_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -87,34 +75,68 @@
   justify-content: center;
   align-items: center;
 }   
+
+.fondo03 {
+  background-color: #cc7d7c;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Opcional: espacio interno alrededor del contenido */
+  box-sizing: border-box; /* Asegura que el padding se cuente dentro del ancho total */
+}
+
+.fondo04 {
+background-color: #cc7d7cb5;
+width: 100%;
+height: 100px;
+} 
+
+.fondo05 {
+background-image: url('{% static 'img/fondo03_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+width: 100%;
+height: 100vh;
+}  
+
+.fondo_playlist {
+  background-image: url('{% static 'img/fondo_playlist.png' %}'); /* Cambia a la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  }  
       
-  .content {
-      text-align: left;
-      color: white;
-      background: rgba(0, 0, 0, 0.0); /* Opcional: Agrega un fondo semitransparente */
-      padding: 10px;
-      border-radius: 10px;
-      width: 70%;
-      max-width: 500px;
-      margin-top: -150px; /* Ajusta este valor para mover el contenido más arriba */          
-  }      
+.content {
+    text-align: left;
+    color: white;
+    background: rgba(0, 0, 0, 0.0); /* Opcional: Agrega un fondo semitransparente */
+    padding: 10px;
+    border-radius: 10px;
+    width: 70%;
+    max-width: 500px;
+    margin-top: -150px; /* Ajusta este valor para mover el contenido más arriba */          
+}      
 
   
-  .estilo1 {
-      color: #f9afa6;
-      font-family: 'Lobster', Arial, sans-serif;
-      font-size: 30px; /* Puedes redondear a 14px */
-      font-weight: 400;
-      vertical-align: baseline;
-  }     
-
-
-  .estilo2 {
-    color: #cc7d7c;
+.estilo1 {
+    color: #f9afa6;
     font-family: 'Lobster', Arial, sans-serif;
     font-size: 30px; /* Puedes redondear a 14px */
     font-weight: 400;
     vertical-align: baseline;
+}     
+
+
+.estilo2 {
+  color: #cc7d7c;
+  font-family: 'Lobster', Arial, sans-serif;
+  font-size: 30px; /* Puedes redondear a 14px */
+  font-weight: 400;
+  vertical-align: baseline;
 }     
       
   .estilo3 {
@@ -125,16 +147,21 @@
     vertical-align: baseline;
 }        
   
-  .estilo4 {
-    position: absolute;
-    top: 0; /* Ajusta según necesites */
-    left: 0; /* Ajusta según necesites */
-    z-index: 1; /* Asegura que la imagen esté por encima de otros elementos */
-    pointer-events: none; /* Opcional: evita que la imagen bloquee la interacción con otros elementos */
-    left: 50%; /* Mueve el elemento al 50% del ancho de la pantalla */
-    transform: translateX(-50%); /* Centra el elemento en el eje X */    
-}   
+.estilo4 {
+  position: absolute;
+  top: 0; /* Ajusta según necesites */
+  left: 50%; /* Mueve el contenedor al 50% del ancho de la pantalla */
+  width: 80%; /* Hace que ocupe el 80% del ancho de la pantalla */
+  z-index: 1; /* Asegura que el contenedor esté por encima de otros elementos */
+  pointer-events: none; /* Opcional: evita que la imagen bloquee la interacción con otros elementos */
+  transform: translateX(-50%); /* Centra el contenedor ajustando su posición en el eje X */
+}
 
+.estilo4 img {
+  width: 100%; /* Asegura que la imagen no se salga del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  max-width: 100%; /* Previene que la imagen se desborde del contenedor */
+}
       
 .estilo5 {
   color: #ffffff;
@@ -154,6 +181,19 @@
     }
 
   }
+
+  .estilo6 {
+    font-size: 25px; /* Puedes redondear a 14px */
+  }  
+  
+    /* DISMINUYE TAMAÑO EN CELULARES */
+    @media (max-width: 767px) {
+        .estilo6 {
+            font-size: 15px;
+            text-align: center;
+        }
+  
+    }  
 
 /* ==================================RELOJ */
 .countdown-container {
@@ -248,73 +288,222 @@
     animation: fadeIn 1s ease forwards;
 }
 /* =======================FIN GALERIA FOTOS ============================== */
+
+/* =======================BOTONES ============================== */
+
+.boton-blanco {
+  background-color: white; /* Fondo blanco */
+  border: 1px solid black; /* Borde negro */
+  color: black; /* Texto negro */
+  padding: 10px 20px; /* Espaciado dentro del botón */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Efecto suave al pasar el ratón */
+  width: 80%;
+}
+
+.boton-blanco:hover {
+  background-color: black; /* Fondo negro al pasar el ratón */
+  color: white; /* Texto blanco al pasar el ratón */
+}
+
+/* =======================fin BOTONES ============================== */
+
+/* =======================CONTENEDOR CENTRADO ============================== */
+.contenedor-centrado {
+  max-width: 600px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 0 20px; /* Espaciado interno a los lados */
+  text-align: center; /* Alinea el contenido al centro */
+  margin-bottom: 40px;
+}
+
+/* =======================IMAGENES ALADO DE LA OTRA ============================== */
+
+.music {
+  position: absolute;
+  top: 10px; /* Ajusta según necesites */
+  left: 40px; /* Ajusta según necesites */
+  z-index: 1; /* Asegura que la imagen esté por encima de otros elementos */
+}  
+
+.music0 {
+  position: absolute;
+  top: 15px; /* Ajusta según necesites */
+  left: 1px; /* Ajusta según necesites */
+  z-index: 1; /* Asegura que la imagen esté por encima de otros elementos */
+}  
+
+/* Para pantallas grandes (como en tu PC) */
+@media (min-width: 768px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 5%;
+    display: block;    
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  #musicflecha {
+    margin-top: 0px;
+    height: 20px;
+    width: auto;    
+  }
+}
+
+/* Para pantallas pequeñas (como en tu celular) */
+@media (max-width: 767px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 15%;
+    display: block;    
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  #musicflecha {
+    margin-top: 0px;
+    height: 20px;
+    width: auto;   
+  }
+}
+
 </style>
 </head>
 <body>
   
-    <div class="fondo01">
-      <div class="estilo4">
-        <img src="{% static 'vid/corazones.gif' %}">
-      </div>
-        <div class="content">
-          <span class="estilo1">14/12/24</span>
-            <p><span class="estilo2" style="font-size: 30px;">SERENA</span></p>
-        <p><span class="estilo3">Mis 15 años</span></p>
-        <p dir="ltr" class="estilo2">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
-      </div>
+
+  <div class="fondo01">      
+    <div class="music0">
+      <img id="musicflecha" src="{% static 'img/flechas.gif' %}" alt="Flecha" />
+    </div>  
+    <div class="music">
+      <img id="soundOnImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido activado" width="24" height="24" style="display: inline;">
+      <img id="soundOffImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido desactivado" width="24" height="24" style="display: none;">                
+    </div>       
+          <audio id="musica" src="{% static 'aud/fiesta.mp3' %}" preload="auto"></audio>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+              $(document).ready(function (){
+                  $('#soundOnImage, #soundOffImage').on('click', function(){
+                      var soundOn = $('#soundOnImage');
+                      var soundOff = $('#soundOffImage');
+                      
+                      if (soundOn.is(':visible')) {
+                          soundOn.hide();
+                          soundOff.show();
+                      } else {
+                          soundOn.show();
+                          soundOff.hide();
+                      }
+          
+                      // Aquí puedes agregar la lógica para reproducir o pausar la música
+                      var musica = $('#musica').get(0);
+                      if (musica.paused) {
+                          musica.play();
+                      } else {
+                          musica.pause();
+                      }
+                  });
+              });
+          </script>  
+
+    <div class="estilo4">
+      <img src="{% static 'vid/corazones.gif' %}">
     </div>
+      <div class="content">          
+        <span class="estilo1">14/12/24</span>
+          <p><span class="estilo2" style="font-size: 30px;">SERENA</span></p>
+      <p><span class="estilo3">Mis 15 años</span></p>
+      <p dir="ltr" class="estilo2">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
+    </div>      
+  </div>
 
-
-    <div class="fondo02">
-      <div class="content">
-        <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p>
-          <div id="countdown" class="countdown-container">
-              <div class="time-box">
-                  <span id="days"></span>
-                  <p>Días</p>
-              </div>
-              <div class="time-box">
-                  <span id="hours"></span>
-                  <p>Horas</p>
-              </div>
-              <div class="time-box">
-                  <span id="minutes"></span>
-                  <p>Minutos</p>
-              </div>
-              <div class="time-box">
-                  <span id="seconds"></span>
-                  <p>Segundos</p>
-              </div>
-          </div>
-      </div>
-    </div> 
-
-    <div class="fondo03">
-      <div>
-          <div class="galeria-fotos invisible">
-            <img class="fade-in" src="{% static 'img/imagen1.jpg' %}" alt="First slide">
-            <img class="fade-in" src="{% static 'img/imagen2.jpg' %}" alt="First slide">
-            <img class="fade-in" src="{% static 'img/imagen3.jpg' %}" alt="First slide">
-          </div>
+  <div class="fondo02">
+    <div class="content">
+      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p>
+        <div id="countdown" class="countdown-container">
+            <div class="time-box">
+                <span id="days"></span>
+                <p>Días</p>
+            </div>
+            <div class="time-box">
+                <span id="hours"></span>
+                <p>Horas</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes"></span>
+                <p>Minutos</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds"></span>
+                <p>Segundos</p>
+            </div>
         </div>
     </div>
+  </div> 
 
-    <div class="fondo04">
-        <p style="text-align: center;"><span class="estilo5">Detalles de la fiesta</span></p>
-        <br>
+  <div class="fondo03">
+    <div>
+        <div class="galeria-fotos invisible">
+          <img class="fade-in" src="{% static 'img/imagen1.jpg' %}" alt="First slide">
+          <img class="fade-in" src="{% static 'img/imagen2.jpg' %}" alt="First slide">
+          <img class="fade-in" src="{% static 'img/imagen3.jpg' %}" alt="First slide">
+        </div>
+      </div>
+  </div>
+
+  <div class="fondo04">
+      <p style="text-align: center;"><span class="estilo5">Detalles de la fiesta</span></p>
+      <br>
+  </div>
+
+  <div class="fondo05">
+    <div class="contenedor-centrado">
+    <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
+    <p style="text-align: center;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
+    <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia enviame un Whatsapp y serás agregado a mi lista</span></p>
+    <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Confirmar</button></span></p>
     </div>
 
     <div class="fondo05">
-      <div class="adlery" style="text-align: center;">
-          Confirmar asistencia                
-      </div>
-      <div style="text-align: center;">
-          <img src="{% static 'img/confirmar02.png' %}" style="width: 60px;">
+      <div class="contenedor-centrado">
+        <p style="text-align: center;"><span class="adlery">Dress Code</span></p>
+        <p style="text-align: center;"><span><img style="width: 300px; margin-top: 0px;" src="{% static 'img/elegante.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">-Formal-</span></p>
+      </div>      
+    </div>   
+
+    <div class="fondo05">
+      <div class="contenedor-centrado">
+        <p style="text-align: center;"><span class="adlery">Regalo</span></p>
+        <p style="text-align: center;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/regalo.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Podés enviar tu regalo de forma digital
+          seran recibidos y agreadecidos!
+        </span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Enviar Regalo</button></span></p>
+      </div>      
+    </div>  
+    
+    <div class="fondo05">
+      <div class="contenedor-centrado">
+        <p style="text-align: center;"><span class="adlery">Lugar</span></p>
+        <p style="text-align: center;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/ubicacion.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Sociedad Española<br>Dirección: Calle Belgrano N° 1102
+          <br>San Salvador de Jujuy
+        </span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Como llegar</button></span></p>
+      </div>      
+    </div>        
+
+      <div class="fondo_playlist">
+        <div class="contenedor-centrado">
+          <iframe style="border-radius:12px; margin-top: 50%; margin-left: 80px;" src="https://open.spotify.com/embed/playlist/7DRhShAQZPaQ9gEHGVZmVw?utm_source=generator" width="75%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>      
       </div>         
-      <div style="text-align: center;">
-          Para confirmar tu asistencia enviame un Whatsapp y serás agregado a mi lista
-      </div> 
-  </div>      
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
