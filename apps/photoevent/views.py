@@ -33,7 +33,11 @@ def subir_foto(request):
     return render(request, 'photoevent/subirfoto.html', {'form': form})
 
 #===SUBIR FOTO V2
-def subir_fotoV2(request):
+def subir_fotoV2(request, cod_evento):
+
+    evento = Evento.objects.get(codigo_evento=cod_evento)
+    print(evento.id)
+    
     if request.method == 'POST':
         form = FotoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -87,27 +91,31 @@ def subir_fotoV2(request):
 
             # Generar un nombre único con la fecha y hora
             timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-            foto.imagen.name = f"photoevent_{timestamp}.jpg"
+            foto.imagen.name = f"{evento.codigo_evento}_{timestamp}.jpg"
+            
 
             # Guardar la imagen redimensionada
             buffer = BytesIO()
             nueva_imagen.save(buffer, format='JPEG')
             buffer.seek(0)
 
-            # Reemplazar la imagen original por la nueva
+            # Reemplazar la imagen original por la nuevaa
             foto.imagen = InMemoryUploadedFile(
                 buffer, 'ImageField', foto.imagen.name, 'image/jpeg', buffer.getbuffer().nbytes, None
             )
+            foto.id_evento = evento
             foto.save()
 
-            return redirect('subir_foto')
+            return redirect('subir_foto', cod_evento=evento.codigo_evento)
     else:
         form = FotoForm()
     return render(request, 'photoevent/subirfoto.html', {'form': form})
 
 #===MODERAR FOTOS   
-def moderar_fotos(request):
-    fotos_pendientes = Fotos.objects.filter(estado='pendiente')
+def moderar_fotos(request, cod_evento):
+    evento = Evento.objects.get(codigo_evento=cod_evento)
+    print(evento)    
+    fotos_pendientes = Fotos.objects.filter(estado='pendiente', id_evento=evento.id) 
     if request.method == 'POST':
         foto_id = request.POST.get('foto_id')
         accion = request.POST.get('accion')
@@ -120,7 +128,7 @@ def moderar_fotos(request):
             foto.estado = 'rechazado'
         
         foto.save()
-        return redirect('moderar_fotos')
+        return redirect('moderar_fotos', cod_evento=evento.codigo_evento)
     
     return render(request, 'photoevent/moderador.html', {'fotos_pendientes': fotos_pendientes})
 
@@ -133,12 +141,27 @@ class LiveGaleriaView(ListView):
 
 
     def get_queryset(self):
+        #===OBJETO EVENTO===
+        cod_evento = self.kwargs.get('cod_evento')
+        evento = Evento.objects.get(codigo_evento=cod_evento)
+        print(evento)
+        #===FIN OBJETO EVENTO===        
         # Obtenemos todas las fotos aprobadas en orden ascendente
-        return Fotos.objects.filter(estado='aprobado').order_by('fecha_aprobado')
+        return Fotos.objects.filter(estado='aprobado', id_evento=evento.id ).order_by('fecha_aprobado')
 
     def get_context_data(self, **kwargs):
         #self.request.session['bandera'] = None
         context = super().get_context_data(**kwargs)
+        #===OBJETO EVENTO===
+        cod_evento = self.kwargs.get('cod_evento')
+        evento = get_object_or_404(Evento, codigo_evento=cod_evento)
+        print(evento.foto_transicion)
+        efecto_transicion = evento.efecto_transicion * 1000
+        context['efecto_transicion'] = efecto_transicion
+        foto_transicion = evento.foto_transicion * 1000
+        context['foto_transicion'] = foto_transicion
+        #===FIN OBJETO EVENTO===
+        context['codigo_evento'] = evento.codigo_evento
         fotos_aprobadas = self.get_queryset()
         foto_index = self.kwargs.get('index')  # Obtener el índice desde la URL
         fotos_aprobadas_list = list(fotos_aprobadas)
@@ -252,7 +275,12 @@ class GaleriaFotosView(ListView):
     
     def get_queryset(self):
         # Obtenemos todas las fotos aprobadas en orden ascendente
-        return Fotos.objects.filter(estado='aprobado').order_by('-fecha_subida')    
+        #===OBJETO EVENTO===
+        cod_evento = self.kwargs.get('cod_evento')
+        evento = Evento.objects.get(codigo_evento=cod_evento)
+        print(evento)
+        #===FIN OBJETO EVENTO===        
+        return Fotos.objects.filter(estado='aprobado', id_evento=evento.id).order_by('-fecha_subida')    
 
 #===LISTADO DE EVENTOS    
 class PhotoEventListaView(ListView):
@@ -337,6 +365,8 @@ class detallesEventoView(DetailView):
         context['id_solicitud'] = solicitud.id
         context['foto_transicion'] = solicitud.foto_transicion
         context['efecto_transicion'] = solicitud.efecto_transicion
+        context['nombre_evento'] = solicitud.nombre_evento
+        context['codigo_evento'] = solicitud.codigo_evento
         return context
     
 

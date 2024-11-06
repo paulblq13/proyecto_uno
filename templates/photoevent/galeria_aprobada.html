@@ -134,15 +134,15 @@
 
             <script>
                 function redirectToGaleria() {
-                    window.location.href = "{% url 'galeria' siguiente %}";
+                    window.location.href = "{% url 'galeria' codigo_evento siguiente %}";
                 }
             </script>                    
         </div>     
             <script>
                 setTimeout(function() {
                     // Redirigir a la URL sin ID
-                    window.location.href = "{% url 'galeria' %}";
-                }, 10000); // Espera de 10 segundos antes de cambiar
+                    window.location.href = "{% url 'galeria' codigo_evento %}";
+                }, {{ foto_transicion }}); // Espera de 10 segundos antes de cambiar
             </script>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
@@ -156,7 +156,7 @@
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
-                            window.location.href = "{% url 'galeria' siguiente_index  %}";
+                            window.location.href = "{% url 'galeria' codigo_evento siguiente_index  %}";
                         }, 5000); // 10 segundos para la siguiente foto
                     </script>            
             {% endif %}        
@@ -182,7 +182,7 @@
                             <button class="boton" id="pause-button" onclick="redirectToGaleria()">Pausar</button>
                             <script>
                                 function redirectToGaleria() {
-                                    window.location.href = "{% url 'galeria' %}";
+                                    window.location.href = "{% url 'galeria' codigo_evento %}";
                                 }
                             </script>                            
                         </div>     
@@ -193,15 +193,15 @@
                     <script>
                         setTimeout(function() {
                             // Redirigir a la URL sin ID
-                            window.location.href = "{% url 'galeria' %}";
-                        }, 10000); // Espera de 10 segundos antes de cambiar
+                            window.location.href = "{% url 'galeria' codigo_evento %}";
+                        }, {{ foto_transicion }}); // Espera de 10 segundos antes de cambiar
                     </script>
                 {% else %}
                     <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
                     <script>
                         setTimeout(function() {
-                            window.location.href = "{% url 'galeria' siguiente_index  %}";
-                        }, 10000); // 10 segundos para la siguiente foto
+                            window.location.href = "{% url 'galeria' codigo_evento siguiente_index  %}";
+                        }, {{ foto_transicion }}); // 10 segundos para la siguiente foto
                     </script>
                 {% endif %}          
             {% endif %}

@@ -9,14 +9,14 @@ from apps.photoevent import views as photoeventViews
 
 urlpatterns = [
     #DEF
-    path('subir_foto/', photoeventViews.subir_fotoV2, name='subir_foto'),    
-    path('moderar_fotos/', photoeventViews.moderar_fotos, name='moderar_fotos'),
-    path('galeria_fotos/', photoeventViews.GaleriaFotosView.as_view(), name="galeria_fotos"), 
+    path('subir_foto/<int:cod_evento>/', photoeventViews.subir_fotoV2, name='subir_foto'),
+    path('moderar_fotos/<int:cod_evento>/', photoeventViews.moderar_fotos, name='moderar_fotos'),
+    path('galeria_fotos/<int:cod_evento>/', photoeventViews.GaleriaFotosView.as_view(), name="galeria_fotos"), 
     #FUNCIONES   
     #path('actualizar_ultima_foto/', photoeventViews.actualizar_ultima_foto, name='actualizar_ultima_foto'),           
     #VIEW
-    path('galeria/<int:index>/', photoeventViews.LiveGaleriaView.as_view(), name='galeria'),
-    path('galeria/', photoeventViews.LiveGaleriaView.as_view(), name='galeria'),
+    path('galeria/<int:cod_evento>/<int:index>/', photoeventViews.LiveGaleriaView.as_view(), name='galeria'),
+    path('galeria/<int:cod_evento>/', photoeventViews.LiveGaleriaView.as_view(), name='galeria'),
     path('photoevent/lista/', photoeventViews.PhotoEventListaView.as_view(), name='photoevent-lista'),
     path('photoevent/agregar/', photoeventViews.addEventoView.as_view(), name="photoevent-agregar"),     
     path('photoevent/modificar/<int:pk>/', photoeventViews.updateEventoView.as_view(), name="photoevent-modificar"),   
