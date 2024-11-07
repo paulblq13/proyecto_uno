@@ -98,22 +98,27 @@ WSGI_APPLICATION = 'proyecto_uno.wsgi.application'
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'd8ki4aakoabm2b',
-#        'USER': 'u5sh07aht3evpl',
-#        'PASSWORD': 'p73141efe44b16e19ffadef62f5103a4ff9b4c1d87395b4ab43210ef22ac61efb',
-#        'HOST': 'c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+#        'NAME': 'db_proyecto_uno',
+#        'USER': 'postgres',
+#        'PASSWORD': '14789632',
+#        'HOST': 'localhost',
 #        'PORT': '5432',       
 #    }
 #}
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_proyecto_uno',
-        'USER': 'postgres',
-        'PASSWORD': '14789632',
-        'HOST': 'localhost',
-        'PORT': '5432',       
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'c7w2tkkhr9208awe',
+        'USER': 'rnhbxo6c3bh35zdt',
+        'PASSWORD': 's4vlufk1t7v3nd18',
+        'HOST': 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',  # Ejemplo: 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+        'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {
+                'ca': 'certs/global-bundle.pem',  # Ruta completa al archivo global-bundle.pem
+            }
+        }
     }
 }
 
