@@ -306,6 +306,7 @@ class addEventoView(CreateView):
     model = Evento
     template_name = 'photoevent/addedit-evento.html'
     form_class = EventoForm
+    success_url = reverse_lazy('photoevent-lista')
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
@@ -319,6 +320,7 @@ class addEventoView(CreateView):
         context['id'] = pk
         context['bandera_add_update'] = "add"
         return context
+ 
     #POST
         #PERSONA EXISTE?
             #SI
