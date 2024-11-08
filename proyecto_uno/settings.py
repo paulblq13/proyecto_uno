@@ -29,7 +29,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-$u_4i50mkj^^=+2ecrzyal4^m&3)#4dssr-^xv&trhw@ka$tb1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['app-proyectouno-a389ad91101a.herokuapp.com']
 
