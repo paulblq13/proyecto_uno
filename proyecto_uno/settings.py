@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-$u_4i50mkj^^=+2ecrzyal4^m&3)#4dssr-^xv&trhw@ka$tb1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['app-proyectouno-a389ad91101a.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -115,6 +115,7 @@ DATABASES = {
         'HOST': 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',  # Ejemplo: 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
         'PORT': '3306',
         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'ssl': {
                 'ca': 'certs/global-bundle.pem',  # Ruta completa al archivo global-bundle.pem
             }

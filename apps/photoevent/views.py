@@ -113,9 +113,15 @@ def subir_fotoV2(request, cod_evento):
 
 #===MODERAR FOTOS   
 def moderar_fotos(request, cod_evento):
-    evento = Evento.objects.get(codigo_evento=cod_evento)
-    print(evento)    
-    fotos_pendientes = Fotos.objects.filter(estado='pendiente', id_evento=evento.id) 
+    evento = get_object_or_404(
+        Evento.objects.prefetch_related(
+            'fotos_set'  # Reemplaza 'fotos_set' con el nombre del related_name si tienes uno
+        ),
+        codigo_evento=cod_evento
+    )
+
+    # Filtra solo las fotos pendientes usando una lista de Python
+    fotos_pendientes = [foto for foto in evento.fotos_set.all() if foto.estado == 'pendiente']
     if request.method == 'POST':
         foto_id = request.POST.get('foto_id')
         accion = request.POST.get('accion')
