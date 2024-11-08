@@ -29,6 +29,7 @@ font-style: normal;
   font-family: 'Adlery Swash';
   font-size: 40px;
   color: white;
+  line-height: 1.5;
 }    
 
 .codecpro {
@@ -73,8 +74,8 @@ body, html {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */  
 }   
 
 .fondo03 {
@@ -90,7 +91,7 @@ body, html {
 .fondo04 {
 background-color: #ffadcb;
 width: 100%;
-height: 100px;
+height: 150px;
 } 
 
 .fondo05 {
@@ -100,6 +101,9 @@ background-position: center;
 background-repeat: no-repeat;
 width: 100%;
 height: 100vh;
+display: flex;
+justify-content: center; /* Centra el contenido horizontalmente */
+align-items: center; /* Centra el contenido verticalmente */
 }  
 
 .fondo_playlist {
@@ -200,7 +204,7 @@ height: 100vh;
 /* ==================================RELOJ */
 .countdown-container {
   text-align: center;
-  background-color: #CC7D7C;
+  background-color: #ff6fa3;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -318,7 +322,6 @@ height: 100vh;
   margin: 0 auto; /* Centra el contenedor horizontalmente */
   padding: 0 20px; /* Espaciado interno a los lados */
   text-align: center; /* Alinea el contenido al centro */
-  margin-bottom: 40px;
 }
 
 /* =======================IMAGENES ALADO DE LA OTRA ============================== */
@@ -372,12 +375,26 @@ height: 100vh;
     width: auto;   
   }
 }
-
+/* =======================TEXTOS EFECTOS============================== */    
+.textoneon {
+    font-size: 40px; /* Puedes ajustar el tamaño de la letra */
+    color: #e3e4e5; /* Rosa neón */
+    text-shadow: 0 0 5px #e3e4e5, 
+                0 0 10px #e3e4e5, 
+                0 0 20px #e3e4e5, 
+                0 0 40px #e3e4e5, 
+                0 0 80px #e3e4e5, 
+                0 0 90px #e3e4e5, 
+                0 0 100px #e3e4e5;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Centra el texto */
+}
+.textblanco{
+  color: white;
+}
 </style>
 </head>
 <body>
-  
-
   <div class="fondo01">      
     <div class="music0">
       <img id="musicflecha" src="{% static 'img/flechas.gif' %}" alt="Flecha" />
@@ -424,9 +441,10 @@ height: 100vh;
     </div>      
   </div>
 
+
   <div class="fondo02">
     <div class="content">
-      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p>
+      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p><br>
         <div id="countdown" class="countdown-container">
             <div class="time-box">
                 <span id="days"></span>
@@ -459,26 +477,26 @@ height: 100vh;
   </div>
 
   <div class="fondo04">
-      <p style="text-align: center;"><span class="estilo5" style="font-size: 40px;">🎉Detalles de la fiesta</span></p>
-      <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás
+      <p style="text-align: center;"><span class="estilo5" style="font-size: 40px;">🎉Detalles de la fiesta</span></p><br>
+      <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
       </span></p>
-      <p style="text-align: center;"><span class="estilo5">👇</span></p>
       <br>
   </div>
 
-  <div class="fondo05">
+  <div class="fondo05" style="height: 70%;">
     <div class="contenedor-centrado">
     <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
-    <p style="text-align: center;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
+    <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
     <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia enviame un Whatsapp y serás agregado a mi lista</span></p>
     <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Confirmar</button></span></p>
     </div>
+  </div>
 
-    <div class="fondo02">
+    <div class="fondo02" style="height: 70%;">
       <div class="contenedor-centrado">
         <p style="text-align: center;"><span class="adlery">Dress Code</span></p>
         <p style="text-align: center;"><span><img style="width: 300px; margin-top: 0px;" src="{% static 'img/elegante.png' %}"></span></p>
-        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">-Formal-</span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">El código de la vestimenta será -Formal-</span></p>
       </div>      
     </div>   
 
@@ -493,10 +511,10 @@ height: 100vh;
       </div>      
     </div>  
     
-    <div class="fondo02">
+    <div class="fondo02" style="height: 80%;">
       <div class="contenedor-centrado">
         <p style="text-align: center;"><span class="adlery">Lugar</span></p>
-        <p style="text-align: center;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/ubicacion_rosa.png' %}"></span></p>
+        <p style="text-align: center; margin-top: 50px;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/ubicacion_rosa.png' %}"></span></p>
         <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Sociedad Española<br>Dirección: Calle Belgrano N° 1102
           <br>San Salvador de Jujuy
         </span></p>
@@ -504,11 +522,35 @@ height: 100vh;
       </div>      
     </div>        
 
+    <div class="fondo05">
+      <div class="contenedor-centrado">
+        <p style="text-align: center;"><span class="adlery">Agendar</span></p>
+        <p style="text-align: center; margin-top: 30px;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/calendario_rosa.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Agendalo para no perderte la Fiesta🥳🥳🥳
+        </span></p>
+        <p style="text-align: center;margin-top: 20px;"><span class=""><button class="boton-blanco">Agendar fecha</button></span></p>
+      </div>      
+    </div>       
+
       <div class="fondo_playlist">
         <div class="contenedor-centrado">
           <iframe style="border-radius:12px; margin-top: 50%; margin-left: 80px;" src="https://open.spotify.com/embed/playlist/7DRhShAQZPaQ9gEHGVZmVw?utm_source=generator" width="75%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>      
-      </div>         
+      </div>    
+      
+      <div class="fondo02">
+        <div class="contenedor-centrado">
+          <p style="text-align: center;"><span class="adlery">Una gran noche junto a vos</span></p>
+          <p style="text-align: center;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/insta_rosa.png' %}"></span></p>
+          <p style="text-align: center;margin-top: 50px;"><span>
+
+            <a href="https://www.instagram.com/explore/tags/LosXVdeSerena/" target="_blank" style="text-decoration: none; color: white;">
+              <h1 class="textoneon" style="font-size: 40px;">#LosXVdeSerena</h1>
+          </a>
+
+          </span></p>
+        </div>      
+      </div>       
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
