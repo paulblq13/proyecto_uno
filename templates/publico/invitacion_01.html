@@ -298,21 +298,23 @@ align-items: center; /* Centra el contenido verticalmente */
 /* =======================BOTONES ============================== */
 
 .boton-blanco {
-  background-color: white; /* Fondo blanco */
-  border: 1px solid black; /* Borde negro */
-  color: black; /* Texto negro */
+  background-image: linear-gradient(0deg, #ed4b84, #ea7aa4);
+  border: 7px solid #ed4b84;
+  color: #fff;
   padding: 10px 20px; /* Espaciado dentro del botón */
   font-size: 16px; /* Tamaño del texto */
   cursor: pointer; /* Cambia el cursor al pasar por encima */
   border-radius: 5px; /* Bordes ligeramente redondeados */
   transition: background-color 0.3s, color 0.3s; /* Efecto suave al pasar el ratón */
   width: 80%;
+  text-transform: uppercase;
 }
 
 .boton-blanco:hover {
-  background-color: black; /* Fondo negro al pasar el ratón */
-  color: white; /* Texto blanco al pasar el ratón */
+  border: 7px solid #ffffff;
 }
+
+
 
 /* =======================fin BOTONES ============================== */
 
@@ -364,13 +366,13 @@ align-items: center; /* Centra el contenido verticalmente */
     top: 2%;
     left: 15%;
     display: block;    
-    height: 40px;
+    height: 30px;
     width: auto;
     cursor: pointer;
   }
 
   #musicflecha {
-    margin-top: 0px;
+    margin-top: -3px;
     height: 20px;
     width: auto;   
   }
@@ -389,19 +391,39 @@ align-items: center; /* Centra el contenido verticalmente */
     font-family: Arial, sans-serif;
     text-align: center; /* Centra el texto */
 }
-.textblanco{
+
+.textblanco {
   color: white;
 }
+
+/* =======================BARRA SUPERIOR============================== */    
+.barrasup {
+  width: 100%;
+  height:50px;
+  background-color: rgba(0, 0, 0, 0); /* Completamente transparente */
+  color: #ffadcb; /* Texto blanco */
+  padding: 0px 0;
+  text-align: center;
+  transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+  position: fixed; /* Fija la barra en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+
+
 </style>
 </head>
 <body>
-  <div class="fondo01">      
+  <!-- Barra superior -->
+  <div class="barrasup" id="barraSuperior">
     <div class="music0">
       <img id="musicflecha" src="{% static 'img/flechas.gif' %}" alt="Flecha" />
     </div>  
     <div class="music">
-      <img id="soundOnImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido activado" width="24" height="24" style="display: inline;">
-      <img id="soundOffImage" src="{% static 'img/botonmusica.png' %}" alt="Sonido desactivado" width="24" height="24" style="display: none;">                
+      <img id="soundOnImage" src="{% static 'img/mp3.gif' %}" alt="Sonido activado" width="24" height="24" style="display: inline;">
+      <img id="soundOffImage" src="{% static 'img/mp3.gif' %}" alt="Sonido desactivado" width="24" height="24" style="display: none;">                
     </div>       
           <audio id="musica" src="{% static 'aud/fiesta.mp3' %}" preload="auto"></audio>
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -429,6 +451,13 @@ align-items: center; /* Centra el contenido verticalmente */
                   });
               });
           </script>  
+
+          <img src="{% static 'img/logo15.png' %}" aria-label="Serena XV" style="width: 150px; margin-top:10px;">          
+  </div>
+
+
+  <div class="fondo01">      
+
 
     <div class="estilo4">
       <img src="{% static 'vid/corazones.gif' %}">
@@ -541,10 +570,10 @@ align-items: center; /* Centra el contenido verticalmente */
       <div class="fondo02">
         <div class="contenedor-centrado">
           <p style="text-align: center;"><span class="adlery">Una gran noche junto a vos</span></p>
-          <p style="text-align: center;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/insta_rosa.png' %}"></span></p>
+          <p style="text-align: center;"><span><img style="width: 200px; margin-top: 30px;" src="{% static 'img/insta_rosa.png' %}"></span></p>
           <p style="text-align: center;margin-top: 50px;"><span>
 
-            <a href="https://www.instagram.com/explore/tags/LosXVdeSerena/" target="_blank" style="text-decoration: none; color: white;">
+            <a href="https://www.instagram.com/explore/tags/LosXVdeSerena/" target="_blank" style="text-decoration: none; color: #ff6fa3;">
               <h1 class="textoneon" style="font-size: 40px;">#LosXVdeSerena</h1>
           </a>
 
@@ -599,6 +628,19 @@ align-items: center; /* Centra el contenido verticalmente */
 
     elements.forEach(element => observer.observe(element));
 });  
+
+
+    // Detecta el scroll y cambia el color de la barra
+    window.onscroll = function() { cambiarColorBarra() };
+
+    function cambiarColorBarra() {
+      var barra = document.getElementById("barraSuperior");
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        barra.style.backgroundColor = "rgba(255, 255, 255)"; // Color oscuro al hacer scroll
+      } else {
+        barra.style.backgroundColor = "rgba(0, 0, 0, 0)"; // Transparente al estar en la parte superior
+      }
+    }
   </script>             
 </body>
 </html>
