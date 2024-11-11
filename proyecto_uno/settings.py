@@ -16,6 +16,12 @@ from pathlib import Path
 from django.conf import settings
 from django.conf.urls.static import static
 
+#===CLOUDINARY===
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
+#===CLOUDINARY===
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -175,3 +181,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 urlpatterns = [
     # otras rutas aquí
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage'
+
+cloudinary.config( 
+    cloud_name = "hfvjb5ty8", 
+    api_key = "539338151534521", 
+    api_secret = "pBw7DoDFCMY-ezP5pq5x3DX-qaU", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
