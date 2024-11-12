@@ -15,19 +15,6 @@ from pathlib import Path
 
 from django.conf import settings
 from django.conf.urls.static import static
-#===CLOUDINARY===
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api	
-
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'hchhzysmh',
-    'API_KEY': '296496241944854',
-    'API_SECRET': '83PgLbyixbw5scrBPIzKBFG7N0Q'
-}
-#DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
-#===CLOUDINARY===
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,9 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
-    'cloudinary',
     'apps.publico.apps.GeneralConfig',
     'apps.prueba.apps.GeneralConfig',
     'apps.usuario.apps.GeneralConfig',
@@ -181,8 +166,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -192,5 +175,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 urlpatterns = [
     # otras rutas aquí
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
