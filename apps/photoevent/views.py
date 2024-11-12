@@ -111,6 +111,7 @@ def subir_fotoV2(request, cod_evento):
             )
             foto.id_evento = evento
             foto.save()
+            messages.success(request, "La foto se ha subido con éxito, será revisada y se mostrará en la pantalla en unos segundos xD")
             return redirect('subir_foto', cod_evento=evento.codigo_evento)
     else:
         form = FotoForm()
