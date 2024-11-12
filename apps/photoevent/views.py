@@ -171,6 +171,7 @@ class LiveGaleriaView(ListView):
         context['efecto_transicion'] = efecto_transicion
         foto_transicion = evento.foto_transicion * 1000
         context['foto_transicion'] = foto_transicion
+        context['imagen_predeterminada'] = evento.foto_predeterminada
         #===FIN OBJETO EVENTO===
         context['codigo_evento'] = evento.codigo_evento
         fotos_aprobadas = self.get_queryset()
@@ -331,6 +332,11 @@ class addEventoView(CreateView):
         context['id'] = pk
         context['bandera_add_update'] = "add"
         return context
+    def form_valid(self, form):
+        # Procesa el formulario correctamente, incluyendo el archivo de imagen
+        if 'foto_predeterminada' in self.request.FILES:
+            form.instance.foto_predeterminada = self.request.FILES['foto_predeterminada']
+        return super().form_valid(form)
  
     #POST
         #PERSONA EXISTE?
@@ -355,7 +361,12 @@ class updateEventoView(UpdateView):
         context['titulo'] = 'MODIFICAR'
         context['tituloh2'] = 'Modificar evento'
         context['titulosmall'] = 'Complete los campos requeridos y luego presiones el botón GUARDAR'
-        return context                
+        return context       
+    def form_valid(self, form):
+        # Procesa el formulario correctamente, incluyendo el archivo de imagen
+        if 'foto_predeterminada' in self.request.FILES:
+            form.instance.foto_predeterminada = self.request.FILES['foto_predeterminada']
+        return super().form_valid(form)             
 
 #------------------------------------------------------------------------EVENTOSDETALLES---------------
 class detallesEventoView(DetailView):

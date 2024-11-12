@@ -17,6 +17,8 @@ class Evento(models.Model):
     foto_transicion = models.IntegerField(default=10)
     efecto_transicion= models.IntegerField(default=2)
     codigo_evento = models.CharField(max_length=6, unique=True, null=True, blank=True)
+    link_wp = models.CharField(max_length=100, null=True, blank=True)
+    foto_predeterminada = CloudinaryField('imagen', null=True, blank=True, folder='fotos/')
 
     def __str__(self):
         return f"{self.nombre_evento}"

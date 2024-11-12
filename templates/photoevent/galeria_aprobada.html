@@ -127,7 +127,7 @@
 
         {% if mostrar_predeterminada %}
         <div>
-            <img class="predeterminada" src="{% static 'img/XVdeserena.png' %}" alt="Imagen Predeterminada">
+            <img class="predeterminada" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada">
             <button class="boton" id="play-button" onclick="redirectToGaleria()">
             Play
             </button>
