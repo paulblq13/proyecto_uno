@@ -18,8 +18,8 @@ from django.conf.urls.static import static
 #===CLOUDINARY===
 import cloudinary
 import cloudinary.uploader
-#from cloudinary.utils import cloudinary_url
-#import cloudinary.api
+from cloudinary.utils import cloudinary_url
+import cloudinary.api
 #===CLOUDINARY===
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
