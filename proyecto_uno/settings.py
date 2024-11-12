@@ -25,6 +25,7 @@ cloudinary.config(
     api_secret = "83PgLbyixbw5scrBPIzKBFG7N0Q", # Click 'View API Keys' above to copy your API secret 
     secure=True 
 )
+#DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
 #===CLOUDINARY===
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -176,9 +177,6 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
-
 
 
 
