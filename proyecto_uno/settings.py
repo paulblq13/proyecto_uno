@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 #===CLOUDINARY===
 import cloudinary
 import cloudinary.uploader
-from cloudinary.utils import cloudinary_url
+#from cloudinary.utils import cloudinary_url
 #import cloudinary.api
 #===CLOUDINARY===
 
@@ -172,6 +172,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
+
+cloudinary.config(  
+    cloud_name = "hchhzysmh",  
+    api_key = "296496241944854",  
+    api_secret = "83PgLbyixbw5scrBPIzKBFG7N0Q", # Click 'View API Keys' above to copy your API secret 
+    secure=True 
+)
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -183,26 +193,3 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
-
-  
-
-cloudinary.config(  
-    cloud_name = "hchhzysmh",  
-    api_key = "296496241944854",  
-    api_secret = "83PgLbyixbw5scrBPIzKBFG7N0Q", # Click 'View API Keys' above to copy your API secret 
-    secure=True 
-)
-
-# Upload an image
-upload_result = cloudinary.uploader.upload("https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg",
-                                           public_id="shoes")
-print(upload_result["secure_url"])
-
-# Optimize delivery by resizing and applying auto-format and auto-quality
-optimize_url, _ = cloudinary_url("shoes", fetch_format="auto", quality="auto")
-print(optimize_url)
-
-# Transform the image: auto-crop to square aspect_ratio
-auto_crop_url, _ = cloudinary_url("shoes", width=500, height=500, crop="auto", gravity="auto")
-print(auto_crop_url)
