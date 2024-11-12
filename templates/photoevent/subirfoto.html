@@ -19,13 +19,13 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Subir Foto</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <form method="post" enctype="multipart/form-data">
+                                <form method="post" enctype="multipart/form-data" id="formulario">
                                     {% csrf_token %}
                                     <p>Mensaje</p>
                                     <p>{{ form.mensaje }}</p>
                                     <p>Sacar SELFI</p>
                                     <p>{{ form.imagen }}</p>
-                                    <button type="submit" class="btn btn-primary btn-icon-split">
+                                    <button type="submit" class="btn btn-primary btn-icon-split" id="btnGuardar">
                                         <span class="icon text-white-50">
                                             <i class="fa fa-camera" aria-hidden="true"></i>
                                         </span>
@@ -43,6 +43,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const formulario = document.getElementById('formulario');
+      const botonGuardar = document.getElementById('btnGuardar');
+      formulario.addEventListener('submit', function(event) {
+        if (formulario.checkValidity()) {
+          botonGuardar.setAttribute('disabled', 'true');
+        }
+      });
+    });
+  </script>
 {% endblock main %}
 
 
