@@ -24,6 +24,9 @@ from django.urls import reverse_lazy
 #===CLOUDINARY===
 import cloudinary
 import cloudinary.uploader
+#===MENSAJES DE ERROR===
+from django.contrib import messages 
+#===MENSAJES DE ERROR===
 
 # Configuration       
 cloudinary.config( 
@@ -43,6 +46,8 @@ def subir_foto(request):
     else:
         form = FotoForm()
     return render(request, 'photoevent/subirfoto.html', {'form': form})
+
+
 
 #===SUBIR FOTO V2
 def subir_fotoV2(request, cod_evento):
@@ -72,52 +77,40 @@ def subir_fotoV2(request, cod_evento):
             except (AttributeError, KeyError, IndexError):
                 # La imagen no tiene datos EXIF o no se pudo procesar
                 pass            
-
             # Dimensiones para pantalla Full HD
             ancho_deseado = 1920
             alto_deseado = 1080
-
             # Obtener dimensiones originales
             ancho_original, alto_original = imagen.size
-
             # Calcular la relación de aspecto
             relacion_aspecto = ancho_original / alto_original        
-
             # Calcular el nuevo alto y ancho
             nuevo_alto = alto_deseado
             nuevo_ancho = int(nuevo_alto * relacion_aspecto)                
-
             # Si el nuevo ancho supera el límite deseado, ajusta el ancho
             if nuevo_ancho > ancho_deseado:
                 nuevo_ancho = ancho_deseado
                 nuevo_alto = int(nuevo_ancho / relacion_aspecto)
-
             # Redimensionar la imagen
             nueva_imagen = imagen.resize((nuevo_ancho, nuevo_alto), Image.LANCZOS)
-
             # Convertir a RGB si es necesario
             if nueva_imagen.mode == 'RGBA':
                 nueva_imagen = nueva_imagen.convert('RGB')
             elif nueva_imagen.mode == 'P':
                 nueva_imagen = nueva_imagen.convert('RGB')
-
             # Generar un nombre único con la fecha y hora
             timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
             foto.imagen.name = f"{evento.codigo_evento}_{timestamp}.jpg"
-            
-
             # Guardar la imagen redimensionada
             buffer = BytesIO()
             nueva_imagen.save(buffer, format='JPEG')
             buffer.seek(0)
-
             # Reemplazar la imagen original por la nuevaa
             foto.imagen = InMemoryUploadedFile(
                 buffer, 'ImageField', foto.imagen.name, 'image/jpeg', buffer.getbuffer().nbytes, None
             )
             foto.id_evento = evento
             foto.save()
-
             return redirect('subir_foto', cod_evento=evento.codigo_evento)
     else:
         form = FotoForm()
@@ -389,4 +382,22 @@ class detallesEventoView(DetailView):
         context['codigo_evento'] = solicitud.codigo_evento
         return context
     
-
+#------------------------------------------------------------------------INGRESARCODIGO---------------
+def ingresar_codigo(request):
+    if request.method == 'POST':
+        cod_evento = request.POST.get('cod_evento')   
+        # Verificar que el código sea de 6 dígitos
+        if cod_evento and cod_evento.isdigit() and len(cod_evento) == 6:
+            # Aquí deberías verificar si el código existe, por ejemplo:
+            evento_existe = Evento.objects.filter(codigo_evento=cod_evento).exists()
+            #evento_existe = True  # Cambia esto según tu lógica para verificar existencia
+            if evento_existe:
+                print("EXISTE")
+                return redirect('subir_foto', cod_evento=int(cod_evento))
+            else:
+                print("NO EXISTE")
+                messages.error(request, "El código de evento no existe.")
+        else:
+            messages.error(request, "Por favor, ingrese un código válido de 6 dígitos.")
+    # Renderiza la plantilla con el formulario y cualquier mensaje
+    return render(request, 'publico/publico.html')

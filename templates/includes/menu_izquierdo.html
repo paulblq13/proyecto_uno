@@ -123,7 +123,20 @@
             </div>
             {% else %}
             <!-- Nav Item - Utilities Collapse Menu -->
-   
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseApps"
+                    aria-expanded="true" aria-controls="collapseApps">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Aplicaciones</span>
+                </a>
+                <div id="collapseApps" class="collapse" aria-labelledby="collapseApps"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Nuevas:</h6>
+                        <a class="collapse-item" data-bs-toggle="modal" data-bs-target="#codigoModal">PhotoEvent</a>
+                    </div>
+                </div>
+            </li>   
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">            
             <!-- Sidebar Toggler (Sidebar) -->

@@ -12,6 +12,8 @@ urlpatterns = [
     path('subir_foto/<int:cod_evento>/', photoeventViews.subir_fotoV2, name='subir_foto'),
     path('moderar_fotos/<int:cod_evento>/', photoeventViews.moderar_fotos, name='moderar_fotos'),
     path('galeria_fotos/<int:cod_evento>/', photoeventViews.GaleriaFotosView.as_view(), name="galeria_fotos"), 
+    path('ingresar_codigo/', views.ingresar_codigo, name='ingresar_codigo'),
+    
     #FUNCIONES   
     #path('actualizar_ultima_foto/', photoeventViews.actualizar_ultima_foto, name='actualizar_ultima_foto'),           
     #VIEW
