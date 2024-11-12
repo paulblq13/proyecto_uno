@@ -150,8 +150,7 @@ class LiveGaleriaView(ListView):
     model = Fotos
     template_name = 'photoevent/galeria_aprobada.html'
     context_object_name = 'foto'
-
-
+    
     def get_queryset(self):
         #===OBJETO EVENTO===
         cod_evento = self.kwargs.get('cod_evento')
