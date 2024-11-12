@@ -20,6 +20,18 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 #===URLS
 from django.urls import reverse_lazy
+#===CLOUDINARY
+#===CLOUDINARY===
+import cloudinary
+import cloudinary.uploader
+
+# Configuration       
+cloudinary.config( 
+    cloud_name = "hchhzysmh", 
+    api_key = "296496241944854", 
+    api_secret = "83PgLbyixbw5scrBPIzKBFG7N0Q", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
 
 #===SUBIR FOTO V1
 def subir_foto(request):

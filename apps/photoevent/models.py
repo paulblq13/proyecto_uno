@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 #===CLOUDNARY===
-#from cloudinary.models import CloudinaryField
+from cloudinary.models import CloudinaryField
 #===CLOUDNARY===
    
 class EventoTipo(models.Model):
@@ -28,8 +28,8 @@ class Fotos(models.Model):
         ('rechazado', 'Rechazado')
     ]
     mensaje = models.CharField(max_length=100)
-    imagen = models.ImageField(upload_to='fotos/')
-    #imagen = CloudinaryField('imagen', folder='fotos/') 
+    #imagen = models.ImageField(upload_to='fotos/')
+    imagen = CloudinaryField('imagen', folder='fotos/') 
     estado = models.CharField(max_length=10, choices=ESTADO_CHOICES, default='pendiente')
     visto = models.BooleanField(default=False)
     fecha_subida = models.DateTimeField(auto_now_add=True)
