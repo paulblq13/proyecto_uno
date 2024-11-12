@@ -19,12 +19,13 @@ from django.conf.urls.static import static
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api	
-cloudinary.config(  
-    cloud_name = "hchhzysmh",  
-    api_key = "296496241944854",  
-    api_secret = "83PgLbyixbw5scrBPIzKBFG7N0Q", # Click 'View API Keys' above to copy your API secret 
-    secure=True 
-)
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hchhzysmh',
+    'API_KEY': '296496241944854',
+    'API_SECRET': '83PgLbyixbw5scrBPIzKBFG7N0Q'
+}
 #DEFAULT_FILE_STORAGE = 'cloudinary.storage.MediaCloudinaryStorage' 
 #===CLOUDINARY===
 
@@ -55,7 +56,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'apps.publico.apps.GeneralConfig',
     'apps.prueba.apps.GeneralConfig',
     'apps.usuario.apps.GeneralConfig',
