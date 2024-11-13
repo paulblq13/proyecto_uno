@@ -36,88 +36,28 @@ cloudinary.config(
     secure=True
 )
 
-#===SUBIR FOTO V1
-def subir_foto(request):
-    if request.method == 'POST':
-        form = FotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('subir_foto')
-    else:
-        form = FotoForm()
-    return render(request, 'photoevent/subirfoto.html', {'form': form})
-
-
-
-#===SUBIR FOTO V2
-def subir_fotoV2(request, cod_evento):
-
+#===SUBIR FOTO V3 CLOUDINARY
+def subir_fotoV3(request, cod_evento):
     evento = Evento.objects.get(codigo_evento=cod_evento)
-    print(evento.id)
-    
     if request.method == 'POST':
         form = FotoForm(request.POST, request.FILES)
         if form.is_valid():
             foto = form.save(commit=False)
-            imagen = Image.open(foto.imagen)
-
-            try:
-                for orientation in ExifTags.TAGS.keys():
-                    if ExifTags.TAGS[orientation] == 'Orientation':
-                        break
-                exif = imagen._getexif()
-                if exif is not None:
-                    orientation_value = exif.get(orientation, None)
-                    if orientation_value == 3:
-                        imagen = imagen.rotate(180, expand=True)
-                    elif orientation_value == 6:
-                        imagen = imagen.rotate(270, expand=True)
-                    elif orientation_value == 8:
-                        imagen = imagen.rotate(90, expand=True)
-            except (AttributeError, KeyError, IndexError):
-                # La imagen no tiene datos EXIF o no se pudo procesar
-                pass            
-            # Dimensiones para pantalla Full HD
-            ancho_deseado = 1920
-            alto_deseado = 1080
-            # Obtener dimensiones originales
-            ancho_original, alto_original = imagen.size
-            # Calcular la relación de aspecto
-            relacion_aspecto = ancho_original / alto_original        
-            # Calcular el nuevo alto y ancho
-            nuevo_alto = alto_deseado
-            nuevo_ancho = int(nuevo_alto * relacion_aspecto)                
-            # Si el nuevo ancho supera el límite deseado, ajusta el ancho
-            if nuevo_ancho > ancho_deseado:
-                nuevo_ancho = ancho_deseado
-                nuevo_alto = int(nuevo_ancho / relacion_aspecto)
-            # Redimensionar la imagen
-            nueva_imagen = imagen.resize((nuevo_ancho, nuevo_alto), Image.LANCZOS)
-            # Convertir a RGB si es necesario
-            if nueva_imagen.mode == 'RGBA':
-                nueva_imagen = nueva_imagen.convert('RGB')
-            elif nueva_imagen.mode == 'P':
-                nueva_imagen = nueva_imagen.convert('RGB')
-            # Generar un nombre único con la fecha y hora
+            # Crear un nombre único con el código del evento y el timestamp
             timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-            foto.imagen.name = f"{evento.codigo_evento}_{timestamp}.jpg"
-            # Guardar la imagen redimensionada
-            buffer = BytesIO()
-            nueva_imagen.save(buffer, format='JPEG')
-            buffer.seek(0)
-            # Reemplazar la imagen original por la nuevaa
-            foto.imagen = InMemoryUploadedFile(
-                buffer, 'ImageField', foto.imagen.name, 'image/jpeg', buffer.getbuffer().nbytes, None
-            )
+            nombre_personalizado = f"{evento.codigo_evento}_{timestamp}"
+            # Asigna el public_id antes de guardar
+            foto.imagen.public_id = f"fotos/{nombre_personalizado}"  # carpeta/fotos/nombre_personalizado
+            # Asigna el evento a la foto y guarda
             foto.id_evento = evento
             foto.save()
-            messages.success(request, "La foto se ha subido con éxito, será revisada y se mostrará en la pantalla en unos segundos xD")
+            messages.success(request, "La foto se ha subido con éxito, será revisada y se mostrará en la pantalla en unos segundos.")
             return redirect('subir_foto', cod_evento=evento.codigo_evento)
     else:
         form = FotoForm()
     return render(request, 'photoevent/subirfoto.html', {'form': form})
 
-#===MODERAR FOTOS   
+#===MODERAR FOTOS===  
 def moderar_fotos(request, cod_evento):
     evento = get_object_or_404(
         Evento.objects.prefetch_related(
@@ -145,7 +85,7 @@ def moderar_fotos(request, cod_evento):
     return render(request, 'photoevent/moderador.html', {'fotos_pendientes': fotos_pendientes})
 
 
-#===LIVE GALERIA DE EVENTOS   
+#===LIVE GALERIA DE EVENTOS===
 class LiveGaleriaView(ListView):
     model = Fotos
     template_name = 'photoevent/galeria_aprobada.html'
@@ -174,6 +114,7 @@ class LiveGaleriaView(ListView):
         context['imagen_predeterminada'] = evento.foto_predeterminada
         #===FIN OBJETO EVENTO===
         context['codigo_evento'] = evento.codigo_evento
+        context['fondo_live'] = evento.fondo_live
         fotos_aprobadas = self.get_queryset()
         foto_index = self.kwargs.get('index')  # Obtener el índice desde la URL
         fotos_aprobadas_list = list(fotos_aprobadas)
@@ -268,18 +209,9 @@ class LiveGaleriaView(ListView):
                 siguiente_index= foto_index
                 print("siguiente index: " + str(foto_index))
         return context
-        
-#===ACTUALIZAR FOTO (X)         
-@csrf_exempt
-def actualizar_ultima_foto(request):
-    if request.method == 'POST':
-        # Cambiar el valor de ultima_foto en la sesión o en la base de datos
-        request.session['ultima_foto'] = True
-        return JsonResponse({'status': 'success'})
-    
-    return JsonResponse({'status': 'failed'})   
+         
 
-#===GALERIA DE FOTOS 
+#===GALERIA DE FOTOS===
 class GaleriaFotosView(ListView):
     model = Fotos
     template_name = 'photoevent/galeria_fotos.html'
@@ -294,7 +226,7 @@ class GaleriaFotosView(ListView):
         #===FIN OBJETO EVENTO===        
         return Fotos.objects.filter(estado='aprobado', id_evento=evento.id).order_by('-fecha_subida')    
 
-#===LISTADO DE EVENTOS    
+#===LISTADO DE EVENTOS===
 class PhotoEventListaView(ListView):
     template_name = 'photoevent/lista-evento.html'
     model= Evento
@@ -313,7 +245,7 @@ class PhotoEventListaView(ListView):
         return context       
 
 
-#---------------------------EVENTONUEVO---------------
+#===EVENTONUEVO===
 class addEventoView(CreateView):
     model = Evento
     template_name = 'photoevent/addedit-evento.html'
@@ -348,7 +280,7 @@ class addEventoView(CreateView):
                 #DAR DE ALTA PERSONA
                 #DAR DE ALTA VENDEDOR
 
-# ------------------------------------------------------------------------EVENTOUPDATE---------------
+#===EVENTOUPDATE===
 class updateEventoView(UpdateView):
     model = Evento
     template_name = 'photoevent/addedit-evento.html'
@@ -361,14 +293,15 @@ class updateEventoView(UpdateView):
         context['titulo'] = 'MODIFICAR'
         context['tituloh2'] = 'Modificar evento'
         context['titulosmall'] = 'Complete los campos requeridos y luego presiones el botón GUARDAR'
-        return context       
+        return context
+    
     def form_valid(self, form):
         # Procesa el formulario correctamente, incluyendo el archivo de imagen
         if 'foto_predeterminada' in self.request.FILES:
             form.instance.foto_predeterminada = self.request.FILES['foto_predeterminada']
         return super().form_valid(form)             
 
-#------------------------------------------------------------------------EVENTOSDETALLES---------------
+#===EVENTOSDETALLES===
 class detallesEventoView(DetailView):
 
     model=Evento
@@ -393,7 +326,7 @@ class detallesEventoView(DetailView):
         context['codigo_evento'] = solicitud.codigo_evento
         return context
     
-#------------------------------------------------------------------------INGRESARCODIGO---------------
+#===INGRESARCODIGO===
 def ingresar_codigo(request):
     if request.method == 'POST':
         cod_evento = request.POST.get('cod_evento')   
