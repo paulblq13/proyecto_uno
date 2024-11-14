@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.usuario.apps.GeneralConfig',
     'apps.noticias.apps.GeneralConfig',
     'apps.photoevent.apps.GeneralConfig',
+    'apps.tuinvitacionvirtual.apps.GeneralConfig',
 ]
 
 ASGI_APPLICATION = 'proyecto_uno.asgi.application'
