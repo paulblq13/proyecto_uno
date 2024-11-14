@@ -55,7 +55,7 @@ body, html {
 /* ================FORMATO GENERAL ===================================*/
 
 .fondo01 {
-    background-image: url('{% static 'img/fondo01_invitacionsere.png' %}'); /* Cambia a la ruta de tu imagen */
+    background-image: url('{% static 'img/imagen4.jpg' %}'); /* Cambia a la ruta de tu imagen */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -410,7 +410,11 @@ align-items: center; /* Centra el contenido verticalmente */
   left: 0;
   z-index: 1000;
 }
-
+/* =======================CONTORNO LETRAS============================== */  
+.contorno {
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+/* =======================CONTORNO LETRAS============================== */  
 
 
 </style>
@@ -460,13 +464,13 @@ align-items: center; /* Centra el contenido verticalmente */
 
 
     <div class="estilo4">
-      <img src="{% static 'vid/corazones.gif' %}">
+      <img src="{% static 'img/corazones.gif' %}">
     </div>
       <div class="content">          
-        <span class="estilo1">14/12/24</span>
-          <p><span class="estilo2" style="font-size: 30px;">SERENA</span></p>
+        <span class="estilo1 contorno">14/12/24</span>
+          <p><span class="estilo2 contorno" style="font-size: 30px;">SERENA</span></p>
       <p><span class="estilo3">Mis 15 años</span></p>
-      <p dir="ltr" class="estilo2">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
+      <p dir="ltr" class="estilo2 contorno">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
     </div>      
   </div>
 
