@@ -48,7 +48,25 @@
     .fontcarta{
         font-family: 'Dancing Script', cursive;
     }
-    /* =======================FIN TIPOS DE LETRA============================== */   
+    /* =======================FIN TIPOS DE LETRA============================== */  
+    
+    .video-container {
+        position: absolute; /* O fixed si quieres que sea visible en toda la página */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Ocupa toda la pantalla */
+        overflow: hidden;
+        z-index: -1; /* Coloca el video detrás de otros elementos */
+    }
+    
+    .section-1, .section-2 {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+
+
     /* =======================FONDO VIDEO 01============================== */    
     .video_fondo {
         position: relative;
@@ -582,16 +600,10 @@
     
         <!-- Primer video -->        
         <div class="video_fondo">
-            <video 
-                src="{% static 'vid/magenta.mp4' %}" 
-                playsinline 
-                preload="auto" 
-                muted 
-                loop 
-                autoplay
-            >
-                Tu navegador no soporta el elemento de video.
+            <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+                <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
             </video>
+            <div id="section-1" class="video-placeholder"></div>            
                 <!-- Flecha -->
             <div class="flecha_abajo">
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha1">
@@ -623,16 +635,10 @@
         </script>    
     <!-- Segundo video -->
     <div class="second-video_fondo">
-        <video 
-            src="{% static 'vid/magenta.mp4' %}" 
-            playsinline 
-            preload="auto" 
-            muted 
-            loop 
-            autoplay
-        >
-            Tu navegador no soporta el elemento de video.
+        <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+            <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
         </video>
+        <div id="section-1" class="video-placeholder"></div>   
             <!-- Flecha -->
             <div class="flecha_abajo">
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha2">
@@ -648,16 +654,10 @@
 
    <!-- Tercer video -->        
    <div class="video_fondo">
-    <video 
-        src="{% static 'vid/magenta.mp4' %}" 
-        playsinline 
-        preload="auto" 
-        muted 
-        loop 
-        autoplay
-    >
-        Tu navegador no soporta el elemento de video.
+    <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+        <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
     </video>
+    <div id="section-1" class="video-placeholder"></div>   
             <!-- Icono -->
     <div class="contenedor_div" style="top: 20%;">
         <div class="container">
@@ -688,16 +688,10 @@
     
     <!-- Cuarto video -->
     <div class="second-video_fondo">
-        <video 
-            src="{% static 'vid/magenta.mp4' %}" 
-            playsinline 
-            preload="auto" 
-            muted 
-            loop 
-            autoplay
-        >
-            Tu navegador no soporta el elemento de video.
+        <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+            <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
         </video>
+        <div id="section-1" class="video-placeholder"></div>   
             <!-- Flecha -->
             <div class="flecha_abajo">
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha4">
@@ -729,16 +723,10 @@
     
    <!-- Quinto video -->        
    <div class="video_fondo">
-    <video 
-        src="{% static 'vid/magenta.mp4' %}" 
-        playsinline 
-        preload="auto" 
-        muted 
-        loop 
-        autoplay
-    >
-        Tu navegador no soporta el elemento de video.
+    <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+        <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
     </video>
+    <div id="section-1" class="video-placeholder"></div>   
             <!-- Icono -->
     <div class="contenedor_div" style="top: 20%;">
         <div class="container">
@@ -769,16 +757,10 @@
 
     <!-- Sexto video -->
     <div class="second-video_fondo" style="height: 300px;">
-        <video 
-            src="{% static 'vid/magenta.mp4' %}" 
-            playsinline 
-            preload="auto" 
-            muted 
-            loop 
-            autoplay
-        >
-            Tu navegador no soporta el elemento de video.
+        <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+            <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
         </video>
+        <div id="section-1" class="video-placeholder"></div>   
             <!-- Flecha -->
             <div class="flecha_abajo">
                 <img src="{% static 'img/flecha.svg' %}" class="animated-arrow"  alt="Flecha6">
@@ -814,16 +796,10 @@
 
    <!-- Septimo video -->        
    <div class="video_fondo"  style="height: 500px;">
-    <video 
-        src="{% static 'vid/magenta.mp4' %}" 
-        playsinline 
-        preload="auto" 
-        muted 
-        loop 
-        autoplay
-    >
-        Tu navegador no soporta el elemento de video.
+    <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+        <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
     </video>
+    <div id="section-1" class="video-placeholder"></div>   
         <!-- Texto -->
         <div class="contenedor_div" style="top: 30%;">
             <div class="rectangulo">
@@ -842,16 +818,10 @@
 
     <!-- Octavo video -->
     <div class="second-video_fondo">
-        <video 
-            src="{% static 'vid/magenta.mp4' %}" 
-            playsinline 
-            preload="auto" 
-            muted 
-            loop 
-            autoplay
-        >
-            Tu navegador no soporta el elemento de video.
+        <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+            <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
         </video>
+        <div id="section-1" class="video-placeholder"></div>   
         <!-- Texto -->
         <div class="contenedor_div" style="top: 20%;">
             <h1><p>Hagamos que sea</p><p> una noche epíca</p></h1><br>
@@ -871,16 +841,10 @@
 
    <!-- Noveno video -->        
    <div class="video_fondo" >
-    <video 
-        src="{% static 'vid/magenta.mp4' %}" 
-        playsinline 
-        preload="auto" 
-        muted 
-        loop 
-        autoplay
-    >
-        Tu navegador no soporta el elemento de video.
+    <video id="shared-video" autoplay muted loop playsinline style="display: none;">
+        <source src="{% static 'vid/magenta.mp4' %}" type="video/mp4">
     </video>
+    <div id="section-1" class="video-placeholder"></div>   
         <!-- Texto -->
         <div class="contenedor_div" style="top: 30%;">
             <p><h1>Una gran noche junto a vos</h1></p>
@@ -961,7 +925,14 @@
       }
     }  
     
+    const videoElement = document.getElementById("shared-video");
+    const placeholders = document.querySelectorAll(".video-placeholder");
     
+    placeholders.forEach(placeholder => {
+        const clone = videoElement.cloneNode(true);
+        clone.style.display = "block";
+        placeholder.appendChild(clone);
+    });    
 </script>
 </body>
 </html>
