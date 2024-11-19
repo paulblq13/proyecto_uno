@@ -336,11 +336,11 @@
     /* =======================ARO FALTAN DIAS============================== */   
     .aro-overlay {
         position: absolute;
-        top: 100px; /* Ajusta la distancia desde la parte superior según sea necesario */
+        top: 200px; /* Ajusta la distancia desde la parte superior según sea necesario */
         left: 50%;
         transform: translateX(-50%);
         z-index: 1; /* Asegura que la imagen esté por encima del video */
-        width: 80vw; /* Ajusta el ancho del contenedor al 50% del ancho de la ventana */
+        width: 95vw; /* Ajusta el ancho del contenedor al 50% del ancho de la ventana */
         max-width: 450px; /* Ancho máximo para pantallas grandes */
         height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
         overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del contenedor */
@@ -358,7 +358,7 @@
         color: white;
         text-align: center;
         z-index: 2; /* Asegura que el texto esté encima del video */
-        width: 300%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
+        width: 400%; /* Asegura que el texto esté centrado en todo el ancho del contenedor */
     }
     .text-reloj-pie {
         position: absolute;
@@ -514,7 +514,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Centra todo verticalmente */
+    height: 100vh;
+    max-width: 100px; /* Reduces the overall width */
+    margin: 0 auto;
     background-color: rgb(0,0,0,0); /* Fondo opcional */
 }
 
@@ -522,7 +524,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 20px; /* Espacio entre cada "time-box" */
+    gap: 10px; /* Espacio entre cada "time-box" */
 }
 
 .time-box {
@@ -544,6 +546,18 @@
     font-size: 1rem; /* Tamaño del texto */
     color: white;
 }
+
+.contenedor_contador {
+    background-image: url('{% static 'img/fondo_abajo.png' %}'); /* Cambia a la ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */  
+  }   
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -636,7 +650,6 @@
             <div class="aro-overlay">
                 <img src="{% static 'img/aro-hojas.webp' %}" alt="Imagen de fondo">   
                 <div class="text-reloj" style="font-size: 40px;">
-                    
                     <div class="content">
                         <p class="fontcarta">Faltan</p>
                         <div id="countdown" class="countdown-container">
