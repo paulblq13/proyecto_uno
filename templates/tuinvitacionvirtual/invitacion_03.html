@@ -507,6 +507,43 @@
     padding: 20px; /* Opcional: espacio interno alrededor del contenido */
     box-sizing: border-box; /* Asegura que el padding se cuente dentro del ancho total */
   }
+
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centra todo verticalmente */
+    background-color: rgb(0,0,0,0); /* Fondo opcional */
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px; /* Espacio entre cada "time-box" */
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif; /* Cambia la fuente si es necesario */
+}
+
+.time-box span {
+    font-size: 2rem; /* Tamaño del número */
+    font-weight: bold;
+    color: white;
+}
+
+.time-box p {
+    margin: 5px 0 0 0;
+    font-size: 1rem; /* Tamaño del texto */
+    color: white;
+}
 </style>   
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -597,13 +634,32 @@
             </div>
                 <!-- Aro -->
             <div class="aro-overlay">
-                <img src="{% static 'img/aro-hojas.webp' %}" alt="Imagen de fondo">    
+                <img src="{% static 'img/aro-hojas.webp' %}" alt="Imagen de fondo">   
                 <div class="text-reloj" style="font-size: 40px;">
-                    <p class='fontcarta'>Faltan</p>
-                    <script>
-                        (function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));
-                    </script>
-                    <a data-type="countdown" data-id="5797229" class="tickcounter" style="display:block; left:0; width:25%; height:0; position:relative; padding-bottom:6%; margin:0 auto;" title="My countdown" href="//www.tickcounter.com/"></a>
+                    
+                    <div class="content">
+                        <p class="fontcarta">Faltan</p>
+                        <div id="countdown" class="countdown-container">
+                            <div class="time-box">
+                                <span id="days">00</span>
+                                <p>Días</p>
+                            </div>
+                            <div class="time-box">
+                                <span id="hours">00</span>
+                                <p>Horas</p>
+                            </div>
+                            <div class="time-box">
+                                <span id="minutes">00</span>
+                                <p>Minutos</p>
+                            </div>
+                            <div class="time-box">
+                                <span id="seconds">00</span>
+                                <p>Segundos</p>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="text-reloj-pie" >
                     <img src="{% static 'img/reloj-arreglo01.svg' %}" alt="arreglo">   
@@ -640,7 +696,7 @@
                 <p><img src="{% static 'img/mariposa.svg' %}" alt="Flecha" style="width: 110px;"></p>
                    <h1><p>Te espero para compartir</p>
                     <p>esta noche mágica</p></h1>
-                <p><img src="{% static 'img/corazon.svg' %}" alt="Flecha" style="width: 30px;"></p>
+                <p><img src="{% static 'img/tribal_separador.svg' %}" alt="Flecha" style="width: 350px;"></p>
             </div>      
     </div>
 
@@ -919,6 +975,40 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fecha objetivo para la cuenta regresiva
+        const targetDate = new Date('December 14, 2024 00:00:00').getTime();
+    
+        // Actualiza la cuenta regresiva cada segundo
+        const countdown = setInterval(function() {
+            // Obtén la fecha y hora actual
+            const now = new Date().getTime();
+    
+            // Calcula la diferencia entre la fecha objetivo y la fecha actual
+            const distance = targetDate - now;
+    
+            // Calcula el tiempo para días, horas, minutos y segundos
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+            // Muestra el resultado en los elementos correspondientes
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+    
+            // Si la cuenta regresiva ha terminado, muestra un mensaje
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerHTML = "¡Feliz Fiesta de 15 Años!";
+            }
+        }, 1000);
+    });
+    
+    
     // Bloquea el menú contextual en toda la página
     document.addEventListener('contextmenu', function (event) {
         event.preventDefault(); // Cancela el menú contextual
