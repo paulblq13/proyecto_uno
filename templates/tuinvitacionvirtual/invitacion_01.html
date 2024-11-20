@@ -294,30 +294,6 @@ align-items: center; /* Centra el contenido verticalmente */
     animation: fadeIn 1s ease forwards;
 }
 /* =======================FIN GALERIA FOTOS ============================== */
-
-/* =======================BOTONES ============================== */
-
-.boton-blanco {
-  background-image: linear-gradient(0deg, #ed4b84, #ea7aa4);
-  border: 7px solid #ed4b84;
-  color: #fff;
-  padding: 10px 20px; /* Espaciado dentro del botón */
-  font-size: 16px; /* Tamaño del texto */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-  border-radius: 5px; /* Bordes ligeramente redondeados */
-  transition: background-color 0.3s, color 0.3s; /* Efecto suave al pasar el ratón */
-  width: 80%;
-  text-transform: uppercase;
-}
-
-.boton-blanco:hover {
-  border: 7px solid #ffffff;
-}
-
-
-
-/* =======================fin BOTONES ============================== */
-
 /* =======================CONTENEDOR CENTRADO ============================== */
 .contenedor-centrado {
   max-width: 600px; /* Ancho máximo del contenedor */
@@ -428,13 +404,33 @@ align-items: center; /* Centra el contenido verticalmente */
     color: white;
 }
 /* =======================BUTTON ROSA============================== */ 
+/* =======================BOTONES ============================== */
+
+.boton-blanco {
+  background-image: linear-gradient(0deg, #ed4b84, #ea7aa4);
+  border: 7px solid #ed4b84;
+  color: #fff;
+  padding: 10px 20px; /* Espaciado dentro del botón */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Efecto suave al pasar el ratón */
+  width: 80%;
+  text-transform: uppercase;
+  z-index: 10;
+  position: relative;
+}
+.boton-blanco:hover {
+  border: 7px solid #ffffff;
+}
+/* =======================fin BOTONES ============================== */
 /* =======================ESTRELLAS SUPERPUESTA============================== */ 
 .imagen-superpuesta {
     position: absolute; /* La imagen se posicionará en relación al contenedor */
     top: 50%; /* Centrar verticalmente */
     left: 50%; /* Centrar horizontalmente */
     transform: translate(-50%, -50%); /* Ajustar para centrar exactamente */
-    z-index: 10; /* Asegura que esté encima de otros elementos */
+    z-index: 0; /* Asegura que esté encima de otros elementos */
 }
 
 .imagen-superpuesta img {
@@ -580,7 +576,8 @@ align-items: center; /* Centra el contenido verticalmente */
     <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
     <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
     <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia enviame un Whatsapp y serás agregado a mi lista</span></p>
-    <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Confirmar</button></span></p>
+    <p style="text-align: center;margin-top: 50px;"><span class="">
+      <a class="btn boton-blanco" href="https://api.whatsapp.com/send?phone=5493884159299&text=Confirmo%20mi%20asistencia%20al%20Cumple%20de%20Sere%F0%9F%91%8D" target="_blank">Confirmar</a></span></p>
     </div>
   </div>
   <div  style="position: relative;">
@@ -595,7 +592,8 @@ align-items: center; /* Centra el contenido verticalmente */
       <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Podés enviar tu regalo de forma digital
         serán recibidos y agreadecidos!
       </span></p>
-      <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Enviar Regalo</button></span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#regaloModal">Enviar Regalo</button></span></p>
     </div>      
   </div>        
 
@@ -612,7 +610,8 @@ align-items: center; /* Centra el contenido verticalmente */
         <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Sociedad Española<br>Dirección: Calle Belgrano N° 1102
           <br>San Salvador de Jujuy
         </span></p>
-        <p style="text-align: center;margin-top: 20px;"><span class=""><button class="boton-blanco">Como llegar</button></span></p>
+        <p style="text-align: center;margin-top: 20px;"><span class="">
+          <a class="btn boton-blanco" href="https://www.google.com/maps/dir//Gral.+Belgrano+1102,+Y4600+San+Salvador+de+Jujuy,+Jujuy/@-24.1857368,-65.3907876,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x941b0f40641abb05:0xaa50a10d1c875b92!2m2!1d-65.3083895!2d-24.1856713?entry=ttu" target="_blank">Como llegar</a></span></p>
       </div>      
     </div>        
 
@@ -621,6 +620,23 @@ align-items: center; /* Centra el contenido verticalmente */
       <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
     </div>
   </div>
+
+  <div class="fondo05">
+    <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Agendar fecha</span></p>
+      <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/calendario_rosa.png' %}"></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Podés crear un recordatorio
+      </span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <a type="button" class="btn boton-blanco" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MzI3bmJodmMwYzlpdHJmNDdudmowaDkxNXAgcGF1bGV2aWxjYUBt&tmsrc=paulevilca%40gmail.com" target="_blank">Agendar</a></span></p>
+    </div>      
+  </div>        
+
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>  
        
     <div class="fondo_playlist">
       <div class="contenedor-centrado" >      
@@ -628,7 +644,7 @@ align-items: center; /* Centra el contenido verticalmente */
         <div style="margin-top: 0px;">
           <span class="adlery" style="font-size: 20px;">Ayudame a hacer la playlist</span>
           </div>
-          <p style="text-align: center;margin-top: 20px;"><span class=""><button class="boton-blanco">Sugerir aquí</button></span></p>          
+          <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#cancionesModal">Sugerir canción</button></span></p>
       </div>      
     </div>    
     
@@ -661,7 +677,7 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar para disfrutar al 100% y no perderte nada de esa noche especial ☺️</p>
+                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación para disfrutar al 100% y no perderte nada de esa noche especial ☺️</p>
                   <p>Regulá tu volumen y comencemos!</p>
               </div>
               <div class="modal-footer justify-content-center">
@@ -670,6 +686,45 @@ align-items: center; /* Centra el contenido verticalmente */
           </div>
       </div>
   </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="regaloModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Regalo Virtual!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <p>Envía tu regalo de forma virtual! al siguiente Alias:</p>
+                  <p><b>serena.XD</b></p>
+                  <p>(A nombre de Vilca Paul) ☺️</p>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+              </div>
+          </div>
+      </div>
+    </div>  
+
+    <!-- Modal -->
+    <div class="modal fade" id="cancionesModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Sugerir canciones!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx1ji88WdlU8WuS6hcZ5mmucDuh6QEBGc9XHLFKFDI3EcJUw/viewform?embedded=true" width="auto" height="450" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+              </div>
+          </div>
+      </div>
+    </div>      
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
