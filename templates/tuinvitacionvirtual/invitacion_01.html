@@ -87,6 +87,7 @@ body, html {
 }
 
 .fondo04 {
+position: relative;  
 background-color: #ffadcb;
 width: 100%;
 height: 150px;
@@ -415,7 +416,7 @@ align-items: center; /* Centra el contenido verticalmente */
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 /* =======================CONTORNO LETRAS============================== */  
-
+/* =======================BUTTON ROSA============================== */ 
 /* Personalización del botón */
 .btn-rosa {
     background-color: #ff6fa3;
@@ -425,6 +426,34 @@ align-items: center; /* Centra el contenido verticalmente */
 .btn-rosa:hover {
     background-color: #ff598d;
     color: white;
+}
+/* =======================BUTTON ROSA============================== */ 
+/* =======================ESTRELLAS SUPERPUESTA============================== */ 
+.imagen-superpuesta {
+    position: absolute; /* La imagen se posicionará en relación al contenedor */
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar para centrar exactamente */
+    z-index: 10; /* Asegura que esté encima de otros elementos */
+}
+
+.imagen-superpuesta img {
+    max-width: 100%; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+}
+/* =======================FIN ESTRELLAS SUPERPUESTA============================== */ 
+/* =======================FLECHA HACIA ABAJO ============================== */
+.flecha-superpuesta {
+    position: absolute; /* La imagen se posicionará en relación al contenedor */
+    bottom: -20px; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar para centrar exactamente */
+    z-index: 10; /* Asegura que esté encima de otros elementos */
+}
+
+.flecha-superpuesta img {
+    max-width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
 }
 </style>
 </head>
@@ -468,10 +497,7 @@ align-items: center; /* Centra el contenido verticalmente */
           <img src="{% static 'img/logo15v2.png' %}" aria-label="Serena XV" style="width: 150px; margin-top:10px;">          
   </div>
 
-
   <div class="fondo01">      
-
-
     <div class="estilo4">
       <img src="{% static 'img/corazones.gif' %}">
     </div>
@@ -480,13 +506,16 @@ align-items: center; /* Centra el contenido verticalmente */
           <p><span class="estilo2 contorno" style="font-size: 30px;">SERENA</span></p>
       <p><span class="estilo3">Mis 15 años</span></p>
       <p dir="ltr" class="estilo2 contorno">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
-    </div>      
+    </div>
+        <!-- Flecha -->
+        <div class="flecha-superpuesta">
+          <img src="{% static 'img/flecha02.gif' %}" alt="Fiesta">
+        </div>
   </div>
 
-
-  <div class="fondo02">
-    <div class="content">
-      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p><br>
+  <div class="fondo02"> 
+    <div class="content">       
+      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p><br>     
         <div id="countdown" class="countdown-container">
             <div class="time-box">
                 <span id="days"></span>
@@ -505,7 +534,7 @@ align-items: center; /* Centra el contenido verticalmente */
                 <p>Segundos</p>
             </div>
         </div>
-    </div>
+    </div>  
   </div> 
 
   <div class="fondo03">
@@ -517,7 +546,11 @@ align-items: center; /* Centra el contenido verticalmente */
         </div>
       </div>
   </div>
-
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
   <div class="fondo04">
       <p style="text-align: center;"><span class="estilo5" style="font-size: 40px;">🎉Detalles de la fiesta</span></p><br>
       <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
@@ -525,18 +558,22 @@ align-items: center; /* Centra el contenido verticalmente */
       <br>
   </div>
 
-  <div class="fondo02" style="height: 70%;">
+  <div class="fondo02">
     <div class="contenedor-centrado">
-      <p style="text-align: center; margin-top: -40px;"><span class="adlery">Dress Code</span></p>
+      <p style="text-align: center; margin-top: -0px;"><span class="adlery">Dress Code</span></p>
       <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/elegante.png' %}"></span></p>
       <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6"><b>Formal Sport</b></span></p>
       <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Se reserva el color rosa en sus variantes 
         para la Quinceañera
       </span></p>
-
     </div>      
   </div>   
 
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
 
   <div class="fondo05" style="height: 100%;">
     <div class="contenedor-centrado">
@@ -546,7 +583,11 @@ align-items: center; /* Centra el contenido verticalmente */
     <p style="text-align: center;margin-top: 50px;"><span class=""><button class="boton-blanco">Confirmar</button></span></p>
     </div>
   </div>
-
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
   <div class="fondo05">
     <div class="contenedor-centrado">
       <p style="text-align: center;"><span class="adlery">Regalo</span></p>
@@ -558,7 +599,11 @@ align-items: center; /* Centra el contenido verticalmente */
     </div>      
   </div>        
 
-
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
  
     <div class="fondo02" style="height: 100%;">
       <div class="contenedor-centrado">
@@ -571,6 +616,11 @@ align-items: center; /* Centra el contenido verticalmente */
       </div>      
     </div>        
 
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
        
     <div class="fondo_playlist">
       <div class="contenedor-centrado" >      
@@ -582,6 +632,11 @@ align-items: center; /* Centra el contenido verticalmente */
       </div>      
     </div>    
     
+    <div  style="position: relative;">
+      <div class="imagen-superpuesta">
+        <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+      </div>
+    </div>
 
     <div class="fondo02">
       <div class="contenedor-centrado">
@@ -595,7 +650,6 @@ align-items: center; /* Centra el contenido verticalmente */
         </span></p>
       </div>      
     </div> 
-
 
 
     <!-- Modal -->
