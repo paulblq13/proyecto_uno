@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
     /* ================FORMATO GENERAL ===================================*/
 
@@ -179,6 +180,7 @@
         position: relative; /* Contenedor para posicionar los divs superpuestos */
         width: 400px; /* Ajusta el tamaño del contenedor */
         height: 300px;
+        z-index: 10;
       }
 
     .circulo_borroso {
@@ -489,7 +491,7 @@
 }
 
 /* Clase para ocultar el elemento inicialmente */
-.invisible {
+.foto_invisible {
     opacity: 0;
 }
 
@@ -604,7 +606,7 @@
   <!-- fin Barra superior -->
     <div style="background-color: black; position: relative; overflow: hidden;">    
         <div class="image-background">
-            <img class="foto_principal" src="{% static 'img/3f17779e59954460c5b522c6d4729b78.jpg' %}" alt="Foto principal">
+            <img class="foto_principal" src="https://res.cloudinary.com/hchhzysmh/image/upload/v1732198529/fotos/muestra/n4bpa6343rqzvn9z6qzp.jpg" alt="Foto principal">
             <div class="contenedor_div">
                 <h5>
                     <span id="t5q1tr8OemPRTugq" style="color:#ffffff; font-size: 30px">
@@ -701,22 +703,23 @@
    <div class="video_fondo">
     {% include 'tuinvitacionvirtual/videofondo.html' %}  
             <!-- Icono -->
-    <div class="contenedor_div" style="top: 20%;">
-        <div class="container">
-            <div class="image-layer circulo_borroso">
-                <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
-            </div>
-            <div class="image-layer aros_movimiento">
-                <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
-            </div>
-            <div class="image-layer circulo_blanco">
-                <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
-            </div>
-            <div class="image-layer icono_circulo">
-                <img src="{% static 'img/03-icono_fiesta.svg' %}" alt="img04">
-            </div>        
+        <div class="contenedor_div" style="top: 10%;">
+            <div class="container">
+                <div class="image-layer circulo_borroso">
+                    <img src="{% static 'img/01-circulo_borroso.svg' %}" alt="img01"> 
+                </div>
+                <div class="image-layer aros_movimiento">
+                    <img src="{% static 'img/02-circulos_movimiento.gif' %}" alt="img02">     
+                </div>
+                <div class="image-layer circulo_blanco">
+                    <img src="{% static 'img/04-circulo blanco.png' %}" alt="img03">
+                </div>
+                <div class="image-layer icono_circulo">
+                    <img src="{% static 'img/03-icono_fiesta.svg' %}" alt="img04">
+                </div>      
+            </div>  
         </div>   
-    </div>  
+ 
         <!-- Fiesta -->
         <div class="contenedor_div" style="top: 60%;">
             <h1><p>FIESTA</p><p>Viernes 16 de Julio - 21 Hs.</p></h1><br>
@@ -819,7 +822,7 @@
 
     <div class="fondo03">
         <div>
-            <div class="galeria-fotos invisible">
+            <div class="galeria-fotos foto_invisible">
               <img class="fade-in" src="{% static 'img/imagen1.jpg' %}" alt="First slide">
               <img class="fade-in" src="{% static 'img/imagen2.jpg' %}" alt="First slide">
               <img class="fade-in" src="{% static 'img/imagen3.jpg' %}" alt="First slide">
@@ -957,7 +960,7 @@
 
   // IMAGEN FADE
   document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll('.invisible');
+    const elements = document.querySelectorAll('.foto_invisible');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

@@ -461,6 +461,47 @@ align-items: center; /* Centra el contenido verticalmente */
     max-width: 50px; /* Ajusta el tamaño según sea necesario */
     height: auto;
 }
+/* =======================FLECHA HACIA ABAJO ============================== */
+/* =======================IFRAME============================== */
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+/* =======================FIN IFRAME============================== */
+/* =======================MODAL ALTO============================== */
+.modal-content {
+  max-height: 90vh; /* Limita la altura del modal al 90% de la altura de la ventana */
+  overflow-y: auto; /* Habilita el scroll si el contenido excede el tamaño */
+}
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Mantiene una relación de aspecto 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 </style>
 </head>
 <body>
@@ -542,7 +583,11 @@ align-items: center; /* Centra el contenido verticalmente */
         </div>
     </div>  
   </div> 
-
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
   <div class="fondo03">
     <div>
         <div class="galeria-fotos fotos_invisible">
@@ -569,8 +614,8 @@ align-items: center; /* Centra el contenido verticalmente */
       <p style="text-align: center; margin-top: -0px;"><span class="adlery">Dress Code</span></p>
       <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/elegante.png' %}"></span></p>
       <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6"><b>Formal Sport</b></span></p>
-      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Se reserva el color rosa en sus variantes 
-        para la Quinceañera
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">El color rosa en sus distintas tonalidades queda exclusivamente 
+        asignado para la Quinceañera
       </span></p>
     </div>      
   </div>   
@@ -638,7 +683,7 @@ align-items: center; /* Centra el contenido verticalmente */
       <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Podés crear un recordatorio
       </span></p>
       <p style="text-align: center;margin-top: 50px;"><span class="">
-        <a type="button" class="btn boton-blanco" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MzI3bmJodmMwYzlpdHJmNDdudmowaDkxNXAgcGF1bGV2aWxjYUBt&tmsrc=paulevilca%40gmail.com" target="_blank">Agendar</a></span></p>
+        <a type="button" class="btn boton-blanco" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=N2w2NDRvanZydWZyMmJmMWhpaG9zM284djQgY2JjYmNiNzg2ODA5Y2MwMDkzZjYzN2IyMjI5YmYxNmE2N2ZlZGRjNmNiNjY2ZmVmYzg1NjY1Yjg5ZDc3ZmJiZkBn&tmsrc=cbcbcb786809cc0093f637b2229bf16a67feddc6cb666fefc85665b89d77fbbf%40group.calendar.google.com" target="_blank">Agendar</a></span></p>
     </div>      
   </div>        
 
@@ -652,9 +697,9 @@ align-items: center; /* Centra el contenido verticalmente */
       <div class="contenedor-centrado" >      
         <iframe style="border-radius:12px; margin-top: 40%; margin-left: 80px;" src="https://open.spotify.com/embed/playlist/7DRhShAQZPaQ9gEHGVZmVw?utm_source=generator" width="75%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <div style="margin-top: 0px;">
-          <span class="adlery" style="font-size: 20px;">Ayudame a hacer la playlist</span>
+          <span class="adlery" style="font-size: 20px;">Ayudame a armar la playlist</span>
           </div>
-          <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#cancionesModal">Sugerir canción</button></span></p>
+          <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#cancionesModal">Sugerir tema</button></span></p>
       </div>      
     </div>    
     
@@ -687,7 +732,7 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación para disfrutar al 100% y no perderte nada de esa noche especial ☺️</p>
+                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación para disfrutar al 100% 🌮​ y no perderte nada de esa noche especial ☺️</p>
                   <p>Regulá tu volumen y comencemos!</p>
               </div>
               <div class="modal-footer justify-content-center">
@@ -707,7 +752,7 @@ align-items: center; /* Centra el contenido verticalmente */
               </div>
               <div class="modal-body">
                   <p>Envía tu regalo de forma virtual! al siguiente Alias:</p>
-                  <p><b>serena.XD</b></p>
+                  <p><b><input id="copyInput" value="serena.xd" readonly style="cursor: pointer;"></b></p>
                   <p>(A nombre de Vilca Paul) ☺️</p>
               </div>
               <div class="modal-footer justify-content-center">
@@ -726,7 +771,12 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx1ji88WdlU8WuS6hcZ5mmucDuh6QEBGc9XHLFKFDI3EcJUw/viewform?embedded=true" width="auto" height="450" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+
+                <div class="iframe-container">
+                  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx1ji88WdlU8WuS6hcZ5mmucDuh6QEBGc9XHLFKFDI3EcJUw/viewform?embedded=true" width="640" height="450" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+              </div>
+
+
               </div>
               <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
@@ -807,6 +857,24 @@ align-items: center; /* Centra el contenido verticalmente */
             const modal = new bootstrap.Modal(document.getElementById('invitationModal'));
             modal.show();
         });
-    </script>        
+    </script>  
+    <script>
+      const input = document.getElementById('copyInput');
+
+      input.addEventListener('click', () => {
+          // Seleccionar el contenido del input
+          input.select();
+          input.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+          // Copiar al portapapeles
+          navigator.clipboard.writeText(input.value)
+              .then(() => {
+                  alert("¡Copiado al portapapeles!");
+              })
+              .catch(err => {
+                  console.error("Error al copiar: ", err);
+              });
+      });
+  </script>          
 </body>
 </html>
