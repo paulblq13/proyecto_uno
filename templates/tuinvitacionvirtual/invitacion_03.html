@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación de Cumpleaños</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Meta etiquetas Open Graph -->
+    <meta property="og:title" content="Invitación de Sofia">
+    <meta property="og:description" content="Estás invitado a los XV de Sofia">
+    <meta property="og:image" content="https://res.cloudinary.com/hchhzysmh/image/upload/v1732198529/fotos/muestra/n4bpa6343rqzvn9z6qzp.jpg">
+    <meta property="og:url" content="https://app-proyectouno-a389ad91101a.herokuapp.com/invitacion03/">
+    <meta property="og:type" content="website">
+
+    <!-- Para asegurar que funcione en WhatsApp -->
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- FIN Meta etiquetas Open Graph -->      
 <style>
     /* ================FORMATO GENERAL ===================================*/
 
@@ -501,7 +512,7 @@
 }
 /* =======================FIN GALERIA FOTOS ============================== */
 .fondo03 {
-    background-color: black;
+    background-color: #3f082a;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -601,7 +612,7 @@
                   });
               });
           </script>  
-          <img src="{% static 'img/logo15v2.png' %}" aria-label="Serena XV" style="width: 150px; margin-top:10px;">  
+          <img src="{% static 'img/logo15v3.png' %}" aria-label="Serena XV" style="width: 150px; margin-top:10px;">  
     </div>        
   <!-- fin Barra superior -->
     <div style="background-color: black; position: relative; overflow: hidden;">    
@@ -613,7 +624,7 @@
                         <svg width="80" height="3">
                             <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
                         </svg>
-                        14-12-2024
+                        15-12-2024
                         <svg width="80" height="3">
                             <path d="M0,1.5 L80.79399747,1.5" style="fill:none;stroke:#ffffff;stroke-width:3px;stroke-linecap:butt;"></path>
                         </svg>
@@ -875,8 +886,8 @@
         <!-- Texto -->
         <div class="contenedor_div" style="top: 30%;">
             <p><h1>Una gran noche junto a vos</h1></p>
-            <a href="https://www.instagram.com/explore/tags/LosXVdeSerena/" target="_blank">
-                <h1 class="textoneon" style="font-size: 40px;">#LosXVdeSerena</h1>
+            <a href="https://www.instagram.com/explore/tags/LosXVdeSofia/" target="_blank">
+                <h1 class="textoneon" style="font-size: 40px;">#LosXVdeSofia</h1>
                 <br>
                 <img src="{% static 'img/logo_insta.png' %}" style="height: 120px;">
             </a>
@@ -922,7 +933,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         // Fecha objetivo para la cuenta regresiva
-        const targetDate = new Date('December 14, 2024 00:00:00').getTime();
+        const targetDate = new Date('December 15, 2024 00:00:00').getTime();
     
         // Actualiza la cuenta regresiva cada segundo
         const countdown = setInterval(function() {
@@ -947,7 +958,7 @@
             // Si la cuenta regresiva ha terminado, muestra un mensaje
             if (distance < 0) {
                 clearInterval(countdown);
-                document.getElementById('countdown').innerHTML = "¡Feliz Fiesta de 15 Años!";
+                document.getElementById('countdown').innerHTML = "¡Felices XV!";
             }
         }, 1000);
     });
