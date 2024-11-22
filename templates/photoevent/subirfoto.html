@@ -23,6 +23,9 @@
                                     {% csrf_token %}
                                     <p>Mensaje</p>
                                     <p>{{ form.mensaje }}</p>
+                                    <p>
+                                        <span id="contador">0</span>/30 caracteres
+                                      </p>
                                     <p>Sacar SELFI</p>
                                     <p>{{ form.imagen }}</p>
                                     <button type="submit" class="btn btn-primary btn-icon-split" id="btnGuardar">
@@ -55,6 +58,21 @@
       });
     });
   </script>
+
+  <script>
+    function actualizarContador(textarea) {
+      const contador = document.getElementById("contador");
+      contador.textContent = textarea.value.length;
+    }
+  
+    // Para inicializar el contador si el campo ya tiene texto
+    document.addEventListener("DOMContentLoaded", function () {
+      const textarea = document.querySelector("textarea");
+      if (textarea) {
+        actualizarContador(textarea);
+      }
+    });
+  </script>  
 {% endblock main %}
 
 

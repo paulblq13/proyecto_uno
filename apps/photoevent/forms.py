@@ -12,7 +12,9 @@ class FotoForm(forms.ModelForm):
                 'placeholder': 'Escribe tu mensaje aquí...',
                 'rows': 4,
                 'cols': 40,
-                'class': 'form-control'
+                'class': 'form-control',
+                'maxlength': 30,
+                'oninput': 'actualizarContador(this)'                
             }),
             'imagen': forms.FileInput(attrs={
                 'class': 'form-control',
