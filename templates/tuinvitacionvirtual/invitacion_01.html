@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invitación de Sere</title>
-
+<link rel="icon" href="{% static 'invitacion.ico' %}" type="image/x-icon">
     <!-- Meta etiquetas Open Graph -->
     <meta property="og:title" content="Invitación de Sere">
     <meta property="og:description" content="Estás invitado a los XV de Sere">
@@ -593,20 +593,7 @@ align-items: center; /* Centra el contenido verticalmente */
       <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
     </div>
   </div>
-  <div class="fondo03">
-    <div>
-        <div class="galeria-fotos fotos_invisible">
-          <img class="fade-in" src="{% static 'img/imagen1.jpg' %}" alt="First slide">
-          <img class="fade-in" src="{% static 'img/imagen2.jpg' %}" alt="First slide">
-          <img class="fade-in" src="{% static 'img/imagen3.jpg' %}" alt="First slide">
-        </div>
-      </div>
-  </div>
-  <div  style="position: relative;">
-    <div class="imagen-superpuesta">
-      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
-    </div>
-  </div>
+
   <div class="fondo04">
       <p style="text-align: center;"><span class="estilo5" style="font-size: 40px;">🎉Detalles de la fiesta</span></p><br>
       <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
@@ -635,9 +622,9 @@ align-items: center; /* Centra el contenido verticalmente */
     <div class="contenedor-centrado">
     <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
     <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
-    <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia enviame un Whatsapp y serás agregado a mi lista</span></p>
+    <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia hacé click, poné tu nombre y serás agregado a mi lista</span></p>
     <p style="text-align: center;margin-top: 50px;"><span class="">
-      <a class="btn boton-blanco" href="https://api.whatsapp.com/send?phone=5493884159299&text=Confirmo%20mi%20asistencia%20al%20Cumple%20de%20Sere%F0%9F%91%8D" target="_blank">Confirmar</a></span></p>
+      <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#confirmarModal">Confirmar Asistencia</button></span></p>
     </div>
   </div>
   <div  style="position: relative;">
@@ -649,8 +636,8 @@ align-items: center; /* Centra el contenido verticalmente */
     <div class="contenedor-centrado">
       <p style="text-align: center;"><span class="adlery">Regalo</span></p>
       <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/regalo_rosa.png' %}"></span></p>
-      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Podés enviar tu regalo de forma digital
-        serán recibidos y agreadecidos!
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Si querés podés enviar tu regalo de forma digital
+        serán recibidos y agradecidos!
       </span></p>
       <p style="text-align: center;margin-top: 50px;"><span class="">
         <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#regaloModal">Enviar Regalo</button></span></p>
@@ -737,7 +724,7 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación para disfrutar al 100% 🌮​ y no perderte nada de esa noche especial ☺️</p>
+                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación <b>obligatoriamente </b>para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
                   <p>Regulá tu volumen y comencemos!</p>
               </div>
               <div class="modal-footer justify-content-center">
@@ -756,9 +743,10 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Envía tu regalo de forma virtual! al siguiente Alias:</p>
+                  <p>Podés enviar tu regalo de forma virtual! al siguiente Alias:</p>
                   <p><b><input id="copyInput" value="serena.xd" readonly style="cursor: pointer;"></b></p>
-                  <p>(A nombre de Vilca Paul) ☺️</p>
+                  <p>(A nombre de Vilca Paul | Brubank) ☺️</p>
+                  <p> WhatsApp: <a href="https://api.whatsapp.com/send?phone=5493884159299" target="_blank">3884159299</a></p>
               </div>
               <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
@@ -788,13 +776,37 @@ align-items: center; /* Centra el contenido verticalmente */
               </div>
           </div>
       </div>
+    </div>    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Confirmar asistencia!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b>OPCIÓN 1: Estamos armando la lista de invitados, completa tus datos 👥​</b>
+                <div class="iframe-container">
+                  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdao6GkHW0DJFAHqUPcTx42aM8zBr_5dUMBEOBl7vbRYyTmzw/viewform?embedded=true" width="640" height="585" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+              </div>
+              <br>
+              <b>OPCIÓN 2:</b> <br>
+              Si tenes problemas para completar el formulario podes enviar un whatsapp <a href="https://api.whatsapp.com/send?phone=5493884159299&text=Confirmo%20mi%20asistencia%20al%20Cumple%20de%20Sere%F0%9F%91%8D%20mi%20nombre%20completo%20es:%20" target="_blank">aquí (3884159299)</a>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+              </div>
+          </div>
+      </div>
     </div>      
 
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       // Fecha objetivo para la cuenta regresiva
-      const targetDate = new Date('December 14, 2024 00:00:00').getTime();
+      const targetDate = new Date('December 14, 2024 23:00:00').getTime();
   
       // Actualiza la cuenta regresiva cada segundo
       const countdown = setInterval(function() {
@@ -824,22 +836,7 @@ align-items: center; /* Centra el contenido verticalmente */
       }, 1000);
   });
 
-   //Aparecer imagenes
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const elements = document.querySelectorAll('.fotos_invisible');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target); // Deja de observar una vez que el efecto se haya aplicado
-            }
-        });
-    }, { threshold: 0.1 }); // El 10% del elemento debe estar visible para activarse
-
-    elements.forEach(element => observer.observe(element));
-});  
 
 
     // Detecta el scroll y cambia el color de la barra
@@ -874,7 +871,7 @@ align-items: center; /* Centra el contenido verticalmente */
           // Copiar al portapapeles
           navigator.clipboard.writeText(input.value)
               .then(() => {
-                  alert("¡Copiado al portapapeles!");
+                  alert("¡Copiado!");
               })
               .catch(err => {
                   console.error("Error al copiar: ", err);

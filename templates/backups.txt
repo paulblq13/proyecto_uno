@@ -115,3 +115,39 @@ def actualizar_ultima_foto(request):
         return JsonResponse({'status': 'success'})
     
     return JsonResponse({'status': 'failed'})  
+
+
+
+FOTOS INVITACION 01
+
+<div class="fondo03">
+    <div>
+        <div class="galeria-fotos fotos_invisible">
+          <img class="fade-in" src="{% static 'img/imagen1.jpg' %}" alt="First slide">
+          <img class="fade-in" src="{% static 'img/imagen2.jpg' %}" alt="First slide">
+          <img class="fade-in" src="{% static 'img/imagen3.jpg' %}" alt="First slide">
+        </div>
+      </div>
+  </div>
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+
+  //Aparecer imagenes
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.fotos_invisible');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target); // Deja de observar una vez que el efecto se haya aplicado
+            }
+        });
+    }, { threshold: 0.1 }); // El 10% del elemento debe estar visible para activarse
+
+    elements.forEach(element => observer.observe(element));
+});  
