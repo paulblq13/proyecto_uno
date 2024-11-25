@@ -595,7 +595,7 @@ align-items: center; /* Centra el contenido verticalmente */
   </div>
 
   <div class="fondo04">
-      <p style="text-align: center;"><span class="estilo5" style="font-size: 40px;">🎉Detalles de la fiesta</span></p><br>
+      <p style="text-align: center;"><span class="estilo5" style="font-size: 35px;">🎉Detalles de la fiesta</span></p><br>
       <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
       </span></p>
       <br>
@@ -618,20 +618,6 @@ align-items: center; /* Centra el contenido verticalmente */
     </div>
   </div>
 
-  <div class="fondo05" style="height: 100%;">
-    <div class="contenedor-centrado">
-    <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
-    <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
-    <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia hacé click, poné tu nombre y serás agregado a mi lista</span></p>
-    <p style="text-align: center;margin-top: 50px;"><span class="">
-      <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#confirmarModal">Confirmar Asistencia</button></span></p>
-    </div>
-  </div>
-  <div  style="position: relative;">
-    <div class="imagen-superpuesta">
-      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
-    </div>
-  </div>
   <div class="fondo05">
     <div class="contenedor-centrado">
       <p style="text-align: center;"><span class="adlery">Regalo</span></p>
@@ -701,6 +687,24 @@ align-items: center; /* Centra el contenido verticalmente */
       </div>
     </div>
 
+    <div class="fondo05" style="height: 100%;">
+      <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
+      <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia, completá tus datos y serás agregado a mi lista
+        <br>
+      Horario de la fiesta: 14/12/24 de 23:00 a 5:00 horas
+      </span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#confirmarModal">Confirmar Asistencia</button></span></p>
+      </div>
+    </div>
+    <div  style="position: relative;">
+      <div class="imagen-superpuesta">
+        <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+      </div>
+    </div>    
+
     <div class="fondo02">
       <div class="contenedor-centrado">
         <p style="text-align: center;"><span class="adlery">Una gran noche junto a vos</span></p>
@@ -724,7 +728,7 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación <b>obligatoriamente </b>para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
+                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación <b>obligatoriamente hasta el 27/11/2024</b> para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
                   <p>Regulá tu volumen y comencemos!</p>
               </div>
               <div class="modal-footer justify-content-center">
@@ -831,7 +835,8 @@ align-items: center; /* Centra el contenido verticalmente */
           // Si la cuenta regresiva ha terminado, muestra un mensaje
           if (distance < 0) {
               clearInterval(countdown);
-              document.getElementById('countdown').innerHTML = "¡Feliz Fiesta de 15 Años!";
+              document.getElementById('countdown').innerHTML = 
+              '<a style="color: white;" href="{% url 'subir_foto' cod_evento=123456 %}" target="_blank">¡Comenzó la fiesta! <br> Dejá tu foto y mensaje!</a>';
           }
       }, 1000);
   });

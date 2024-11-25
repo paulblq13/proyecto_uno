@@ -13,7 +13,7 @@ class FotoForm(forms.ModelForm):
                 'rows': 4,
                 'cols': 40,
                 'class': 'form-control',
-                'maxlength': 30,
+                'maxlength': 80,
                 'oninput': 'actualizarContador(this)'                
             }),
             'imagen': forms.FileInput(attrs={
