@@ -68,7 +68,7 @@ body, html {
 /* ================FORMATO GENERAL ===================================*/
 
 .fondo01 {
-    background-image: url('https://res.cloudinary.com/hchhzysmh/image/upload/v1732545416/fotos/serena/yb3klzyqb5fufcrlahck.png'); /* Cambia a la ruta de tu imagen */
+    background-image: url('https://res.cloudinary.com/hchhzysmh/image/upload/v1732588061/fotos/serena/ll2fleymejdonlhnedqe.png'); /* Cambia a la ruta de tu imagen */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -258,10 +258,12 @@ align-items: center; /* Centra el contenido verticalmente */
 
 /* =======================GALERIA FOTOS ============================== */
 .galeria-fotos {
-    display: grid;
     grid-template-columns: repeat(1, 1fr); /* Por defecto, una foto por fila en pantallas pequeñas */
     gap: 10px;
     padding: 10px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */    
 }
 
 .galeria-fotos img {
@@ -554,10 +556,6 @@ align-items: center; /* Centra el contenido verticalmente */
       <img src="{% static 'img/corazones.gif' %}">
     </div>
       <div class="content">          
-        <span class="estilo1 contorno">14/12/24</span>
-          <p><span class="estilo2 contorno" style="font-size: 30px;">SERENA</span></p>
-      <p><span class="estilo3">Mis 15 años</span></p>
-      <p dir="ltr" class="estilo2 contorno">"Te espero para compartir la alegría de esa noche que será mágica, única y la mejor"</span></p>   
     </div>
         <!-- Flecha -->
         <div class="flecha-superpuesta">
@@ -565,6 +563,36 @@ align-items: center; /* Centra el contenido verticalmente */
         </div>
   </div>
 
+
+  <div class="fondo03">
+    <div>
+        <div class="galeria-fotos fotos_invisible">
+          <img class="fade-in" src="https://res.cloudinary.com/hchhzysmh/image/upload/v1732588072/fotos/serena/ik4g2qsh9z8xfhcs38vx.png" alt="First slide">
+        </div>
+      </div>
+  </div>
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+<script>
+  //Aparecer imagenes
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.fotos_invisible');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target); // Deja de observar una vez que el efecto se haya aplicado
+            }
+        });
+    }, { threshold: 0.1 }); // El 10% del elemento debe estar visible para activarse
+
+    elements.forEach(element => observer.observe(element));
+});   
+</script>
   <div class="fondo02"> 
     <div class="content">       
       <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p><br>     
