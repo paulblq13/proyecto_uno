@@ -595,7 +595,8 @@ align-items: center; /* Centra el contenido verticalmente */
 </script>
   <div class="fondo02"> 
     <div class="content">       
-      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p><br>     
+      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p>    
+      <p style="text-align: center;"><span class="estilo3" style="">PARA LA FIESTA🎉</span></p><br>     
         <div id="countdown" class="countdown-container">
             <div class="time-box">
                 <span id="days"></span>
@@ -623,7 +624,7 @@ align-items: center; /* Centra el contenido verticalmente */
   </div>
 
   <div class="fondo04">
-      <p style="text-align: center;"><span class="estilo5" style="font-size: 35px;">🎉Detalles de la fiesta</span></p><br>
+      <p style="text-align: center;"><span class="estilo5" style="font-size: 35px;">Detalles de la fiesta</span></p><br>
       <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
       </span></p>
       <br>
@@ -656,6 +657,7 @@ align-items: center; /* Centra el contenido verticalmente */
       </span></p>
     </div>      
   </div>  
+  
   <div class="fondo05">
     <div class="contenedor-centrado">
       <p style="text-align: center;"><span class="adlery">Regalo</span></p>
@@ -768,8 +770,14 @@ align-items: center; /* Centra el contenido verticalmente */
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación <b>obligatoriamente hasta el 27/11/2024</b> para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
-                  <p>Regulá tu volumen y comencemos!</p>
+                  <p>Te invitamos a descubrir algo especial. Recuerda confirmar esta invitación <b>obligatoriamente hasta el 30/11/2024</b> para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
+                  <div id="contador">
+                    <small>
+                      <p>Quedan <span id="dias"></span> día/s <span id="horas"></span> hora/s <span id="minutos"></span> minuto/s y <span id="segundos"></span> segundo/s para confirmar⏱️​</p>
+                    </small>
+                  </div>
+                  <br>
+                    <p>Regulá tu volumen y comencemos!</p>
               </div>
               <div class="modal-footer justify-content-center">
                   <button id="soundOnImage" type="button" class="btn btn-rosa" data-bs-dismiss="modal">Ver invitación</button>
@@ -793,7 +801,7 @@ align-items: center; /* Centra el contenido verticalmente */
                   <p> WhatsApp: <a href="https://api.whatsapp.com/send?phone=5493883345932" target="_blank">3883345932</a></p>
               </div>
               <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
               </div>
           </div>
       </div>
@@ -816,7 +824,7 @@ align-items: center; /* Centra el contenido verticalmente */
 
               </div>
               <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
               </div>
           </div>
       </div>
@@ -840,7 +848,7 @@ align-items: center; /* Centra el contenido verticalmente */
               Si tenes problemas para completar el formulario podes enviar un whatsapp <a href="https://api.whatsapp.com/send?phone=5493883345932&text=Confirmo%20mi%20asistencia%20al%20Cumple%20de%20Sere%F0%9F%91%8D%20mi%20nombre%20completo%20es:%20" target="_blank">aquí (3883345932)</a>
               </div>
               <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Hecho</button>
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
               </div>
           </div>
       </div>
@@ -848,6 +856,8 @@ align-items: center; /* Centra el contenido verticalmente */
 
 
 <script>
+
+  //CONTADOR FIESTA
   document.addEventListener('DOMContentLoaded', function() {
       // Fecha objetivo para la cuenta regresiva
       const targetDate = new Date('December 14, 2024 22:00:00').getTime();
@@ -881,6 +891,39 @@ align-items: center; /* Centra el contenido verticalmente */
       }, 1000);
   });
 
+  //CONTADOR CONFIRMACIÓN
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fecha objetivo para la cuenta regresiva
+    const targetDate = new Date('November 30, 2024 23:59:59').getTime();
+
+    // Actualiza la cuenta regresiva cada segundo
+    const countdown = setInterval(function() {
+        // Obtén la fecha y hora actual
+        const now = new Date().getTime();
+
+        // Calcula la diferencia entre la fecha objetivo y la fecha actual
+        const distance = targetDate - now;
+
+        // Calcula el tiempo para días, horas, minutos y segundos
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Muestra el resultado en los elementos correspondientes
+        document.getElementById('dias').innerText = days;
+        document.getElementById('horas').innerText = hours;
+        document.getElementById('minutos').innerText = minutes;
+        document.getElementById('segundos').innerText = seconds;
+
+        // Si la cuenta regresiva ha terminado, muestra un mensaje
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.getElementById('contador').innerHTML = 
+            '<small><a style="color: black;" https://api.whatsapp.com/send?phone=5493884159299 target="_blank">(Finalizó el tiempo para confirmar, comunicate al 3884159299 si vas a asistir)</a></small><br>';
+        }
+    }, 1000);
+});
 
 
 
