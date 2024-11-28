@@ -22,7 +22,10 @@ urlpatterns = [
     path('photoevent/lista/', photoeventViews.PhotoEventListaView.as_view(), name='photoevent-lista'),
     path('photoevent/agregar/', photoeventViews.addEventoView.as_view(), name="photoevent-agregar"),     
     path('photoevent/modificar/<int:pk>/', photoeventViews.updateEventoView.as_view(), name="photoevent-modificar"),   
-    path('photoevent/detalle/<int:pk>/', photoeventViews.detallesEventoView.as_view(), name="photoevent-detalle"),      
+    path('photoevent/detalle/<int:pk>/', photoeventViews.detallesEventoView.as_view(), name="photoevent-detalle"),     
+
+    path('galeria2/<int:cod_evento>/<int:index>/', photoeventViews.LiveGaleriaView2.as_view(), name='galeria2'),
+    path('galeria2/<int:cod_evento>/', photoeventViews.LiveGaleriaView2.as_view(), name='galeria2'),     
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHOTO EVENT</title>
+    <style>
+/* ===================CONFIGURACION PANTALLA GRAL */        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }     
+/* ===================FIN CONFIGURACION PANTALLA GRAL */ 
+
+/* ===================IMAGEN PREDETERMINADA */
+        .predeterminada {
+            width: 100%;
+            height: 100vh;
+            opacity: 0; /* Comienza invisible */
+            transition: opacity 0.5s ease-in; /* Transición suave de opacidad */              
+        }
+/* ===================FIN IMAGEN PREDETERMINADA */
+
+/* ===================FONDO VIDEO */
+        .video-background {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Tamaño completo para el segundo video */
+            overflow: hidden;
+        } 
+
+        .video-background video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }    
+/* ===================FIN FONDO VIDEO */
+
+/* ===================OBJETO ENCIMA DEL VIDEO */
+        .objeto-overlay {
+            position: absolute;
+            bottom: 100%; /* Ajusta el valor según la distancia deseada desde el borde inferior */
+            left: 50%;
+            transform: translateX(-50%); /* Centra el contenido horizontalmente */
+            text-align: center;
+            width: 100%;
+        }                
+/* ===================FIN OBJETO ENCIMA DEL VIDEO */   
+/* ===================GELERIA APROBADA */
+        .galeria-aprobada {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            position: absolute;
+        } 
+
+        .foto {
+            height: 95%; /* Ocupa el alto de la pantalla */
+            width: auto; /* Ajusta el ancho de manera proporcional */
+            border-radius: 10px; /* Bordes redondeados */
+            border: 10px solid white; /* Marco blanco alrededor de la imagen */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombras opcionales para resaltar */
+
+            opacity: 0; /* Comienza invisible */
+            transition: opacity 1.5s ease-in; /* Transición suave de opacidad */      
+        }
+
+/* ===================FIN GELERIA APROBADA */     
+
+/* ===================EFECTO MOSTRAR FOTO */  
+        .mostrar {
+            opacity: 1; /* Aparece cuando se le agrega la clase 'mostrar' */
+        }
+/* ===================FIN EFECTO MOSTRAR FOTO */   
+
+/* ===================MENSAJE */
+        .mensaje {
+            position: absolute; /* Posicionamiento absoluto para superponer */
+            bottom: 50px; /* Espacio desde la parte inferior */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translateX(-50%); /* Mover a la izquierda para centrar */
+            color: #fff; /* Color blanco para el texto */
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+            padding: 15px 20px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            font-size: 40px; /* Tamaño de fuente mayor */
+            z-index: 10; /* Asegurarse de que el mensaje esté por encima de la imagen */
+            text-align: center; /* Centrar el texto */
+            font-family: 'Dancing Script', cursive; /* Fuente elegante (ejemplo) */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
+        }
+/* ===================FIN MENSAJE */
+
+/* ===================BUTTON */
+.boton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    font-size: 10px;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    color: #fff; /* Color blanco para el texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+/* ===================FIN BUTTON */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div>
+
+        {% if mostrar_predeterminada %}
+        <div>
+            <img class="predeterminada" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada">
+            <button class="boton" id="play-button" onclick="redirectToGaleria()">
+            Play
+            </button>
+
+            <script>
+                function redirectToGaleria() {
+                    window.location.href = "{% url 'galeria2' codigo_evento siguiente %}";
+                }
+            </script>                    
+        </div>     
+            <script>
+                setTimeout(function() {
+                    // Redirigir a la URL sin ID
+                    window.location.href = "{% url 'galeria2' codigo_evento %}";
+                }, {{ foto_transicion }}); // Espera de 10 segundos antes de cambiar
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+                    setTimeout(function() {
+                        document.querySelector(".predeterminada").classList.add("mostrar");
+                    }, 100); // 100 ms de retraso para que se vea el efecto
+                });
+            </script>            
+            {% if mostrar_predeterminada_salir %}
+                    <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "{% url 'galeria2' codigo_evento siguiente_index  %}";
+                        }, 5000); // 10 segundos para la siguiente foto
+                    </script>            
+            {% endif %}        
+        {% else %}
+            {% if foto_actual %}
+                <!-- video -->
+                <div class="video-background">
+                    <video 
+                        src="{% static fondo_live %}" 
+                        playsinline 
+                        preload="auto" 
+                        muted 
+                        loop 
+                        autoplay
+                    >
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                        <div class="objeto-overlay" style="top: 0%;">
+                            <div class="galeria-aprobada">
+                                    <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                                    <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
+                            </div> 
+                            <button class="boton" id="pause-button" onclick="redirectToGaleria()">Pausar</button>
+                            <script>
+                                function redirectToGaleria() {
+                                    window.location.href = "{% url 'galeria2' codigo_evento %}";
+                                }
+                            </script>                            
+                        </div>     
+                        
+                </div>
+                {% if ultima_foto %}
+                    <!-- Mostrar última foto por 10 segundos antes de redirigir a la imagen predeterminada -->
+                    <script>
+                        setTimeout(function() {
+                            // Redirigir a la URL sin ID
+                            window.location.href = "{% url 'galeria2' codigo_evento %}";
+                        }, {{ foto_transicion }}); // Espera de 10 segundos antes de cambiar
+                    </script>
+                {% else %}
+                    <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "{% url 'galeria2' codigo_evento siguiente_index  %}";
+                        }, {{ foto_transicion }}); // 10 segundos para la siguiente foto
+                    </script>
+                {% endif %}          
+            {% endif %}
+        {% endif %}
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+            setTimeout(function() {
+                document.querySelector(".foto").classList.add("mostrar");
+            }, 100); // 100 ms de retraso para que se vea el efecto
+        });
+    </script>
+</body>
+</html>
+
+
+
