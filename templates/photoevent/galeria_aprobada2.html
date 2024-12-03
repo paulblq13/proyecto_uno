@@ -125,99 +125,28 @@
 <body>
     <div>
 
-        {% if mostrar_predeterminada %}
-        <!-- Mostrar la imagen predeterminada -->
-        <div>
-            <img class="predeterminada" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada">
-            <button class="boton" id="play-button" onclick="redirectToGaleria()">
-                Play
-            </button>
-
-            <script>
-                function redirectToGaleria() {
-                    // Si 'siguiente_index' está disponible, redirigimos a la siguiente foto
-                    const siguienteIndex = "{{ siguiente_index }}";
-                    if (siguienteIndex) {
-                        window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
-                    } else {
-                        window.location.href = "{% url 'galeria2' codigo_evento %}";
-                    }
+        <h1>Galería</h1>
+        <p>Código del evento: {{ codigo_evento }}</p>
+        <p>Índice siguiente: {{ index_inicial }}</p>
+        <p>Índice actual: {{ index }}</p>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const cod_evento = {{ codigo_evento }};
+                let index = {{ index|default:0 }};
+                alert(index);
+                if (index == 0){
+                    setTimeout(function() {
+                        window.location.href = "{% url 'galeria2_qr' codigo_evento %}";
+                    }, {{ foto_transicion }});
+                }else{
+                    setTimeout(function() {
+                        window.location.href = "{% url 'galeria2' codigo_evento index %}";
+                    }, 5000);
                 }
-            </script>
-
-            <script>
-                setTimeout(function() {
-                    window.location.href = "{% url 'galeria2' codigo_evento %}";
-                }, {{ foto_transicion }}); // Espera de {{ foto_transicion }} milisegundos antes de cambiar
-            </script>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    setTimeout(function() {
-                        document.querySelector(".predeterminada").classList.add("mostrar");
-                    }, 100); // Retardo para mostrar la imagen
-                });
-            </script>
-            
-        </div>
-
-    {% else %}
-        <!-- Si no es la foto predeterminada, mostrar la foto actual -->
-        {% if foto_actual %}
-            <div class="video-background">
-                <video 
-                    src="{{ fondo_live.url }}" 
-                    playsinline 
-                    preload="auto" 
-                    muted 
-                    loop 
-                    autoplay
-                >
-                    Tu navegador no soporta el elemento de video.
-                </video>
-                
-                <div class="objeto-overlay">
-                    <div class="galeria-aprobada">
-                        <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
-                        <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
-                    </div>
-                    <button class="boton" id="pause-button" onclick="redirectToGaleria()">Pausar</button>
-                    <script>
-                        function redirectToGaleria() {
-                            window.location.href = "{% url 'galeria2' codigo_evento %}";
-                        }
-                    </script>
-                </div>
-            </div>
-
-            {% if ultima_foto %}
-                <!-- Si es la última foto, redirigir después de {{ foto_transicion }} milisegundos -->
-                <script>
-                    setTimeout(function() {
-                        window.location.href = "{% url 'galeria2' codigo_evento %}";
-                    }, {{ foto_transicion }}); // Redirige después de {{ foto_transicion }} milisegundos
-                </script>
-            {% else %}
-                <!-- Si no es la última foto, avanzar automáticamente a la siguiente -->
-                <script>
-                    setTimeout(function() {
-                        window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
-                    }, {{ foto_transicion }}); // 10 segundos para la siguiente foto
-                </script>
-            {% endif %}
-        {% endif %}
-    {% endif %}
+            });
+        </script>
     </div>
 
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Agrega la clase 'mostrar' a la imagen después de un breve retraso
-            setTimeout(function() {
-                document.querySelector(".foto").classList.add("mostrar");
-            }, 100); // 100 ms de retraso para que se vea el efecto
-        });
-    </script>
 </body>
 </html>
 

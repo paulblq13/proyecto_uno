@@ -143,7 +143,6 @@ class LiveGaleriaView(ListView):
         #==================================SI LA URL ESTÁ VACIA
         if foto_index is None: 
             # Si no hay id, muestra la imagen predeterminada
-           
             context['mostrar_predeterminada'] = True
             context['foto_actual'] = None
             # Buscar si existe una nueva foto aprobada con ID mayor que la bandera
@@ -217,69 +216,79 @@ class LiveGaleriaView2(ListView):
     context_object_name = 'foto'
 
     def get_queryset(self):
-        # Obtenemos el evento basado en 'cod_evento'
         cod_evento = self.kwargs.get('cod_evento')
         evento = get_object_or_404(Evento, codigo_evento=cod_evento)
-        # Devolvemos las fotos aprobadas ordenadas por 'fecha_aprobado'
         return Fotos.objects.filter(estado='aprobado', id_evento=evento.id).order_by('fecha_aprobado')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        # Obtener el evento y las configuraciones relacionadas
         cod_evento = self.kwargs.get('cod_evento')
+        cod_index = self.kwargs.get('index')
+        
+        # Configuraciones del Live
         evento = get_object_or_404(Evento, codigo_evento=cod_evento)
         context['efecto_transicion'] = evento.efecto_transicion * 1000
         context['foto_transicion'] = evento.foto_transicion * 1000
         context['imagen_predeterminada'] = evento.foto_predeterminada
-        context['codigo_evento'] = evento.codigo_evento
         context['fondo_live'] = evento.fondo_live
+        context['codigo_evento'] = evento.codigo_evento
 
         # Obtener las fotos aprobadas
         fotos_aprobadas = self.get_queryset()
         fotos_aprobadas_list = list(fotos_aprobadas)
-        fotos_cantidad = len(fotos_aprobadas_list)
-        print("CANTIDAD DE FOTOS APROBADAS: " + str(len(fotos_aprobadas_list)))
+        #fotos_cantidad = len(fotos_aprobadas_list)
+        fotos_cantidad = 7
+        print("CANTIDAD DE FOTOS APROBADAS: " + str(fotos_cantidad))        
 
         # Inicializamos las sesiones si no existen
-        if 'bandera' not in self.request.session:
-            self.request.session['bandera'] = fotos_cantidad - 1 if fotos_cantidad > 0 else 0
-        if 'siguiente' not in self.request.session:
+        if fotos_cantidad == 0:
+            print("SIN FOTOS")
             self.request.session['siguiente'] = 0
+            self.request.session['bandera'] = 0
+        else:
+            print("CON FOTOS")
+            if 'bandera' not in self.request.session:
+                print("Bandera no está en la sesión")
+                self.request.session['bandera'] = fotos_cantidad - 1
+            if 'siguiente' not in self.request.session:
+                print("Siguiente no está en la sesión")
+                self.request.session['siguiente'] = 0
+            
 
+        #self.request.session['bandera'] = 0
         bandera = self.request.session['bandera']
+        #bandera=10
+        self.request.session['bandera'] = bandera
         print("BANDERA: " + str(bandera))
 
-        # Determinamos el índice de la foto actual en base a la bandera
-        foto_index = self.kwargs.get('index')
-        context['mostrar_predeterminada'] = True  # Por defecto mostrar la predeterminada
-
-        if foto_index is not None: 
-            print("Si hay un índice en la URL")
-            foto_index = int(foto_index)
-            foto_actual = fotos_aprobadas_list[foto_index] if foto_index < fotos_cantidad else None
-            context['foto_actual'] = foto_actual
-            context['mostrar_predeterminada'] = False
-            context['ultima_foto'] = foto_index == fotos_cantidad - 1
-            context['siguiente_index'] = foto_index + 1
-            self.request.session['bandera'] = bandera + 1
-            if not context['ultima_foto']:
-                self.request.session['siguiente'] = foto_index + 1  # Avanzar el índice para la siguiente foto
-        else:
-            print("Si no hay índice, mostramos la foto según la bandera")
-            if fotos_cantidad > bandera:
-                context['mostrar_predeterminada'] = False
-                foto_actual = fotos_aprobadas_list[bandera]
-                context['foto_actual'] = foto_actual
-                context['ultima_foto'] = bandera == fotos_cantidad - 1
+        # Si el index de la URL está vacio
+        if cod_index == None:
+            print("INDEX NONE")
+            cod_index = 0
+            if bandera < fotos_cantidad:
+                print("BANDERA ES MENOR A CANTIDAD DE FOTOS")
                 self.request.session['bandera'] = bandera + 1
-                if not context['ultima_foto']:
-                    self.request.session['siguiente'] = bandera + 1  # Avanzar el índice para la siguiente foto                
-
-        # Determinamos el siguiente índice para la transición
-        context['siguiente_index'] = self.request.session['siguiente'] if fotos_cantidad > 0 else None
+                cod_index=bandera + 1
+                context['index'] = cod_index
+            else:
+                print("BANDERA ES IGUAL A CANTIDAD DE FOTOS, NO SUCEDE NADA")
+                context['index'] = cod_index
+        else:
+            print("TIENE INDEX")
+            cod_index = cod_index + 1
+            if bandera >= fotos_cantidad:
+                print("bandera es igual a fotos_cantidad, ULTIMA FOTO")
+                self.request.session['bandera'] = bandera
+                cod_index = 0
+                context['index'] = cod_index
+            else:
+                print("bandera NO es igual a fotos_cantidad")
+                self.request.session['bandera'] = bandera + 1
+                context['index'] = cod_index
 
         return context
+
+        
     
 #===GALERIA DE FOTOS===
 class GaleriaFotosView(ListView):

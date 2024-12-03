@@ -25,7 +25,7 @@ urlpatterns = [
     path('photoevent/detalle/<int:pk>/', photoeventViews.detallesEventoView.as_view(), name="photoevent-detalle"),     
 
     path('galeria2/<int:cod_evento>/<int:index>/', photoeventViews.LiveGaleriaView2.as_view(), name='galeria2'),
-    path('galeria2/<int:cod_evento>/', photoeventViews.LiveGaleriaView2.as_view(), name='galeria2'),     
+    path('galeria2/<int:cod_evento>/', photoeventViews.LiveGaleriaView2.as_view(), name='galeria2_qr'),     
 ]
 
 if settings.DEBUG:
