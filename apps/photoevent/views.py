@@ -224,7 +224,7 @@ class LiveGaleriaView2(ListView):
         context = super().get_context_data(**kwargs)
         cod_evento = self.kwargs.get('cod_evento')
         cod_index = self.kwargs.get('index')
-        
+        cod_pausa=self.kwargs.get('pausa')
         # Configuraciones del Live
         evento = get_object_or_404(Evento, codigo_evento=cod_evento)
         context['efecto_transicion'] = evento.efecto_transicion * 1000
@@ -232,59 +232,108 @@ class LiveGaleriaView2(ListView):
         context['imagen_predeterminada'] = evento.foto_predeterminada
         context['fondo_live'] = evento.fondo_live
         context['codigo_evento'] = evento.codigo_evento
-
+        
+        pausa=cod_pausa
+        if pausa == "True":
+            pausa = True
+        elif pausa == "False":
+            pausa = False
+        elif pausa == "None":
+            pausa = False
+        self.request.session['pausa'] = pausa             
+        context['pausa'] = self.request.session['pausa']
+        print(f"pausa {self.request.session['pausa']}") 
+                   
         # Obtener las fotos aprobadas
         fotos_aprobadas = self.get_queryset()
         fotos_aprobadas_list = list(fotos_aprobadas)
-        #fotos_cantidad = len(fotos_aprobadas_list)
-        fotos_cantidad = 7
+        fotos_cantidad = len(fotos_aprobadas_list)
+        #fotos_cantidad = 0
+        print("=========================================================")
         print("CANTIDAD DE FOTOS APROBADAS: " + str(fotos_cantidad))        
-
         # Inicializamos las sesiones si no existen
         if fotos_cantidad == 0:
             print("SIN FOTOS")
-            self.request.session['siguiente'] = 0
             self.request.session['bandera'] = 0
         else:
             print("CON FOTOS")
             if 'bandera' not in self.request.session:
                 print("Bandera no está en la sesión")
                 self.request.session['bandera'] = fotos_cantidad - 1
-            if 'siguiente' not in self.request.session:
-                print("Siguiente no está en la sesión")
-                self.request.session['siguiente'] = 0
-            
-
         #self.request.session['bandera'] = 0
         bandera = self.request.session['bandera']
         #bandera=10
         self.request.session['bandera'] = bandera
         print("BANDERA: " + str(bandera))
-
+        
         # Si el index de la URL está vacio
         if cod_index == None:
-            print("INDEX NONE")
+            print("========INDEX NONE")
+            if bandera > fotos_cantidad:
+                bandera=fotos_cantidad
+                self.request.session['bandera'] = bandera
             cod_index = 0
-            if bandera < fotos_cantidad:
-                print("BANDERA ES MENOR A CANTIDAD DE FOTOS")
-                self.request.session['bandera'] = bandera + 1
-                cod_index=bandera + 1
+            if pausa == True:
+                print(f"PAUSA ES TRUE")
+                print(f"index: {cod_index}")
+                print(f"indice_actual: PREDETERMINADO")
+                print(f"siguiente_index: {bandera}")
                 context['index'] = cod_index
+                context['siguiente_index'] = bandera
+                context['indice_actual'] = "PREDETERMINADO"
             else:
-                print("BANDERA ES IGUAL A CANTIDAD DE FOTOS, NO SUCEDE NADA")
-                context['index'] = cod_index
+                print(f"PAUSA ES FALSE")
+                if bandera < fotos_cantidad:
+                    print(f"BANDERA ES MENOR A CANTIDAD DE FOTOS")
+                    self.request.session['bandera'] = bandera + 1
+                    cod_index=bandera + 1
+                    siguiente_index=cod_index - 1
+                    print(f"index: {cod_index}")
+                    print(f"indice_actual: PREDETERMINADO")
+                    print(f"siguiente_index: {bandera}")                
+                    context['index'] = cod_index
+                    context['siguiente_index'] = siguiente_index
+                    context['indice_actual'] = "PREDETERMINADO"
+                else:
+                    print(f"BANDERA ES IGUAL A CANTIDAD DE FOTOS, NO SUCEDE NADA")
+                    print(f"index: {cod_index}")
+                    print(f"indice_actual: PREDETERMINADO")
+                    print(f"siguiente_index: {bandera}")
+                    context['index'] = cod_index
+                    context['siguiente_index'] = bandera
+                    context['indice_actual'] = "PREDETERMINADO"
         else:
-            print("TIENE INDEX")
+            print("======TIENE INDEX")
             cod_index = cod_index + 1
             if bandera >= fotos_cantidad:
                 print("bandera es igual a fotos_cantidad, ULTIMA FOTO")
                 self.request.session['bandera'] = bandera
                 cod_index = 0
+                foto_actual = fotos_aprobadas_list[bandera - 1]
+                print(f"fotos_aprobadas_list: {fotos_aprobadas_list}")
+                print(f"foto_actual: {foto_actual.mensaje}")
+
+                print(f"index: {cod_index}")
+                print(f"siguiente_index: PREDETERMINADO")     
+                print(f"indice_actual: {bandera - 1}")             
                 context['index'] = cod_index
+                context['siguiente_index'] = bandera
+                context['indice_actual'] = bandera - 1
+                context['foto_actual'] = foto_actual
+
             else:
                 print("bandera NO es igual a fotos_cantidad")
+                foto_actual = fotos_aprobadas_list[bandera - 1]
+                print(f"fotos_aprobadas_list: {fotos_aprobadas_list}")
+                print(f"foto_actual: {foto_actual.mensaje}")                
+                print(f"index: {cod_index}")
+                print(f"siguiente_index: {bandera}")     
+                print(f"indice_actual: {bandera - 1}")                  
                 self.request.session['bandera'] = bandera + 1
                 context['index'] = cod_index
+                context['siguiente_index'] = bandera
+                context['indice_actual'] = bandera - 1
+                context['foto_actual'] = foto_actual
 
         return context
 

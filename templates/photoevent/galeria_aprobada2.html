@@ -127,8 +127,20 @@
 
         <h1>Galería</h1>
         <p>Código del evento: {{ codigo_evento }}</p>
-        <p>Índice siguiente: {{ index_inicial }}</p>
-        <p>Índice actual: {{ index }}</p>
+        <p>Índice siguiente: {{ siguiente_index }}</p>
+        <p>Índice actual: {{ indice_actual }}</p>
+        <p>Pausa: {{ pausa }}</p>
+        {% if indice_actual == "PREDETERMINADO" %}
+            FOTO PREDETERMINADO
+            <!-- <img class="" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada"> -->
+        {% else %}
+            FOTO INDEX {{ indice_actual }}
+            <img class="" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+            {{ foto_actual.mensaje }}
+        {% endif %}
+        <a href="{% url 'galeria2_qr' codigo_evento 'True' %}">pausa</a>
+
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const cod_evento = {{ codigo_evento }};
@@ -136,11 +148,11 @@
                 alert(index);
                 if (index == 0){
                     setTimeout(function() {
-                        window.location.href = "{% url 'galeria2_qr' codigo_evento %}";
+                        window.location.href = "{% url 'galeria2_qr' codigo_evento pausa %}";
                     }, {{ foto_transicion }});
                 }else{
                     setTimeout(function() {
-                        window.location.href = "{% url 'galeria2' codigo_evento index %}";
+                        window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
                     }, 5000);
                 }
             });
