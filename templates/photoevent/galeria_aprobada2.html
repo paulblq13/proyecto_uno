@@ -174,7 +174,7 @@
             }else{
                 setTimeout(function() {
                     window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
-                }, 5000);
+                }, {{ foto_transicion }});
             }
         });
     </script>    
