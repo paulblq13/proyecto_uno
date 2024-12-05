@@ -225,6 +225,7 @@ class LiveGaleriaView2(ListView):
         cod_evento = self.kwargs.get('cod_evento')
         cod_index = self.kwargs.get('index')
         cod_pausa=self.kwargs.get('pausa')
+        print(f"cod_pausa: {cod_pausa}")
         # Configuraciones del Live
         evento = get_object_or_404(Evento, codigo_evento=cod_evento)
         context['efecto_transicion'] = evento.efecto_transicion * 1000
@@ -233,16 +234,14 @@ class LiveGaleriaView2(ListView):
         context['fondo_live'] = evento.fondo_live
         context['codigo_evento'] = evento.codigo_evento
         
+        if 'pausa' not in self.request.session:
+            print("PAUSA NO ESTÁ EN LA SESION")
         pausa=cod_pausa
-        if pausa == "True":
-            pausa = True
-        elif pausa == "False":
-            pausa = False
-        elif pausa == "None":
-            pausa = False
+        if pausa == 'None':
+            pausa ='play'
         self.request.session['pausa'] = pausa             
         context['pausa'] = self.request.session['pausa']
-        print(f"pausa {self.request.session['pausa']}") 
+        print(f"pausa: {pausa}") 
                    
         # Obtener las fotos aprobadas
         fotos_aprobadas = self.get_queryset()
@@ -273,7 +272,7 @@ class LiveGaleriaView2(ListView):
                 bandera=fotos_cantidad
                 self.request.session['bandera'] = bandera
             cod_index = 0
-            if pausa == True:
+            if pausa == 'pausa':
                 print(f"PAUSA ES TRUE")
                 print(f"index: {cod_index}")
                 print(f"indice_actual: PREDETERMINADO")

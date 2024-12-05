@@ -124,41 +124,76 @@
 </head>
 <body>
     <div>
-
-        <h1>Galería</h1>
-        <p>Código del evento: {{ codigo_evento }}</p>
-        <p>Índice siguiente: {{ siguiente_index }}</p>
-        <p>Índice actual: {{ indice_actual }}</p>
-        <p>Pausa: {{ pausa }}</p>
         {% if indice_actual == "PREDETERMINADO" %}
-            FOTO PREDETERMINADO
-            <!-- <img class="" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada"> -->
+        <div>
+            <img class="predeterminada" src="{{ imagen_predeterminada.url }}" alt="Imagen Predeterminada">
+                {% if pausa == "play" %}
+                    <a  class="boton" style="text-decoration: none;" href="{% url 'galeria2_qr' codigo_evento 'pausa' %}">pausa</a>
+                {% else %}
+                    <a  class="boton" style="text-decoration: none;" href="{% url 'galeria2_qr' codigo_evento 'play' %}">play</a>
+                {% endif %}
+        </div>
         {% else %}
-            FOTO INDEX {{ indice_actual }}
-            <img class="" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
-            {{ foto_actual.mensaje }}
+                <!-- video -->
+                <div class="video-background">
+                    <video 
+                        src="{% static fondo_live %}" 
+                        playsinline 
+                        preload="auto" 
+                        muted 
+                        loop 
+                        autoplay
+                    >
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                        <div class="objeto-overlay" style="top: 0%;">
+                            <div class="galeria-aprobada">
+                                    <img class="foto" src="{{ foto_actual.imagen.url }}" alt="{{ foto_actual.mensaje }}">
+                                    <div class="mensaje"> 🎉{{ foto_actual.mensaje }}</div>
+                            </div> 
+                            <a class="boton" id="pause-button" href="{% url 'galeria2_qr' codigo_evento 'pausa' %}">pausa</a>
+                            
+                            <script>
+                                function redirectToGaleria() {
+                                    window.location.href = "{% url 'galeria' codigo_evento %}";
+                                }
+                            </script>                            
+                        </div>     
+                </div>
         {% endif %}
-        <a href="{% url 'galeria2_qr' codigo_evento 'True' %}">pausa</a>
-
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const cod_evento = {{ codigo_evento }};
-                let index = {{ index|default:0 }};
-                alert(index);
-                if (index == 0){
-                    setTimeout(function() {
-                        window.location.href = "{% url 'galeria2_qr' codigo_evento pausa %}";
-                    }, {{ foto_transicion }});
-                }else{
-                    setTimeout(function() {
-                        window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
-                    }, 5000);
-                }
-            });
-        </script>
     </div>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cod_evento = {{ codigo_evento }};
+            let index = {{ index|default:0 }};
+            //alert(index);
+            if (index == 0){
+                setTimeout(function() {
+                    window.location.href = "{% url 'galeria2_qr' codigo_evento pausa %}";
+                }, {{ foto_transicion }});
+            }else{
+                setTimeout(function() {
+                    window.location.href = "{% url 'galeria2' codigo_evento siguiente_index %}";
+                }, 5000);
+            }
+        });
+    </script>    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+            setTimeout(function() {
+                document.querySelector(".foto").classList.add("mostrar");
+            }, 100); // 100 ms de retraso para que se vea el efecto
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Agrega la clase 'mostrar' a la imagen después de un breve retraso
+            setTimeout(function() {
+                document.querySelector(".predeterminada").classList.add("mostrar");
+            }, 100); // 100 ms de retraso para que se vea el efecto
+        });
+    </script> 
 </body>
 </html>
 
