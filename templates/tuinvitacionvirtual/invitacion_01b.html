@@ -1,0 +1,967 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación de Sere</title>
+<link rel="icon" href="{% static 'invitacion.ico' %}" type="image/x-icon">
+    <!-- Meta etiquetas Open Graph -->
+    <meta property="og:title" content="Invitación de Sere">
+    <meta property="og:description" content="Estás invitado a los XV de Sere">
+    <meta property="og:image" content="https://res.cloudinary.com/hchhzysmh/image/upload/v1732762804/fotos/serena/grw4youqixlfpy8hdn7z.jpg">
+    <meta property="og:url" content="https://app-proyectouno-a389ad91101a.herokuapp.com/serexv1/">
+    <meta property="og:type" content="website">
+    <meta property="fb:app_id" content="3021337648014321"/>
+
+
+
+    <!-- Para asegurar que funcione en WhatsApp -->
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- FIN Meta etiquetas Open Graph -->    
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+/* ================TIPOS DE LETRAS ===================================*/
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');      
+
+@font-face {
+  font-family: 'Adlery Swash';
+  src: url("{% static 'fonts/Adlery_TRIAL.ttf' %}") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+font-family: 'Codec Pro';
+src: url("{% static 'fonts/CodecPro-Regular.ttf' %}") format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+.adlery {
+  font-family: 'Adlery Swash';
+  font-size: 40px;
+  color: white;
+  line-height: 1.5;
+}    
+
+.codecpro {
+font-family: 'Codec Pro';
+line-height: 1.5;
+}      
+/* ================fin TIPOS DE LETRAS ====================*/    
+/* ================FORMATO GENERAL ===================================*/
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+/* ================FORMATO GENERAL ===================================*/
+
+.fondo01 {
+    background-image: url('https://res.cloudinary.com/hchhzysmh/image/upload/v1732588061/fotos/serena/ll2fleymejdonlhnedqe.png'); /* Cambia a la ruta de tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fondo02 {
+  background-image: url('{% static 'img/fondo_abajo.png' %}'); /* Cambia a la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */  
+}   
+
+.fondo03 {
+  background-color: #ff6fa3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Opcional: espacio interno alrededor del contenido */
+  box-sizing: border-box; /* Asegura que el padding se cuente dentro del ancho total */
+}
+
+.fondo04 {
+position: relative;  
+background-color: #ffadcb;
+width: 100%;
+height: 150px;
+} 
+
+.fondo05 {
+background-image: url('{% static 'img/fondo_arriba.png' %}'); /* Cambia a la ruta de tu imagen */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+width: 100%;
+height: 100vh;
+display: flex;
+justify-content: center; /* Centra el contenido horizontalmente */
+align-items: center; /* Centra el contenido verticalmente */
+}  
+
+.fondo_playlist {
+  background-image: url('{% static 'img/fondo_playlist.png' %}'); /* Cambia a la ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  }  
+      
+.content {
+    text-align: left;
+    color: white;
+    background: rgba(0, 0, 0, 0.0); /* Opcional: Agrega un fondo semitransparente */
+    padding: 10px;
+    border-radius: 10px;
+    width: 70%;
+    max-width: 500px;
+    margin-top: -150px; /* Ajusta este valor para mover el contenido más arriba */          
+}      
+
+  
+.estilo1 {
+    color: #ff97bd;
+    font-family: 'Lobster', Arial, sans-serif;
+    font-size: 30px; /* Puedes redondear a 14px */
+    font-weight: 400;
+    vertical-align: baseline;
+}     
+
+
+.estilo2 {
+  color: #ff6fa3;
+  font-family: 'Lobster', Arial, sans-serif;
+  font-size: 30px; /* Puedes redondear a 14px */
+  font-weight: 400;
+  vertical-align: baseline;
+}     
+      
+  .estilo3 {
+    /*color: #ba9b3f;*/
+    color: white;
+    font-family: 'Lobster', Arial, sans-serif;
+    font-size: 30px; /* Puedes redondear a 14px */
+    font-weight: 400;
+    vertical-align: baseline;
+}        
+  
+.estilo4 {
+  position: absolute;
+  top: 0; /* Ajusta según necesites */
+  left: 50%; /* Mueve el contenedor al 50% del ancho de la pantalla */
+  width: 80%; /* Hace que ocupe el 80% del ancho de la pantalla */
+  z-index: 1; /* Asegura que el contenedor esté por encima de otros elementos */
+  pointer-events: none; /* Opcional: evita que la imagen bloquee la interacción con otros elementos */
+  transform: translateX(-50%); /* Centra el contenedor ajustando su posición en el eje X */
+}
+
+.estilo4 img {
+  width: 100%; /* Asegura que la imagen no se salga del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  max-width: 100%; /* Previene que la imagen se desborde del contenedor */
+}
+      
+.estilo5 {
+  color: #ffffff;
+  font-family: 'Lobster', Arial, sans-serif;
+  font-size: 30px; /* Puedes redondear a 14px */
+  font-weight: 400;
+  vertical-align: baseline;
+}  
+
+  /* DISMINUYE TAMAÑO EN CELULARES */
+  @media (max-width: 767px) {
+      .estilo1 {
+          font-size: 20px;
+      }
+      .estilo2 {
+        font-size: 20px;
+    }
+
+  }
+
+  .estilo6 {
+    font-size: 25px; /* Puedes redondear a 14px */
+    color: white;
+  }  
+  
+    /* DISMINUYE TAMAÑO EN CELULARES */
+    @media (max-width: 767px) {
+        .estilo6 {
+            font-size: 15px;
+            text-align: center;
+        }
+  
+    }  
+
+/* ==================================RELOJ */
+.countdown-container {
+  text-align: center;
+  background-color: #ff6fa3;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Lobster', cursive;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(50% - 20px);
+  margin: 5px;
+}
+
+.time-box span {
+  display: block;
+  font-size: 1.5em;
+  color: #ff66b2;
+}
+
+.time-box p {
+  margin: 0;
+  color: #ff3399;
+  font-size: 0.75em;
+}
+
+/* =======================GALERIA FOTOS ============================== */
+.galeria-fotos {
+    grid-template-columns: repeat(1, 1fr); /* Por defecto, una foto por fila en pantallas pequeñas */
+    gap: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */    
+}
+
+.galeria-fotos img {
+    width: 100%;
+    height: 600px; /* Ajusta la altura según tus preferencias */
+    object-fit: cover;
+    border-radius: 10px; /* Opcional: redondea los bordes */
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+/* Para pantallas medianas (tablets) */
+@media (min-width: 600px) {
+    .galeria-fotos {
+        grid-template-columns: repeat(2, 1fr); /* Dos fotos por fila en pantallas medianas */
+    }
+}
+
+/* Para pantallas grandes (escritorios) */
+@media (min-width: 992px) {
+    .galeria-fotos {
+        grid-template-columns: repeat(3, 1fr); /* Tres fotos por fila en pantallas grandes */
+    }
+}
+
+/* Definición de la animación fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Movimiento inicial hacia abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Posición final */
+    }
+}
+
+/* Clase para ocultar el elemento inicialmente */
+.fotos_invisible {
+    opacity: 0;
+}
+
+/* Clase que se agrega cuando el elemento está en pantalla */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+/* =======================FIN GALERIA FOTOS ============================== */
+/* =======================CONTENEDOR CENTRADO ============================== */
+.contenedor-centrado {
+  max-width: 600px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 0 20px; /* Espaciado interno a los lados */
+  text-align: center; /* Alinea el contenido al centro */
+  border: 0, 1px;
+}
+
+/* =======================IMAGENES ALADO DE LA OTRA ============================== */
+
+.music {
+  position: absolute;
+  top: 10px; /* Ajusta según necesites */
+  left: 40px; /* Ajusta según necesites */
+  z-index: 1; /* Asegura que la imagen esté por encima de otros elementos */
+}  
+
+.music0 {
+  position: absolute;
+  top: 15px; /* Ajusta según necesites */
+  left: 1px; /* Ajusta según necesites */
+  z-index: 1; /* Asegura que la imagen esté por encima de otros elementos */
+}  
+
+/* Para pantallas grandes (como en tu PC) */
+@media (min-width: 768px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 5%;
+    display: block;    
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  #musicflecha {
+    margin-top: 0px;
+    height: 20px;
+    width: auto;    
+  }
+}
+
+/* Para pantallas pequeñas (como en tu celular) */
+@media (max-width: 767px) {
+  #soundOnImage, #soundOffImage {
+    top: 2%;
+    left: 15%;
+    display: block;    
+    height: 30px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  #musicflecha {
+    margin-top: -3px;
+    height: 20px;
+    width: auto;   
+  }
+}
+/* =======================TEXTOS EFECTOS============================== */    
+.textoneon {
+    font-size: 40px; /* Puedes ajustar el tamaño de la letra */
+    color: #e3e4e5; /* Rosa neón */
+    text-shadow: 0 0 5px #e3e4e5, 
+                0 0 10px #e3e4e5, 
+                0 0 20px #e3e4e5, 
+                0 0 40px #e3e4e5, 
+                0 0 80px #e3e4e5, 
+                0 0 90px #e3e4e5, 
+                0 0 100px #e3e4e5;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Centra el texto */
+}
+
+.textblanco {
+  color: white;
+}
+
+/* =======================BARRA SUPERIOR============================== */    
+.barrasup {
+  width: 100%;
+  height:50px;
+  background-color: rgba(0, 0, 0, 0); /* Completamente transparente */
+  color: #ffadcb; /* Texto blanco */
+  padding: 0px 0;
+  text-align: center;
+  transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+  position: fixed; /* Fija la barra en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+/* =======================CONTORNO LETRAS============================== */  
+.contorno {
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+/* =======================CONTORNO LETRAS============================== */  
+/* =======================BUTTON ROSA============================== */ 
+/* Personalización del botón */
+.btn-rosa {
+    background-color: #ff6fa3;
+    color: white;
+}
+
+.btn-rosa:hover {
+    background-color: #ff598d;
+    color: white;
+}
+/* =======================BUTTON ROSA============================== */ 
+/* =======================BOTONES ============================== */
+
+.boton-blanco {
+  background-image: linear-gradient(0deg, #ed4b84, #ea7aa4);
+  border: 7px solid #ed4b84;
+  color: #fff;
+  padding: 10px 20px; /* Espaciado dentro del botón */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  transition: background-color 0.3s, color 0.3s; /* Efecto suave al pasar el ratón */
+  width: 80%;
+  text-transform: uppercase;
+  z-index: 10;
+  position: relative;
+}
+.boton-blanco:hover {
+  border: 7px solid #ffffff;
+}
+/* =======================fin BOTONES ============================== */
+/* =======================ESTRELLAS SUPERPUESTA============================== */ 
+.imagen-superpuesta {
+    position: absolute; /* La imagen se posicionará en relación al contenedor */
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar para centrar exactamente */
+    z-index: 0; /* Asegura que esté encima de otros elementos */
+}
+
+.imagen-superpuesta img {
+    max-width: 100%; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+}
+/* =======================FIN ESTRELLAS SUPERPUESTA============================== */ 
+/* =======================FLECHA HACIA ABAJO ============================== */
+.flecha-superpuesta {
+    position: absolute; /* La imagen se posicionará en relación al contenedor */
+    bottom: -20px; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar para centrar exactamente */
+    z-index: 10; /* Asegura que esté encima de otros elementos */
+}
+
+.flecha-superpuesta img {
+    max-width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+}
+/* =======================FLECHA HACIA ABAJO ============================== */
+/* =======================IFRAME============================== */
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+/* =======================FIN IFRAME============================== */
+/* =======================MODAL ALTO============================== */
+.modal-content {
+  max-height: 90vh; /* Limita la altura del modal al 90% de la altura de la ventana */
+  overflow-y: auto; /* Habilita el scroll si el contenido excede el tamaño */
+}
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Mantiene una relación de aspecto 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+</head>
+<body>
+  <!-- Barra superior -->
+  <div class="barrasup" id="barraSuperior">
+    <div class="music0">
+      <img id="musicflecha" src="{% static 'img/flechas.gif' %}" alt="Flecha" />
+    </div>  
+    <div class="music">
+      <img id="soundOnImage" src="{% static 'img/mp3.gif' %}" alt="Sonido activado" width="24" height="24" style="display: inline;">
+      <img id="soundOffImage" src="{% static 'img/mp3.gif' %}" alt="Sonido desactivado" width="24" height="24" style="display: none;">                
+    </div>       
+          <audio id="musica" src="https://res.cloudinary.com/hchhzysmh/video/upload/v1732545695/audio/g4jcrtywvotwhxvwchgf.mp3" preload="auto"></audio>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+              $(document).ready(function (){
+                  $('#soundOnImage, #soundOffImage').on('click', function(){
+                      var soundOn = $('#soundOnImage');
+                      var soundOff = $('#soundOffImage');
+                      
+                      if (soundOn.is(':visible')) {
+                          soundOn.hide();
+                          soundOff.show();
+                      } else {
+                          soundOn.show();
+                          soundOff.hide();
+                      }
+          
+                      // Aquí puedes agregar la lógica para reproducir o pausar la música
+                      var musica = $('#musica').get(0);
+                      if (musica.paused) {
+                          musica.play();
+                      } else {
+                          musica.pause();
+                      }
+                  });
+              });
+          </script>  
+
+          <img src="{% static 'img/logo15v2.png' %}" aria-label="Serena XV" style="width: 150px; margin-top:10px;">          
+  </div>
+
+  <div class="fondo01">      
+    <div class="estilo4">
+      <img src="{% static 'img/corazones.gif' %}">
+    </div>
+      <div class="content">          
+    </div>
+        <!-- Flecha -->
+        <div class="flecha-superpuesta">
+          <img src="{% static 'img/flecha02.gif' %}" alt="Fiesta">
+        </div>
+  </div>
+
+
+  <div class="fondo03">
+    <div>
+        <div class="galeria-fotos fotos_invisible">
+          <img class="fade-in" src="https://res.cloudinary.com/hchhzysmh/image/upload/v1732588072/fotos/serena/ik4g2qsh9z8xfhcs38vx.png" alt="First slide">
+        </div>
+      </div>
+  </div>
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+<script>
+  //Aparecer imagenes
+  document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.fotos_invisible');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target); // Deja de observar una vez que el efecto se haya aplicado
+            }
+        });
+    }, { threshold: 0.1 }); // El 10% del elemento debe estar visible para activarse
+
+    elements.forEach(element => observer.observe(element));
+});   
+</script>
+  <div class="fondo02"> 
+    <div class="content">       
+      <p style="text-align: center;"><span class="estilo3" style="">CUENTA REGRESIVA</span></p>    
+      <p style="text-align: center;"><span class="estilo3" style="">🎉14 de Diciembre del 2024🎉</span></p><br>     
+        <div id="countdown" class="countdown-container">
+            <div class="time-box">
+                <span id="days"></span>
+                <p>Días</p>
+            </div>
+            <div class="time-box">
+                <span id="hours"></span>
+                <p>Horas</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes"></span>
+                <p>Minutos</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds"></span>
+                <p>Segundos</p>
+            </div>
+        </div>
+    </div>  
+  </div> 
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+
+  <div class="fondo04">
+      <p style="text-align: center;"><span class="estilo5" style="font-size: 35px;">Detalles de la fiesta</span></p><br>
+      <p style="text-align: center;"><span class="codecpro estilo6" style="color: white;">Toda la info que necesitás👇
+      </span></p>
+      <br>
+  </div>
+
+  <div class="fondo02">
+    <div class="contenedor-centrado">
+      <p style="text-align: center; margin-top: -0px;"><span class="adlery">Dress Code</span></p>
+      <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/elegante.png' %}"></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6"><b>Elegante Sport</b></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">El color rosa en sus distintas tonalidades queda exclusivamente 
+        asignado para la Quinceañera
+      </span></p>
+      <a type="button" class="boton-blanco" style="text-decoration: none;" target="_blank" href="https://www.google.com/search?client=firefox-b-e&sca_esv=c744cb070de47b7e&sxsrf=ADLYWILY-4fFultPq4ZrPZiafPnmQpKEiw:1732546030693&q=sport+elegante+juvenil&uds=ADvngMjcH0KdF7qGWtwTBrP0nt7dbk2-nP0CNKeqjqD_kw1xhZf6WGfRaayNXtkqOAC933d-Zm6plHeMAcbInLxZMZ9bBIp04MnQJP37S9K4-0UFXwTdvLsVjhqC9DomuV3JpOUOoh1LT4vpAKGiK8VT6IY6RuLfAA&udm=2&sa=X&ved=2ahUKEwjErt313PeJAxUJs5UCHTQMKf8QxKsJegUIpQEQAQ&ictx=0&biw=1600&bih=747&dpr=1">Ideas</a></span></p>
+
+
+    </div>      
+  </div>   
+
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+  <div class="fondo05">
+    <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Toro inflable</span></p>
+      <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/toro.png' %}"></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Llevar ropa cómoda
+      </span></p>
+    </div>      
+  </div>  
+  
+  <div class="fondo05">
+    <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Regalo</span></p>
+      <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/regalo_rosa.png' %}"></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Si querés podés enviar tu regalo de forma digital
+        serán recibidos y agradecidos!
+      </span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#regaloModal">Enviar Regalo</button></span></p>
+    </div>      
+  </div>        
+
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+ 
+    <div class="fondo02" style="height: 100%;">
+      <div class="contenedor-centrado">
+        <p style="text-align: center; margin-top: -100px;"><span class="adlery">Lugar</span></p>
+        <p style="text-align: center; margin-top: 50px;"><span><img style="width: 200px; margin-top: 0px;" src="{% static 'img/ubicacion_rosa.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Sociedad Española (Planta Alta)<br>Dirección: Calle Belgrano N° 1102
+          <br>San Salvador de Jujuy
+        </span></p>
+        <p style="text-align: center;margin-top: 20px;"><span class="">
+          <a class="btn boton-blanco" href="https://www.google.com/maps/dir//Gral.+Belgrano+1102,+Y4600+San+Salvador+de+Jujuy,+Jujuy/@-24.1857368,-65.3907876,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x941b0f40641abb05:0xaa50a10d1c875b92!2m2!1d-65.3083895!2d-24.1856713?entry=ttu" target="_blank">Como llegar</a></span></p>
+      </div>      
+    </div>
+
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>
+
+  <div class="fondo05">
+    <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Agendar fecha</span></p>
+      <p style="text-align: center;"><span><img style="width: 250px; margin-top: 0px;" src="{% static 'img/calendario_rosa.png' %}"></span></p>
+      <p style="text-align: center;margin-top: 0px;"><span class="codecpro estilo6">Podés crear un recordatorio
+      </span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <a type="button" class="btn boton-blanco" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=N2w2NDRvanZydWZyMmJmMWhpaG9zM284djQgY2JjYmNiNzg2ODA5Y2MwMDkzZjYzN2IyMjI5YmYxNmE2N2ZlZGRjNmNiNjY2ZmVmYzg1NjY1Yjg5ZDc3ZmJiZkBn&tmsrc=cbcbcb786809cc0093f637b2229bf16a67feddc6cb666fefc85665b89d77fbbf%40group.calendar.google.com" target="_blank">Agendar</a></span></p>
+    </div>      
+  </div>        
+
+  <div  style="position: relative;">
+    <div class="imagen-superpuesta">
+      <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+    </div>
+  </div>  
+       
+    <div class="fondo_playlist">
+      <div class="contenedor-centrado" >      
+        <iframe style="border-radius:12px; margin-top: 40%; margin-left: 0px;" src="https://open.spotify.com/embed/playlist/1BI0SYbJm7xLksSg6FHp96?utm_source=generator" width="75%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div style="margin-top: 0px;">
+          <span class="adlery" style="font-size: 20px;">Ayudame a armar la playlist</span>
+          </div>
+          <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#cancionesModal">Sugerir tema</button></span></p>
+      </div>      
+    </div>    
+    
+    <div  style="position: relative;">
+      <div class="imagen-superpuesta">
+        <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+      </div>
+    </div>
+
+    <div class="fondo05" style="height: 100%;">
+      <div class="contenedor-centrado">
+      <p style="text-align: center;"><span class="adlery">Confirmar Asistencia</span></p>
+      <p style="text-align: center; margin-top: 50px;"><span><img src="{% static 'img/confirmar02.png' %}" style="width: 80px;"></span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="codecpro estilo6">Para confirmar tu asistencia, completá tus datos y serás agregado a mi lista
+        <br>
+      Horario de la fiesta: 14/12/24 de 22:00 a 5:00 horas
+      </span></p>
+      <p style="text-align: center;margin-top: 50px;"><span class="">
+        <button type="button" class="boton-blanco" data-bs-toggle="modal" data-bs-target="#confirmarModal">Confirmar Asistencia</button></span></p>
+      </div>
+    </div>
+    <div  style="position: relative;">
+      <div class="imagen-superpuesta">
+        <img src="{% static 'img/fiesta_estrellas.gif' %}" alt="Fiesta">
+      </div>
+    </div>    
+
+    <div class="fondo02">
+      <div class="contenedor-centrado">
+        <p style="text-align: center;"><span class="adlery">Una gran noche junto a vos</span></p>
+        <p style="text-align: center;"><span><img style="width: 150px; margin-top: 30px;" src="{% static 'img/whatsapprosa.png' %}"></span></p>
+        <p style="text-align: center;margin-top: 50px;"><span>
+
+          <a href="https://chat.whatsapp.com/CYhmAobAXNRA688oVJgQhY" target="_blank" style="text-decoration: none; color: #ff6fa3;">
+            <h1 class="textoneon" style="font-size: 35px;">#LosXVdeSerena</h1>
+        </a></span></p>
+        <p><a href="https://chat.whatsapp.com/CYhmAobAXNRA688oVJgQhY" target="_blank" type="button" class="boton-blanco" style="text-decoration: none;">UNIRME</a></p>
+
+        </span></p>
+      </div>      
+    </div> 
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="invitationModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Bienvenido/a a la Invitación de Sere!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <p>Te invitamos a descubrir algo especial, acompañanos para disfrutar de la fiesta 🎉​​ y no perderte esa noche especial ☺️✨​</p>
+                  <div id="contador">
+                  </div>
+                  <br>
+                    <p>Regulá tu volumen y comencemos!</p>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button id="soundOnImage" type="button" class="btn btn-rosa" data-bs-dismiss="modal">Ver invitación</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="regaloModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Regalo Virtual!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <p>Podés enviar tu regalo de forma virtual! al siguiente Alias:</p>
+                  <p><b><input id="copyInput" value="serena.xd" readonly style="cursor: pointer;"></b></p>
+                  <p>(A nombre de Vilca Paul | Brubank) ☺️</p>
+                  <p> WhatsApp: <a href="https://api.whatsapp.com/send?phone=5493883345932" target="_blank">3883345932</a></p>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+          </div>
+      </div>
+    </div>  
+
+    <!-- Modal -->
+    <div class="modal fade" id="cancionesModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Sugerir canciones!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="iframe-container">
+                  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScx1ji88WdlU8WuS6hcZ5mmucDuh6QEBGc9XHLFKFDI3EcJUw/viewform?embedded=true" width="640" height="450" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+              </div>
+
+
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+          </div>
+      </div>
+    </div>    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="confirmarModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle">¡Confirmar asistencia!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b>OPCIÓN 1: Estamos armando la lista de invitados, completa tus datos y presioná enviar (si son mas de 1 invitados repitan los pasos)👥​</b>
+                <div class="iframe-container">
+                  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdao6GkHW0DJFAHqUPcTx42aM8zBr_5dUMBEOBl7vbRYyTmzw/viewform?embedded=true" width="640" height="585" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+              </div>
+              <br>
+              <b>OPCIÓN 2:</b> <br>
+              Si tenes problemas para completar el formulario podes enviar un whatsapp <a href="https://api.whatsapp.com/send?phone=5493884159299&text=Confirmo%20mi%20asistencia%20al%20Cumple%20de%20Sere%F0%9F%91%8D%20mi%20nombre%20completo%20es:%20" target="_blank">aquí (3884159299)</a>
+              </div>
+              <div class="modal-footer justify-content-center">
+                  <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+          </div>
+      </div>
+    </div>      
+
+
+<script>
+
+  //CONTADOR FIESTA
+  document.addEventListener('DOMContentLoaded', function() {
+      // Fecha objetivo para la cuenta regresiva
+      const targetDate = new Date('December 14, 2024 22:00:00').getTime();
+  
+      // Actualiza la cuenta regresiva cada segundo
+      const countdown = setInterval(function() {
+          // Obtén la fecha y hora actual
+          const now = new Date().getTime();
+  
+          // Calcula la diferencia entre la fecha objetivo y la fecha actual
+          const distance = targetDate - now;
+  
+          // Calcula el tiempo para días, horas, minutos y segundos
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+          // Muestra el resultado en los elementos correspondientes
+          document.getElementById('days').innerText = days;
+          document.getElementById('hours').innerText = hours;
+          document.getElementById('minutes').innerText = minutes;
+          document.getElementById('seconds').innerText = seconds;
+  
+          // Si la cuenta regresiva ha terminado, muestra un mensaje
+          if (distance < 0) {
+              clearInterval(countdown);
+              document.getElementById('countdown').innerHTML = 
+              '<a style="color: white;" href="{% url 'subir_foto' cod_evento=123456 %}" target="_blank">¡Comenzó la fiesta! <br> Dejá tu foto y mensaje!</a>';
+          }
+      }, 1000);
+  });
+
+  //CONTADOR CONFIRMACIÓN
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fecha objetivo para la cuenta regresiva
+    const targetDate = new Date('December 7, 2024 23:59:59').getTime();
+
+    // Actualiza la cuenta regresiva cada segundo
+    const countdown = setInterval(function() {
+        // Obtén la fecha y hora actual
+        const now = new Date().getTime();
+
+        // Calcula la diferencia entre la fecha objetivo y la fecha actual
+        const distance = targetDate - now;
+
+        // Calcula el tiempo para días, horas, minutos y segundos
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Muestra el resultado en los elementos correspondientes
+        document.getElementById('dias').innerText = days;
+        document.getElementById('horas').innerText = hours;
+        document.getElementById('minutos').innerText = minutes;
+        document.getElementById('segundos').innerText = seconds;
+
+        // Si la cuenta regresiva ha terminado, muestra un mensaje
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.getElementById('contador').innerHTML = 
+            '<small><a style="color: black;" https://api.whatsapp.com/send?phone=5493884159299 target="_blank">(Finalizó el tiempo para confirmar, comunicate al 3884159299 si vas a asistir)</a></small><br>';
+        }
+    }, 1000);
+});
+
+
+
+    // Detecta el scroll y cambia el color de la barra
+    window.onscroll = function() { cambiarColorBarra() };
+
+    function cambiarColorBarra() {
+      var barra = document.getElementById("barraSuperior");
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        barra.style.backgroundColor = "rgba(255, 234, 242)"; // Color oscuro al hacer scroll
+      } else {
+        barra.style.backgroundColor = "rgba(0, 0, 0, 0)"; // Transparente al estar en la parte superior
+      }
+    }
+  </script>   
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mostrar el modal automáticamente al cargar la página
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = new bootstrap.Modal(document.getElementById('invitationModal'));
+            modal.show();
+        });
+    </script>  
+    <script>
+      const input = document.getElementById('copyInput');
+
+      input.addEventListener('click', () => {
+          // Seleccionar el contenido del input
+          input.select();
+          input.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+          // Copiar al portapapeles
+          navigator.clipboard.writeText(input.value)
+              .then(() => {
+                  alert("¡Copiado!");
+              })
+              .catch(err => {
+                  console.error("Error al copiar: ", err);
+              });
+      });
+  </script>          
+</body>
+</html>

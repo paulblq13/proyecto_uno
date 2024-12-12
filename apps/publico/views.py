@@ -19,7 +19,7 @@ class IndexView(TemplateView):
     template_name = 'publico/index.html'
 
 class Invitacion01View(TemplateView):
-    template_name = 'tuinvitacionvirtual/invitacion_01.html'    
+    template_name = 'tuinvitacionvirtual/invitacion_01b.html'    
 
 class Invitacion02View(TemplateView):
     template_name = 'tuinvitacionvirtual/invitacion_02.html'       
