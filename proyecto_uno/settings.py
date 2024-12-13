@@ -107,23 +107,33 @@ WSGI_APPLICATION = 'proyecto_uno.wsgi.application'
 #    }
 #}
 
+#DATABASES = {
+ #   'default': {
+  #      'ENGINE': 'django.db.backends.mysql',
+   #     'NAME': 'c7w2tkkhr9208awe',
+    #    'USER': 'rnhbxo6c3bh35zdt',
+     #   'PASSWORD': 's4vlufk1t7v3nd18',
+      #  'HOST': 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',  # Ejemplo: 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+       # 'PORT': '3306',
+        #'OPTIONS': {
+         #   'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+          #  'ssl': {
+           #     'ca': 'certs/global-bundle.pem',  # Ruta completa al archivo global-bundle.pem
+            #}
+#        }
+ #   }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'c7w2tkkhr9208awe',
-        'USER': 'rnhbxo6c3bh35zdt',
-        'PASSWORD': 's4vlufk1t7v3nd18',
-        'HOST': 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',  # Ejemplo: 'i2cpbxbi4neiupid.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'ssl': {
-                'ca': 'certs/global-bundle.pem',  # Ruta completa al archivo global-bundle.pem
-            }
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ddqch71f1ji8ej',
+        'USER': 'ucf8n45n1oi6v0',
+        'PASSWORD': 'p3129716a976993d063cda6c4b3ef0430fda0e8b371d474b0e4fa990a98aea505',
+        'HOST': 'cfls9h51f4i86c.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',       
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
