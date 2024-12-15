@@ -1,13 +1,4 @@
 {% extends 'base.html' %}
-{% block meta %}
-    <!-- Meta etiquetas Open Graph -->
-    <meta property="og:title" content="Subir foto y mensaje">
-    <meta property="og:description" content="Compartí tu selfie">
-    <meta property="og:image" content="{% static 'img/serewap.jpg' %}">
-    <meta property="og:url" content="https://app-proyectouno-a389ad91101a.herokuapp.com/subir_foto/123456/">
-    <meta property="og:type" content="website">
-    <meta property="fb:app_id" content="3021337648014321"/>
-{% endblock meta %}    
 {% block main %}
 {% if messages %}
     {% for message in messages %}
