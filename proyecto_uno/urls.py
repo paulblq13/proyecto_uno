@@ -36,6 +36,7 @@ urlpatterns = [
     path('', include('apps.noticias.urls')),
     path('', include('apps.photoevent.urls')),
     path('', include('apps.tuinvitacionvirtual.urls')),
+    path('', include('apps.local.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

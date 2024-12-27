@@ -1,3 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
+#==VIEWS
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, TemplateView
+ 
