@@ -14,6 +14,8 @@ urlpatterns = [
     #path('actualizar_ultima_foto/', photoeventViews.actualizar_ultima_foto, name='actualizar_ultima_foto'),           
     #VIEW
     #path('home', localViews.home.as_view(), name='home'),
+    path('local/home/', localViews.homeLocalView.as_view(), name="local-home"), 
+    path('local/productos/', localViews.productosView.as_view(), name="local-productos"),
 ]
 
 if settings.DEBUG:

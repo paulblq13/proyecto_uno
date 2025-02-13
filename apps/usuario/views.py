@@ -18,9 +18,9 @@ def login_user(request):
             
             # Configurar la duración de la sesión 
             if remember_me:
-                request.session.set_expiry(3600)  # 1 hora
+                request.session.set_expiry(28800)  # 1 hora
             else:
-                request.session.set_expiry(1200)  # 20 minutos
+                request.session.set_expiry(28800)  # 20 minutos
             
             print("Login OK")
             return HttpResponseRedirect(reverse('index'))
