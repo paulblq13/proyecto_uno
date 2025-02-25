@@ -15,7 +15,14 @@ urlpatterns = [
     #VIEW
     #path('home', localViews.home.as_view(), name='home'),
     path('local/home/', localViews.homeLocalView.as_view(), name="local-home"), 
-    path('local/productos/', localViews.productosView.as_view(), name="local-productos"),
+
+    path('local/lista-productos/', localViews.productosView.as_view(), name="lista-productos"),
+    path('local/lista-ventas/', localViews.listaVentasView.as_view(), name="lista-ventas"),
+
+    path('local/agregar-articulo/', localViews.addArticuloView.as_view(), name="agregar-articulo"),
+    path('local/agregar-venta/', localViews.addVentaView.as_view(), name="agregar-venta"),    
+
+    path('local/modificar-articulo/<int:pk>/', localViews.updateArticuloView.as_view(), name="modificar-articulo"),    
 ]
 
 if settings.DEBUG:

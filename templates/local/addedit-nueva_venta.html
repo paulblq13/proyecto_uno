@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div id="main-content" xmlns="http://www.w3.org/1999/html">
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i>INICIO</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'local-home' %}"><i></i>{{ nivel_anterior }}</li></a>
+                        <li class="breadcrumb-item"><i></i><b>{{titulo}}</b></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                           <h6 class="m-0 font-weight text-secondary"> {{ titulo }}: {{ descripcion_pantalla }}
+                           </h6>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+
+                            <form method="POST" id="factura_form">
+                                {% csrf_token %}
+                                <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        CLIENTE:
+                                                    </span>
+                                                </div>
+                                                 {{ form.cod_cliente }}
+                                            </div>                                  
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    TIPO FACTURA:
+                                                </span>
+                                            </div>
+                                             {{ form.tipo_factura }}
+                                        </div>           
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    N° FACTURA:
+                                                </span>
+                                            </div>
+                                             {{ form.numero_factura }}
+                                        </div>                                                
+                                        
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    FECHA Y HORA:
+                                                </span>
+                                            </div>
+                                             {{ form.fechahora }}
+                                        </div>   
+
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    ES PRESUPUESTO:
+                                                </span>
+                                            </div>
+                                             {{ form.presupuesto }}
+                                        </div>    
+
+                                        <h3>Agregar Artículos a la Venta</h3>
+                                        <form method="POST" id="detalle_form">
+                                            {% csrf_token %}
+                                            {{ form2.as_p }}  <!-- Formulario de Detalles (Artículos) -->
+                                            
+                                            <div>
+                                                <label for="articulo">Artículo:</label>
+                                                <select name="articulo" id="articulo">
+                                                    {% for articulo in articulos %}
+                                                        <option value="{{ articulo.id }}">{{ articulo.nombre }} - ${{ articulo.precio }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="cantidad">Cantidad:</label>
+                                                <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+                                            </div>
+                                            <div>
+                                                <button type="submit" id="add_articulo">Agregar Artículo</button>
+                                            </div>
+                                        </form>
+                                    
+                                        <h3>Artículos Agregados</h3>
+                                        <table id="tabla_articulos" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Artículo</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio Unitario</th>
+                                                    <th>Total</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Aquí se agregarán los artículos mediante JavaScript -->
+                                            </tbody>
+                                        </table>
+                                    
+                                        <div>
+                                            <button type="submit" id="guardar_venta">Finalizar Venta</button>
+                                        </div>
+                                    </form>
+                                    
+                                    <script>
+                                        // Aquí usas JavaScript o jQuery para agregar artículos a la tabla y actualizar el total
+                                    
+                                        document.getElementById("detalle_form").addEventListener("submit", function(event) {
+                                            event.preventDefault(); // Prevenir el envío del formulario
+                                    
+                                            // Obtener los valores del formulario
+                                            const articuloId = document.getElementById("articulo").value;
+                                            const cantidad = document.getElementById("cantidad").value;
+                                            const articuloNombre = document.querySelector("#articulo option:checked").textContent;
+                                            const precioUnitario = parseFloat(document.querySelector("#articulo option:checked").dataset.precio);
+                                    
+                                            // Calcular el total del artículo
+                                            const total = precioUnitario * cantidad;
+                                    
+                                            // Crear una nueva fila en la tabla
+                                            const tbody = document.querySelector("#tabla_articulos tbody");
+                                            const tr = document.createElement("tr");
+                                    
+                                            // Crear las celdas
+                                            tr.innerHTML = `
+                                                <td>${articuloNombre}</td>
+                                                <td>${cantidad}</td>
+                                                <td>${precioUnitario}</td>
+                                                <td>${total}</td>
+                                                <td><button class="eliminar_articulo">Eliminar</button></td>
+                                            `;
+                                    
+                                            // Agregar la fila a la tabla
+                                            tbody.appendChild(tr);
+                                    
+                                            // Limpiar los campos de entrada
+                                            document.getElementById("cantidad").value = 1;
+                                        });
+                                    
+                                        // Eliminar artículo de la tabla
+                                        document.querySelector("#tabla_articulos").addEventListener("click", function(event) {
+                                            if (event.target && event.target.classList.contains("eliminar_articulo")) {
+                                                event.target.closest("tr").remove();
+                                            }
+                                        });
+                                    </script>                                        
+                                        
+
+                                </div>
+		                        <div class="col-lg-12 col-md-12" style="display: flex; flex-direction: column; align-items: end;">
+		                            <button id="btnGuardar" type="submit" class="btn btn-primary btn-block" style="width: auto;">FINALIZAR</button>
+		                        </div>                                
+                                </div>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+{% endblock main %}
+{% block java %}
+{% include 'includes/_mayusculas.html' %}
+<script>
+    $(function(){
+        $(".select2-cliente").select2({
+theme: 'bootstrap4',
+        });
+
+        
+    });
+    </script> 
+{% endblock java %}

@@ -24,7 +24,7 @@
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             {% if user.is_authenticated %}
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'local-productos' %}">PRODUCTOS</a></h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'lista-productos' %}">PRODUCTOS</a></h6>
                             {% else %}
 
                             {% endif %}
@@ -56,7 +56,7 @@
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             {% if user.is_authenticated %}
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'local-home' %}">VENTAS</a></h6>
+                            <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'lista-ventas' %}">VENTAS</a></h6>
                             {% else %}
                             <h6 class="m-0 font-weight-bold text-primary"><a href="">VENTAS</a></h6>
                             {% endif %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div id="main-content" xmlns="http://www.w3.org/1999/html">
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i>INICIO</a></li>
+                        <li class="breadcrumb-item"><i></i><a href="{% url 'lista-productos' %}">KIOSCO</a></li>
+                        <li class="breadcrumb-item"><i></i><b>{{titulo}}</b></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                           <h6 class="m-0 font-weight text-secondary"> {{ titulo }}: {{ descripcion_pantalla }}
+                           </h6>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        CATEGORIA:
+                                                    </span>
+                                                </div>
+                                                 {{ form.cod_categoria }}
+                                            </div>                                  
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    UNIDAD DE MEDIDA:
+                                                </span>
+                                            </div>
+                                             {{ form.cod_unidad }}
+                                        </div>           
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    CAPACIDAD:
+                                                </span>
+                                            </div>
+                                             {{ form.capacidad }}
+                                        </div>         
+                                        
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    NOMBRE:
+                                                </span>
+                                            </div>
+                                             {{ form.nombre }}
+                                        </div>                                          
+                                        
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    OBSERVACIONES:
+                                                </span>
+                                            </div>
+                                             {{ form.observacion }}
+                                        </div>   
+
+                                        <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                    CÓDIGO DEL PRODUCTO:
+                                                </span>
+                                            </div>
+                                             {{ form.codigo }}
+                                        </div>    
+
+                                </div>
+		                        <div class="col-lg-12 col-md-12" style="display: flex; flex-direction: column; align-items: end;">
+		                            <button id="btnGuardar" type="submit" class="btn btn-primary btn-block" style="width: auto;">GUARDAR</button>
+		                        </div>                                
+                                </div>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+{% endblock main %}
+{% block java %}
+{% include 'includes/_mayusculas.html' %}
+<script>
+    $(function(){
+        $(".select2-categoria").select2({
+theme: 'bootstrap4',
+        });
+        $(".select2-cod_unidad").select2({
+            theme: 'bootstrap4',
+                    });        
+    });
+    </script> 
+{% endblock java %}
