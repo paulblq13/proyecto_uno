@@ -28,153 +28,195 @@
                 <div class="col-lg-12">
                     <div class="card mb-4 py-3 border-left-info">
                         <div class="card-body">
-
                             <form method="POST" id="factura_form">
                                 {% csrf_token %}
                                 <div class="row clearfix">
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="row clearfix">
-                                        <div class="col-lg-12 col-md-12">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                            CLIENTE:
+                                                        </span>
+                                                    </div>
+                                                    {{ form.cod_cliente }}
+                                                </div>                                  
                                             <div class="input-group input-group-sm mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">
-                                                        CLIENTE:
+                                                        TIPO FACTURA:
                                                     </span>
                                                 </div>
-                                                 {{ form.cod_cliente }}
-                                            </div>                                  
-                                        <div class="input-group input-group-sm mb-3">
-                                            <div class="input-group-prepend">
+                                                {{ form.tipo_factura }}
+                                            </div>           
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">
-                                                    TIPO FACTURA:
-                                                </span>
-                                            </div>
-                                             {{ form.tipo_factura }}
-                                        </div>           
-                                        <div class="input-group input-group-sm mb-3">
-                                            <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                                    N° FACTURA:
-                                                </span>
-                                            </div>
-                                             {{ form.numero_factura }}
-                                        </div>                                                
-                                        
-                                        <div class="input-group input-group-sm mb-3">
-                                            <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                                    FECHA Y HORA:
-                                                </span>
-                                            </div>
-                                             {{ form.fechahora }}
-                                        </div>   
-
-                                        <div class="input-group input-group-sm mb-3">
-                                            <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroup-sizing-sm">
-                                                    ES PRESUPUESTO:
-                                                </span>
-                                            </div>
-                                             {{ form.presupuesto }}
-                                        </div>    
-
-                                        <h3>Agregar Artículos a la Venta</h3>
-                                        <form method="POST" id="detalle_form">
-                                            {% csrf_token %}
-                                            {{ form2.as_p }}  <!-- Formulario de Detalles (Artículos) -->
+                                                        N° FACTURA:
+                                                    </span>
+                                                </div>
+                                                {{ form.numero_factura }}
+                                            </div>                                                
                                             
-                                            <div>
-                                                <label for="articulo">Artículo:</label>
-                                                <select name="articulo" id="articulo">
-                                                    {% for articulo in articulos %}
-                                                        <option value="{{ articulo.id }}">{{ articulo.nombre }} - ${{ articulo.precio }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <label for="cantidad">Cantidad:</label>
-                                                <input type="number" id="cantidad" name="cantidad" value="1" min="1">
-                                            </div>
-                                            <div>
-                                                <button type="submit" id="add_articulo">Agregar Artículo</button>
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        FECHA Y HORA:
+                                                    </span>
+                                                </div>
+                                                {{ form.fechahora }}
+                                            </div>   
+
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        ES PRESUPUESTO:
+                                                    </span>
+                                                </div>
+                                                {{ form.presupuesto }}
                                             </div>
                                         </form>
-                                    
-                                        <h3>Artículos Agregados</h3>
-                                        <table id="tabla_articulos" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Artículo</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Precio Unitario</th>
-                                                    <th>Total</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Aquí se agregarán los artículos mediante JavaScript -->
-                                            </tbody>
-                                        </table>
-                                    
-                                        <div>
-                                            <button type="submit" id="guardar_venta">Finalizar Venta</button>
-                                        </div>
-                                    </form>
-                                    
-                                    <script>
-                                        // Aquí usas JavaScript o jQuery para agregar artículos a la tabla y actualizar el total
-                                    
-                                        document.getElementById("detalle_form").addEventListener("submit", function(event) {
-                                            event.preventDefault(); // Prevenir el envío del formulario
-                                    
-                                            // Obtener los valores del formulario
-                                            const articuloId = document.getElementById("articulo").value;
-                                            const cantidad = document.getElementById("cantidad").value;
-                                            const articuloNombre = document.querySelector("#articulo option:checked").textContent;
-                                            const precioUnitario = parseFloat(document.querySelector("#articulo option:checked").dataset.precio);
-                                    
-                                            // Calcular el total del artículo
-                                            const total = precioUnitario * cantidad;
-                                    
-                                            // Crear una nueva fila en la tabla
-                                            const tbody = document.querySelector("#tabla_articulos tbody");
-                                            const tr = document.createElement("tr");
-                                    
-                                            // Crear las celdas
-                                            tr.innerHTML = `
-                                                <td>${articuloNombre}</td>
-                                                <td>${cantidad}</td>
-                                                <td>${precioUnitario}</td>
-                                                <td>${total}</td>
-                                                <td><button class="eliminar_articulo">Eliminar</button></td>
-                                            `;
-                                    
-                                            // Agregar la fila a la tabla
-                                            tbody.appendChild(tr);
-                                    
-                                            // Limpiar los campos de entrada
-                                            document.getElementById("cantidad").value = 1;
-                                        });
-                                    
-                                        // Eliminar artículo de la tabla
-                                        document.querySelector("#tabla_articulos").addEventListener("click", function(event) {
-                                            if (event.target && event.target.classList.contains("eliminar_articulo")) {
-                                                event.target.closest("tr").remove();
-                                            }
-                                        });
-                                    </script>                                        
-                                        
-
+                                    </div>                                      
                                 </div>
-		                        <div class="col-lg-12 col-md-12" style="display: flex; flex-direction: column; align-items: end;">
-		                            <button id="btnGuardar" type="submit" class="btn btn-primary btn-block" style="width: auto;">FINALIZAR</button>
-		                        </div>                                
-                                </div>
-                            </form>
                         </div>                        
                     </div>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+
+        <!--NUEVO INGRESO CARD 3-->
+        <div class="row clearfix" id="formulario_ingreso">
+            <div class="col-lg-12 col-md-12" id="resultado-busqueda-factura">
+            </div>
+                <div class="col-lg-12">
+                <div class="card">
+                    <div class="header" id="" style="">
+                        <b>DETALLE FACTURA</b>
+                        <span class="arrow-left">&#9664;</span>
+                    </div>
+                    <div class="body" id="">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12" id="select_articulo">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <!--SELECT ARTICULO NUEVO INGRESO 3-->
+                                        <select class="form-control select2-agregararticulo" id="agregararticulo" onchange="actualizarCantidad()">
+                                            <option value="" selected disabled>Seleccione el Artículo</option>
+                                            {% for lista in lista_articulos %}
+                                            <option value="{{ lista.id }}" {% if lista.serializado %} data-serial="true" {% endif %}>{{ lista.nombre }} <small>({% if lista.serializado %}Tiene Serial){% else %}Sin Serial){% endif %}</small>
+                                            <p>{{ lista.id_individuo__id_grupo__id_familia__nombre }} > {{ lista.id_individuo__id_grupo__nombre }} > {{ lista.id_individuo__nombre }}</p>
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="hidden" id="idarticulo3">
+                                        <!--FIN SELECT ARTICULO NUEVO INGRESO 3-->
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                Cantidad:
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="cantidad3" value="1" enabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-12" id="div_serial" style="display: none;">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                Serial:
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" id="serial">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-12">
+                                    <button id="guardar_btn_agregaringreso" type="submit" class="btn btn-primary btn-block" style="width: auto;">AGREGAR PRODUCTO</button>
+                                </div>                                 
+                            </div>
+
+                <!-- TABLA ULTIMOS INGRESOS -->
+                <div class="row clearfix">
+                <div class="col-lg-9">
+                <div class="card">
+                <div class="header">
+                    <h2>Ultimos Ingresos</h2>
+                    <ul class="header-dropdown">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="">Detalle</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                <div class="table-responsive table_middel">
+                    <table class="table m-b-0" id="tabla_ingresos">
+                        <thead class="sorting">
+                            <tr>
+                                <th>C#</th>
+                                <th>Nombre Ingreso</th>
+                                <th>Artículo</th>
+                                <th>Cantidad</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for fields in dict_ing %}
+                            <tr>
+                                <td><span class="fields-id" data-id="{{ fields.id }}" onclick="copiarNumero(this)" style="cursor: pointer;">{{ fields.id }}</span></td>
+                                <td>{{ fields.nombre }}</td>
+                                <td>{{ fields.nombre_articulo }}</td>
+                                <td>{{ fields.cantidad }}</td>
+                                <td>{{ fields.fecha }}</td>
+                                <td>{{ fields.acciones }}
+                                    {% if fields.finalizado %}
+                                    <button type="button" class="btn btn-danger js-sweetalert" disabled title="ELIMINAR"><i class="fa fa-trash-o"></i></button></td>
+                                    {% else %}
+                                    <button type="button" data-id="{{ fields.id_ingreso }}" data-articulo="{{ fields.id_articulo }}" class="btn btn-danger js-sweetalert" title="ELIMINAR"><i class="fa fa-trash-o"></i></button></td>
+                                    {% endif %}
+                                </tr>
+                        {% endfor %}                          
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                </div>
+<div>
+</div>  
+<div style="text-align: right;">
+<button id="guardar_btn_finalizaringreso" type="submit" class="btn btn-secondary btn-block" style="width: auto; display: inline-block;">3-FINALIZAR INGRESO</button>
+<hr>
+</div>            
+
+<!-- FIN - TABLA ULTIMOS INGRESOS-->
+    </div>
+</div>
+</div>
+</div>
+<!--NUEVO INGRESO (END CARD 3)-->
+
+
+
+
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+
 
         </div>
         </div>
@@ -186,7 +228,9 @@
         $(".select2-cliente").select2({
 theme: 'bootstrap4',
         });
-
+        $(".select2-agregararticulo").select2({
+            theme: 'bootstrap4',
+                    });
         
     });
     </script> 

@@ -32,7 +32,8 @@ class FacturaEgresoForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control'
         self.fields['cod_cliente'].widget.attrs.update({
             'class': 'form-control select2-cliente',         
-        })             
+        })                   
+      
 
 #---------------------------------------------FACTURA EGRESO DETALLE FORM---------------------------
 class FacturaEgresoDetalleForm(forms.ModelForm):

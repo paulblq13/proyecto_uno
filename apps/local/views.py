@@ -95,7 +95,7 @@ class listaVentasView(ListView):
         context['titulo'] = "GESTIÓN DE VENTAS"
         context['descripcion_pantalla'] = "Muestra un listado de las ventas realizadas"
         context['titulosmall'] = "Gestión de ventas"
-        context['boton_nuevo'] = "NUEVO ARTÍCULO"
+        context['boton_nuevo'] = "NUEVA VENTA"
         context['url_nuevo'] = "/local/agregar-venta/"
         context['url_modificar'] = "modificar-evento"
         context['url_detalle'] = "detalle-evento"
@@ -111,6 +111,7 @@ class addVentaView(CreateView):
     form_class = FacturaEgresoForm
     second_form_class = FacturaEgresoDetalleForm
     success_url = reverse_lazy('lista-productos')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
@@ -120,8 +121,10 @@ class addVentaView(CreateView):
 
         articulos=Articulo.objects.all()
         print(articulos)
+        lista_articulos = Articulo.objects.all()
+        print(lista_articulos)
 
-        context['articulos'] = articulos
+        context['lista_articulos'] = lista_articulos
         context['nivel_anterior'] = "KIOSCO"            
         context['titulo']="NUEVO"
         context['descripcion_pantalla'] = "Complete los datos requeridos para agregar un nuevo artículo"        

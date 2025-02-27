@@ -101,6 +101,7 @@ class FacturaEgreso(models.Model):
     cod_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, blank=True, null=True)
     tipo_factura = models.CharField(max_length=2, null=True, blank=True)
     numero_factura = models.CharField(max_length=30, null=True, blank=True)
+    ticket = models.CharField(max_length=30, blank=True, null=True)
     fechahora = models.DateTimeField()
     presupuesto = models.BooleanField(default=False)
 
@@ -119,7 +120,7 @@ class FacturaEgresoDetalle(models.Model):
     factura = models.ForeignKey (FacturaEgreso, on_delete=models.CASCADE, null=True, blank=True)    
     cod_articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE, blank=True, null=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)    
-    cantidad = models.IntegerField(null=True, blank=True)
+    cantidad = models.IntegerField(null=True, blank=True, default=1)
     descuento = models.IntegerField(null=True, blank=True)    
 
     def __str__(self):
