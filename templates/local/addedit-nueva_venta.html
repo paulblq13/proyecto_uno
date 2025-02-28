@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block main %}
 <div id="main-content" xmlns="http://www.w3.org/1999/html">
     <div class="container-fluid">
@@ -40,7 +40,10 @@
                                                             CLIENTE:
                                                         </span>
                                                     </div>
-                                                    {{ form.cod_cliente }}
+                                                    <select class="form-class select2-cliente" name="states[]">
+                                                        <option value="AL">Alabama</option>
+                                                        <option value="WY">Wyoming</option>
+                                                      </select>
                                                 </div>                                  
                                             <div class="input-group input-group-sm mb-3">
                                                 <div class="input-group-prepend">
@@ -106,17 +109,7 @@
                                     <div class="input-group input-group-sm mb-3">
                                         <div class="input-group-prepend">
                                         </div>
-                                        <!--SELECT ARTICULO NUEVO INGRESO 3-->
-                                        <select class="form-control select2-agregararticulo" id="agregararticulo" onchange="actualizarCantidad()">
-                                            <option value="" selected disabled>Seleccione el Artículo</option>
-                                            {% for lista in lista_articulos %}
-                                            <option value="{{ lista.id }}" {% if lista.serializado %} data-serial="true" {% endif %}>{{ lista.nombre }} <small>({% if lista.serializado %}Tiene Serial){% else %}Sin Serial){% endif %}</small>
-                                            <p>{{ lista.id_individuo__id_grupo__id_familia__nombre }} > {{ lista.id_individuo__id_grupo__nombre }} > {{ lista.id_individuo__nombre }}</p>
-                                            </option>
-                                            {% endfor %}
-                                        </select>
-                                        <input type="hidden" id="idarticulo3">
-                                        <!--FIN SELECT ARTICULO NUEVO INGRESO 3-->
+                                        <input type="text" id="cod_articulo" name="cod_articulo" class="form-control select2-articulo">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-12">
@@ -151,14 +144,6 @@
                 <div class="card">
                 <div class="header">
                     <h2>Ultimos Ingresos</h2>
-                    <ul class="header-dropdown">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="">Detalle</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="body">
                 <div class="table-responsive table_middel">
@@ -220,18 +205,15 @@
 
         </div>
         </div>
+
+
+ 
 {% endblock main %}
 {% block java %}
 {% include 'includes/_mayusculas.html' %}
 <script>
-    $(function(){
-        $(".select2-cliente").select2({
-theme: 'bootstrap4',
-        });
-        $(".select2-agregararticulo").select2({
-            theme: 'bootstrap4',
-                    });
-        
-    });
-    </script> 
+    $(document).ready(function() {
+        $('.select2-cliente').select2();
+    });  
+</script>      
 {% endblock java %}

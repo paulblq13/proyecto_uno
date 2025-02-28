@@ -42,9 +42,7 @@ class FacturaEgresoDetalleForm(forms.ModelForm):
         model = FacturaEgresoDetalle
         fields = "__all__"
     def __init__(self, *args, **kwargs):
-        super(FacturaEgresoDetalle, self).__init__(*args, **kwargs)
+        super(FacturaEgresoDetalleForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-        self.fields['cod_articulo'].widget.attrs.update({
-            'class': 'form-control select2-articulo',         
-        })                     
+            

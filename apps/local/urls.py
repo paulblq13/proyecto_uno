@@ -9,6 +9,7 @@ from apps.local import views as localViews
 
 urlpatterns = [
     #DEF
+    path('api/articulos/', localViews.search_articulos, name='search_articulos'),
     #path('subir_foto/<int:cod_evento>/', localViews.subir_fotoV3, name='subir_foto'),
     #FUNCIONES   
     #path('actualizar_ultima_foto/', photoeventViews.actualizar_ultima_foto, name='actualizar_ultima_foto'),           

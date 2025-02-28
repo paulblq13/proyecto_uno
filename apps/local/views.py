@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 #==VIEWS
 from django.urls import reverse_lazy
@@ -115,9 +116,8 @@ class addVentaView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
-        if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
-            context['form2'] = self.second_form_class(self.request.GET)
+        context['form'] = self.form_class(self.request.GET)
+        context['form2'] = self.second_form_class(self.request.GET)
 
         articulos=Articulo.objects.all()
         print(articulos)
@@ -136,3 +136,11 @@ class addVentaView(CreateView):
         context['id'] = pk
         context['bandera_add_update'] = "add"
         return context    
+    
+
+def search_articulos(request):
+    print("hola")
+    query = request.GET.get('q', '')
+    articulos = Articulo.objects.filter(nombre__icontains=query)[:10]  # Filtra los artículos por nombre
+    results = [{'id': articulo.id, 'text': articulo.nombre} for articulo in articulos]  # Formato necesario para select2
+    return JsonResponse({'results': results})    
