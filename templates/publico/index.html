@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block menu_superior %}
+{% include 'includes/menu_superior.html' %}
+{% endblock menu_superior %} 
 {% block main %}
     <!-- Contenido principal -->
 {% if messages %}
@@ -68,7 +71,7 @@
                 {% if user.is_authenticated %}
                 <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'todoventas' %}">TODO VENTAS</a></h6>
                 {% else %}
-                <h6 class="m-0 font-weight-bold text-primary"><a data-bs-toggle="modal" data-bs-target="#codigoModal" style="cursor: pointer;">TODO VENTAS</a></h6>
+                <h6 class="m-0 font-weight-bold text-primary"><a href="{% url 'todoventas' %}">TODO VENTAS</a></h6>
                 {% endif %}
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
