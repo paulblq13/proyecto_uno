@@ -8,6 +8,7 @@ class Categorias(models.Model):
         return f"{self.nombre}"
     
 class Productos(models.Model):
+    id_categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=150, null=True, blank=True)
     detalle = models.CharField(max_length=1000, null=True, blank=True)
     estado = models.CharField(max_length=1000, null=True, blank=True)

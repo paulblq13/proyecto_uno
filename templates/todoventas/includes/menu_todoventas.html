@@ -1,0 +1,97 @@
+{% block css %}
+<style>
+    #bannerCarrusel img {
+        height: 300px; /* o el alto que vos quieras */
+        object-fit: cover;
+      }   
+</style>
+{% endblock css %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>    
+    <!-- Topbar Search -->
+    <form class="form-inline mr-auto ml-3 my-2 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Ingrese su búsqueda" aria-label="Search" aria-describedby="basic-addon2" >
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" disabled>
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
+        </div>
+    </form>  
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+            <!-- Menú de usuario -->
+            {% include 'includes/menu_usuario.html' %}
+        {% else %}
+            <!-- Dropdown - MENSAJEA -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-gray-700" href="#" id="cursosDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-book fa-fw"></i>
+                    <span></span>
+                </a>
+                <!-- Dropdown - Submenú de Cursos -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="cursosDropdown">
+                    <a class="dropdown-item" href="https://wa.me/+5493884159299">
+                        <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </li>     
+            <!-- Botón de Ingresar -->
+            <li class="nav-item">
+                <a class="nav-link btn btn-primary btn-sm ml-2 text-white" href="{% url 'login' %}">
+                    <span>INGRESAR</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="{% url 'todoventas' %}">TODOVENTAS</a>
+            </li>            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-gray-700" href="#" id="cursosDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Categorías
+                    <span></span>
+                </a>
+                <!-- Dropdown - Submenú de Cursos -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="cursosDropdown">
+                    <a class="dropdown-item" href="">Módulos</a>
+                    <a class="dropdown-item" href="">Pines de carga</a>                    
+                </div>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#ofertas">Ofertas</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#contacto">Contacto</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-gray-700" href="#" id="cursosDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <strong>Gestion de Productos</strong>
+                    <span></span>
+                </a>
+                <!-- Dropdown - Submenú de Cursos -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="cursosDropdown">
+                    <a class="dropdown-item" href="">Nuevo Producto</a>
+                    <a class="dropdown-item" href="{% url 'todoventas-gestion_categorias' %}">Gestión de Categorías</a>
+                    <a class="dropdown-item" href="{% url 'todoventas-lista-productos' %}">Ver Lista</a>               
+                </div>
+            </li>            
+        </ul>
+    </div>
+</nav>    

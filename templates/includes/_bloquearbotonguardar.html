@@ -1,0 +1,10 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botones = document.querySelectorAll('.btndesactivar');
+        botones.forEach(function(boton) {
+          boton.addEventListener('click', function () {
+            boton.setAttribute('disabled', 'true');
+          });
+        });
+      });
+</script>
