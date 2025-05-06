@@ -44,9 +44,10 @@
                             <table id="data_table" class="display" style="width:100%">
                               <thead>
                               <tr>
-                                  <th>ACCIONES</th>
+                                  <th>-</th>
                                   <th>NOMBRE</th>
                                   <th>OBSERVACIÓN</th>
+                                  <th>ACCIONES</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -66,7 +67,8 @@
                                     </div>
                                 </td>
                                 <td>{{ objeto.nombre }}</td>
-                                <td>{{ objeto.observacion}}</td>
+                                <td>{{ objeto.detalle}}</td>
+                                <td><a type="button" class="btn btn-primary">Agregar</a></td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
