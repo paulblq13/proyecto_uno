@@ -124,3 +124,29 @@ def actualizar_registro(request):
         return JsonResponse(response_data, status=201)
 
     return JsonResponse({'mensaje': 'Método no permitido.'}, status=405)      
+
+    # ------------------------------------------GESTION VENTAS ----------------------------------------
+class gestionVentasView(ListView):
+    template_name = 'todoventas/gestion_ventas.html'
+    model= Productos
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #CONTEXTS
+        context['nivel_uno'] = "INICIO"
+        context['nivel_dos'] = "TODOVENTAS"
+        context['nivel_dos_link'] = "todoventas"
+        context['nivel_tres'] = ""
+        context['nivel_actual'] = "GESTIÓN DE VENTAS"
+        context['titulo_nuevo_modal'] = "Nueva categoría"
+        context['urleliminar'] ="/sistemas/eliminar_registro/"
+        context['btnNuevo'] = "NUEVA VENTA" 
+        context['nuevo_titulo'] = "Agregar nueva venta"
+        context['modificar_titulo'] = "Modificar datos"           
+        context['nuevo_descripcion'] = "Complete los campos requeridos (*) y luego presione el botón GUARDAR"
+        context['modificar_descripcion'] = "Modifique los campos necesarios y luego presione el botón GUARDAR"        
+        context['titulo'] = "LISTA DE CATEGORÍAS"
+        context['tituloh2'] = "Listado de categorías"
+        context['titulosmall'] = "El siguiente listado muestra las categorías guardadas, si lo desea puede copiar la tabla, exportarla para trabajar como una hoja de cálculo o simplemente imprimirlo."
+        return context 

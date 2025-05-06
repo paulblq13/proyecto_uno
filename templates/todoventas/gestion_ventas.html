@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+
+{% block menu_superior %}
+    {% include "todoventas/includes/menu_todoventas.html" %} 
+{% endblock menu_superior %} 
+
+{% block main %}
+    <div class="container-fluid">
+            <ul class="breadcrumb .border-left-secondary">
+                <li class="breadcrumb-item"><a class="home" href="/"><i class="icon-home"></i>{{ nivel_uno }}</a></li>
+                <li class="breadcrumb-item"><a href="{% url nivel_dos_link %}"><i></i>{{ nivel_dos }}</li></a>
+                <li class="breadcrumb-item"><i></i><b>{{ nivel_actual }}</b></li>
+            </ul>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                           <h6 class="m-0 font-weight text-secondary"> {{ titulo }}: Muestra un listado de todos los productos y su gestión.
+                           </h6>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-4 py-2">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalNuevo">{{ btnNuevo }}</button>
+                        </div>
+                    </div> 
+                </div>                
+            </div>
+                  
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+
+                        </div>
+                   </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4 py-3 border-left-info">
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table id="data_table" class="display" style="width:100%">
+                              <thead>
+                              <tr>
+                                  <th>ACCIONES</th>
+                                  <th>NOMBRE</th>
+                                  <th>OBSERVACIÓN</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                {% for objeto in object_list %}
+                                <tr>
+                                <td>
+                                    <!-- Botón de menú desplegable -->
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="">
+                                            <a class="dropdown-item modal_ver"  data-id="{{ objeto.id }}" data-url="{% url 'obtener_registro' %}" style="cursor: pointer;">Información</a>         
+                                            <a class="dropdown-item modal_modificar" data-id="{{ objeto.id }}" data-url="{% url 'obtener_registro' %}" style="cursor: pointer;">Modificar</a>
+                                            <a class="dropdown-item" href="#">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ objeto.nombre }}</td>
+                                <td>{{ objeto.observacion}}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                              </table>
+                        </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+    </div>
+
+    <!-- MODAL NUEVO -->
+    <div class="modal fade" id="modalNuevo"  role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel2">{{ nuevo_titulo }}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12">
+                                        <small>{{ titulo_nuevo_modal }}</small>
+                                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                    <div class="row clearfix">
+
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        (*) Nombre:
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="nombre_nuevo">
+                                            </div>
+                                        </div>         
+                                        
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                        Observación:
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="observacion_nuevo">
+                                            </div>
+                                        </div>     
+                                        
+                                        <div class="col-lg-12 col-md-12 text-right">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                                            <button id="nuevo_registro" type="submit" class="btn btn-primary btndesactivar" style="width: auto;">GUARDAR</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+        </div>
+    </div> 
+    <!-- FIN MODAL -->   
+   
+    <!-- MODAL MODIFICAR -->
+    <div class="modal fade" id="modalModificar"  role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel2">{{ modificar_titulo }}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12">
+                                        <small>{{ modificar_descripcion }}</small>
+                                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div>
+                            </div>
+                            <div class="body">
+                                    <div class="row clearfix">
+                                            <input type="hidden" id="id_modificar" value="">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                            (*) Nombre:
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="nombre_modificar">
+                                                </div>
+                                            </div>         
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="input-group input-group-sm mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroup-sizing-sm">
+                                                            Observación:
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="observacion_modificar">
+                                                </div>
+                                            </div>         
+
+
+
+                                            <div class="col-lg-12 col-md-12 text-right">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                                                <button id="actualizar_registro" data-id="{{ objeto.id }}" type="submit" class="btn btn-primary btndesactivar" style="width: auto;">GUARDAR</button>
+                                            </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </div>
+        </div>
+    </div>
+</div>    
+    <!-- FIN MODAL -->   
+     
+    
+<!-- MODAL VER -->
+<div class="modal fade" id="modalVer"  role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel2">Detalle</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="row">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Nombre</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><p><i class="fa fa-building-o m-r-5"></i><span id="nombre_ver"></span></p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Observación</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><p><i class="fa fa-building-o m-r-5"></i><span id="observacion_ver"></span></p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                
+            </div>
+      </div>
+    </div>
+
+  <!-- FIN MODAL -->  
+{% endblock main %}
+
+
+
+
+
+
+
+
+
+
+
+{% block java %}
+<script>
+    //-----------------SCRIPT NEW-----------------------   
+    $(document).ready(function () {
+        $('#nuevo_registro').on('click', function (e) {
+            e.preventDefault();        
+                var campo1 = $('#nombre_nuevo').val();
+                var campo2 = $('#observacion_nuevo').val();
+    
+                if (campo1.trim() === '' )  {
+                    if (campo1.trim() === '') {
+                        $('#nombre_nuevo').css('box-shadow', '0 0 5px rgba(255, 0, 0, 50)');
+                    } else {
+                        $('#nombre_nuevo').css('box-shadow', 'none');
+                    }
+                    return;
+                } else {
+                    $('#nombre_nuevo').css('box-shadow', 'none');
+                }
+    
+                $.ajax({
+                    url: '{% url "nuevo_registro" %}',
+                    type: 'POST',
+                    data: {
+                        'campo1': campo1,
+                        'campo2': campo2,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.guardado === 'ok') {
+                            alert('GUARDADO CON ÉXITO');
+                            location.reload();
+                        } else if (response.guardado === 'error') {
+                            alert('OCURRIÓ UN ERROR');
+                        }                    
+                    },
+                    error: function (error) {
+                        console.error('Error en la solicitud Ajax:', error);
+                    }
+                });     
+        });
+    });    
+    //-----------------END SCRIPT NEW-----------------------   
+    </script>  
+
+<script>  
+    //-----------------MODAL SHOW UPDATE-----------------------      
+    $(document).ready(function () {
+        $('.modal_modificar').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            //alert("HOLA")
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    'id': id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },                
+                success: function(response) {
+                    $('#id_modificar').val(response.id);
+                    $('#nombre_modificar').val(response.nombre);
+                    $('#observacion_modificar').val(response.observacion);
+                    $('#modalModificar').modal('show');
+                },
+                error: function() {
+                    alert('Error al obtener los datos.');
+                }
+            });
+        });  
+    });      
+//-----------------END MODAL UPDATE-----------------------       
+</script>    
+
+<script>
+    //-----------------SCRIPT UPDATE-----------------------   
+    $(document).ready(function () {
+        $('#actualizar_registro').on('click', function (e) {
+            e.preventDefault();
+                var campo_id = $('#id_modificar').val(); 
+                var campo1 = $('#nombre_modificar').val();
+                var campo2 = $('#observacion_modificar').val();
+                  
+                if (campo1.trim() === '')  {
+                    if (campo1.trim() === '') {
+                        $('#nombre_modificar').css('box-shadow', '0 0 5px rgba(255, 0, 0, 50)');
+                    } else {
+                        $('#nombre_modificar').css('box-shadow', 'none');
+                    }
+                    return;
+                } else {
+                    $('#nombre_modificar').css('box-shadow', 'none');
+                }
+
+                $.ajax({
+                    url: '{% url "actualizar_registro" %}',
+                    type: 'POST',
+                    data: {
+                        'campo_id': campo_id,                        
+                        'campo1': campo1,
+                        'campo2': campo2,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.guardado === 'ok') {
+                            alert('GUARDADO CON ÉXITO');
+                            location.reload();
+                        } else if (response.guardado === 'error') {
+                            alert('OCURRIÓ UN ERROR');
+                        }                    
+                    },
+                    error: function (error) {
+                        console.error('Error en la solicitud Ajax:', error);
+                    }
+                });      
+        });
+    });    
+    //-----------------END SCRIPT UPDATE-----------------------   
+    </script>
+    
+    <script>
+        //-----------------MODAL SHOW VIEW-----------------------      
+            $(document).ready(function () {
+                $('.modal_ver').on('click', function (e) {
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                    var url = $(this).data('url');
+        
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            'id': id,
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                        },                
+                        success: function(response) {
+                            $('#id_ver').val(response.id);
+                            $('#nombre_ver').text(response.nombre);
+                            $('#observacion_ver').text(response.observacion);
+        
+                            $('#modalVer').modal('show');
+                        },
+                        error: function() {
+                            alert('Error al obtener los datos.');
+                        }
+                    });
+                });  
+            });      
+        //-----------------END MODAL VIEW-----------------------       
+        </script>
+    {% include "includes/_bloquearbotonguardar.html" %}   
+    {% include "includes/_datatable.html" %}   
+{% endblock java %}
