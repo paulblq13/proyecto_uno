@@ -14,7 +14,8 @@ class Productos(models.Model):
     estado = models.CharField(max_length=1000, null=True, blank=True)
     observacion = models.CharField(max_length=300, null=True, blank=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
-    actualizado = models.DateTimeField()
+    actualizado = models.DateTimeField(auto_now=True)
+    descuento = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
     serial = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):

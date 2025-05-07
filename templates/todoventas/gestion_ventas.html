@@ -30,14 +30,33 @@
             </div>
                   
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="card mb-4 py-3 border-left-info">
+                <div class="col-lg-5">
+                    <div class="card mb-4 py-3 border-left-success">
                         <div class="card-body">
-
+                            <h4>Carrito</h4>
+                            <table id="tabla_carrito" class="table">
+                                <thead>
+                                  <tr>
+                                    <th>NOMBRE</th>
+                                    <th>CANTIDAD</th>
+                                    <th>PRECIO</th>
+                                    <th>SUBTOTAL</th>
+                                    <th>ACCIÓN</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                  <tr>
+                                    <td colspan="3"><strong>Total:</strong></td>
+                                    <td id="total_carrito">0.00</td>
+                                    <td></td>
+                                  </tr>
+                                </tfoot>
+                              </table>
                         </div>
                    </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="card mb-4 py-3 border-left-info">
                         <div class="card-body">
                           <div class="table-responsive">
@@ -46,7 +65,9 @@
                               <tr>
                                   <th>-</th>
                                   <th>NOMBRE</th>
-                                  <th>OBSERVACIÓN</th>
+                                  <th>PRECIO</th>
+                                  <th>CANTIDAD</th>
+                                  <th>DESC / AUM (%)</th>                                  
                                   <th>ACCIONES</th>
                               </tr>
                               </thead>
@@ -67,8 +88,14 @@
                                     </div>
                                 </td>
                                 <td>{{ objeto.nombre }}</td>
-                                <td>{{ objeto.detalle}}</td>
-                                <td><a type="button" class="btn btn-primary">Agregar</a></td>
+                                <td>{{ objeto.precio}}</td>
+                                <td><input type="number" class="form-control input-cantidad" value="1" min="1" style="width: 80px;">
+                                </td>
+                                
+                                <td>
+                                    <input type="number" class="form-control input-descuento" value="0" step="0.01" style="width: 100px;">
+                                </td>                                
+                                <td><a type="button" class="btn btn-primary btn-agregar">Agregar</a></td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
@@ -79,6 +106,76 @@
                 </div>
             </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+
+    <script>
+        let total = 0;
+        
+        function recalcularTotal() {
+          total = 0;
+          $('#tabla_carrito tbody tr').each(function() {
+            const subtotal = parseFloat($(this).find('.subtotal').text());
+            total += subtotal;
+          });
+          $('#total_carrito').text(total.toFixed(2));
+        }
+        
+        $(document).on('click', '.btn-agregar', function() {
+          const row = $(this).closest('tr');
+          const nombre = row.find('td:eq(1)').text().trim();
+          const precioOriginal = parseFloat(row.find('td:eq(2)').text().trim());
+          const porcentaje = parseFloat(row.find('.input-descuento').val().trim()) || 0;
+          const cantidad = parseInt(row.find('.input-cantidad').val().trim()) || 1;
+        
+          const precioFinal = precioOriginal + (precioOriginal * (porcentaje / 100));
+        
+          let encontrado = false;
+        
+          $('#tabla_carrito tbody tr').each(function() {
+            if ($(this).find('td:eq(0)').text() === nombre) {
+              let inputCantidad = $(this).find('.cantidad');
+              let nuevaCantidad = parseInt(inputCantidad.val()) + cantidad;
+              inputCantidad.val(nuevaCantidad);
+              let subtotal = nuevaCantidad * precioFinal;
+              $(this).find('.subtotal').text(subtotal.toFixed(2));
+              encontrado = true;
+              return false;
+            }
+          });
+        
+          if (!encontrado) {
+            const subtotal = cantidad * precioFinal;
+            $('#tabla_carrito tbody').append(`
+              <tr>
+                <td>${nombre}</td>
+                <td><input type="number" class="form-control cantidad" value="${cantidad}" min="1" style="width:80px;"></td>
+                <td>${precioFinal.toFixed(2)}</td>
+                <td class="subtotal">${subtotal.toFixed(2)}</td>
+                <td><button class="btn btn-danger btn-quitar">Quitar</button></td>
+              </tr>
+            `);
+          }
+        
+          recalcularTotal();
+        });
+        
+        $(document).on('change', '.cantidad', function() {
+          const row = $(this).closest('tr');
+          const cantidad = parseInt($(this).val()) || 1;
+          const precio = parseFloat(row.find('td:eq(2)').text());
+          const subtotal = cantidad * precio;
+          row.find('.subtotal').text(subtotal.toFixed(2));
+          recalcularTotal();
+        });
+        
+        $(document).on('click', '.btn-quitar', function() {
+          $(this).closest('tr').remove();
+          recalcularTotal();
+        });
+        </script>
+    
+
+    
 
     <!-- MODAL NUEVO -->
     <div class="modal fade" id="modalNuevo"  role="dialog" aria-labelledby="myModalLabel">
@@ -249,8 +346,8 @@
             </div>
       </div>
     </div>
-
   <!-- FIN MODAL -->  
+
 {% endblock main %}
 
 
@@ -264,6 +361,7 @@
 
 
 {% block java %}
+
 <script>
     //-----------------SCRIPT NEW-----------------------   
     $(document).ready(function () {
